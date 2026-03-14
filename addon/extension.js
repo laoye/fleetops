@@ -19,10 +19,10 @@ export default {
                     route: 'console.fleet-ops.operations.orders',
                 },
                 {
-                    title: 'Routes',
-                    description: 'Plan and manage optimised multi-stop delivery routes.',
-                    icon: 'map-location-dot',
-                    route: 'console.fleet-ops.operations.routes',
+                    title: 'Places',
+                    description: 'Manage saved locations, addresses, and points of interest.',
+                    icon: 'location-dot',
+                    route: 'console.fleet-ops.management.places',
                 },
                 {
                     title: 'Drivers',
@@ -49,10 +49,10 @@ export default {
                     route: 'console.fleet-ops.operations.service-rates',
                 },
                 {
-                    title: 'Tracking',
-                    description: 'Live map view of all active drivers and orders.',
-                    icon: 'satellite-dish',
-                    route: 'console.fleet-ops.connectivity.tracking',
+                    title: 'Devices',
+                    description: 'Manage connected telematics devices and their sensor data.',
+                    icon: 'microchip',
+                    route: 'console.fleet-ops.connectivity.devices',
                 },
                 {
                     title: 'Reports',
