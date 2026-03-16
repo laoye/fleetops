@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
-import fleetOpsOptions from '../../../utils/fleet-ops-options';
+import { localizeFleetOpsOptions } from '../../../utils/fleet-ops-options';
 
 export default class ManagementIssuesIndexController extends Controller {
     @service issueActions;
@@ -117,7 +117,7 @@ export default class ManagementIssuesIndexController extends Controller {
                 filterComponent: 'filter/select',
                 filterOptionLabel: 'label',
                 filterOptionValue: 'value',
-                filterOptions: fleetOpsOptions('issueTypes'),
+                filterOptions: localizeFleetOpsOptions(this.intl, 'issueTypes'),
                 placeholder: 'Select issue type',
             },
             {
@@ -130,7 +130,7 @@ export default class ManagementIssuesIndexController extends Controller {
                 filterComponent: 'filter/select',
                 filterOptionLabel: 'label',
                 filterOptionValue: 'value',
-                filterOptions: fleetOpsOptions('issueCategories'),
+                filterOptions: localizeFleetOpsOptions(this.intl, 'issueCategories'),
                 placeholder: 'Select issue category',
             },
             {

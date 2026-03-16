@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
-import fleetOpsOptions from '../../../utils/fleet-ops-options';
+import { localizeFleetOpsOptions } from '../../../utils/fleet-ops-options';
 
 export default class ManagementFleetsIndexController extends Controller {
     @service fleetActions;
@@ -195,7 +195,7 @@ export default class ManagementFleetsIndexController extends Controller {
                 filterComponent: 'filter/multi-option',
                 filterOptionLabel: 'label',
                 filterOptionValue: 'value',
-                filterOptions: fleetOpsOptions('fleetStatuses'),
+                filterOptions: localizeFleetOpsOptions(this.intl, 'fleetStatuses'),
             },
             {
                 label: this.intl.t('column.created-at'),

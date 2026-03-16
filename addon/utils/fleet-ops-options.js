@@ -569,6 +569,25 @@ export const transmissionTypes = [
 
 export const odometerUnits = [...distanceUnits, { label: 'Hours', value: 'hours', description: 'Unit of time measurement, commonly used worldwide.' }];
 
+function camelToKebab(str) {
+    return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+}
+
+export function localizeFleetOpsOptions(intl, key) {
+    const options = fleetOpsOptions(key);
+    const prefix = `fleet-ops-options.${camelToKebab(key)}`;
+
+    return options.map((option) => {
+        const labelKey = `${prefix}.${option.value}`;
+        const descKey = `${prefix}.${option.value}-description`;
+        return {
+            ...option,
+            label: intl.exists(labelKey) ? intl.t(labelKey) : option.label,
+            description: intl.exists(descKey) ? intl.t(descKey) : option.description,
+        };
+    });
+}
+
 export default function fleetOpsOptions(key) {
     const allOptions = {
         driverTypes,

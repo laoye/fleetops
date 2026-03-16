@@ -1716,3 +1716,886 @@ settings:
       button-continue: Continue
       button-start: Start onboard now
       button-in-progress: Onboard in progress
+
+fleet-ops-options:
+  driver-types:
+    full_time: Full-time
+    full_time-description: Permanent employee driver
+    part_time: Part-time
+    part_time-description: Part-time or contract driver
+    contractor: Contractor
+    contractor-description: Independent contractor driver
+    owner_operator: Owner-Operator
+    owner_operator-description: Driver owns and operates own vehicle
+    temporary: Temporary
+    temporary-description: Short-term or seasonal driver
+    apprentice: Apprentice
+    apprentice-description: Trainee or under-supervision driver
+    relief: Relief / On-call
+    relief-description: Covers shifts and peak demand as needed
+    hazmat: Hazmat Certified
+    hazmat-description: Qualified to carry hazardous materials
+    reefer_specialist: Refrigerated Cargo Specialist
+    reefer_specialist-description: Experienced with temperature-controlled cargo
+    heavy_haul: Oversize / Heavy Haul
+    heavy_haul-description: Certified for oversize/overweight loads
+    last_mile: Courier / Last-mile
+    last_mile-description: Small parcel/urban delivery specialist
+  driver-statuses:
+    active: Active
+    active-description: Driver is available for assignments
+    inactive: Inactive
+    inactive-description: Driver is not currently active
+    on_duty: On Duty
+    on_duty-description: Driver is working and available
+    off_duty: Off Duty
+    off_duty-description: Driver is not working
+    on_break: On Break
+    on_break-description: Driver is on a scheduled break
+    suspended: Suspended
+    suspended-description: Driver is temporarily suspended
+    terminated: Terminated
+    terminated-description: Driver no longer works with company
+    pre_shift: Pre-shift
+    pre_shift-description: Clocked in, prepping for shift
+    training: Training
+    training-description: In training, not available for jobs
+    onboarding: Onboarding
+    onboarding-description: Documents/induction in progress
+    on_route: On Route
+    on_route-description: Actively driving a planned route
+    delayed: Delayed
+    delayed-description: Experiencing delay (traffic, weather, etc.)
+    accident_hold: Accident Hold
+    accident_hold-description: Temporarily paused due to incident
+    on_leave: On Leave
+    on_leave-description: Approved leave period
+    no_show: No-show
+    no_show-description: Missed scheduled shift
+    pending_verification: Pending Verification
+    pending_verification-description: Waiting on document/compliance checks
+  vehicle-types:
+    truck: Truck
+    truck-description: Standard freight truck
+    van: Van
+    van-description: Cargo or delivery van
+    trailer: Trailer
+    trailer-description: Detachable cargo trailer
+    motorbike: Motorbike
+    motorbike-description: Two-wheeled delivery bike
+    car: Car
+    car-description: Passenger car or small vehicle
+    reefer: Refrigerated Truck
+    reefer-description: Temperature-controlled transport
+    container_truck: Container Truck
+    container_truck-description: Truck for containerized cargo
+    tanker: Tanker
+    tanker-description: Truck for liquid/gas transport
+    box_truck: Box Truck
+    box_truck-description: Enclosed box body truck
+    flatbed: Flatbed
+    flatbed-description: Open platform for oversized cargo
+    pickup: Pickup
+    pickup-description: Light-duty utility pickup
+    bus: Bus / Minibus
+    bus-description: Passenger transport
+    forklift: Forklift
+    forklift-description: Material handling equipment
+    ev: EV (Electric Vehicle)
+    ev-description: Battery electric vehicle
+    hybrid: Hybrid
+    hybrid-description: Hybrid electric vehicle
+    charging_trailer: Charging Trailer
+    charging_trailer-description: Mobile charging or auxiliary power unit
+  vehicle-statuses:
+    available: Available
+    available-description: Vehicle is ready for use
+    in_use: In Use
+    in_use-description: Vehicle is assigned to a driver/order
+    maintenance: Maintenance
+    maintenance-description: Vehicle is under maintenance or repair
+    out_of_service: Out of Service
+    out_of_service-description: Vehicle is not operational
+    reserved: Reserved
+    reserved-description: Vehicle is reserved for a future assignment
+    retired: Retired
+    retired-description: Vehicle is decommissioned
+    staging: Staging
+    staging-description: Prepped and queued for dispatch
+    on_route: On Route
+    on_route-description: Actively executing a route
+    idle: Idle
+    idle-description: Powered on but not moving
+    cleaning: Cleaning
+    cleaning-description: Under wash/detailing
+    awaiting_parts: Awaiting Parts
+    awaiting_parts-description: Maintenance waiting for spares
+    inspection_due: Inspection Due
+    inspection_due-description: Compliance inspection required
+    inspection_failed: Inspection Failed
+    inspection_failed-description: Failed inspection—cannot dispatch
+    accident: Accident / Damage
+    accident-description: Unavailable due to incident
+    compliance_hold: Compliance Hold
+    compliance_hold-description: Blocked due to expired docs/permits
+    stolen: Stolen
+    stolen-description: Reported stolen—do not dispatch
+  vendor-types:
+    vendor: Vendor
+    vendor-description: General vendor type for uncategorized services
+    integrated_vendor: Integrated Vendor
+    integrated_vendor-description: Vendor with native API integration into Fleetbase
+    fuel_supplier: Fuel Supplier
+    fuel_supplier-description: Provides fuel for vehicles
+    maintenance_provider: Maintenance Provider
+    maintenance_provider-description: Performs vehicle repairs/maintenance
+    parts_supplier: Parts Supplier
+    parts_supplier-description: Supplies vehicle parts
+    tech_provider: Technology Provider
+    tech_provider-description: Provides software or hardware services
+    logistics_partner: Logistics Partner
+    logistics_partner-description: 3PL or logistics subcontractor
+    insurance_provider: Insurance Provider
+    insurance_provider-description: Provides insurance services
+    towing_service: Towing Service
+    towing_service-description: Roadside assistance, towing, and recovery
+    leasing_company: Leasing Company
+    leasing_company-description: Provides rental or leased vehicles and equipment
+    driver_staffing: Driver Staffing Agency
+    driver_staffing-description: Provides contract or temporary drivers
+    customs_broker: Customs Broker
+    customs_broker-description: Handles border clearance and regulatory compliance
+    telematics_provider: Telematics Provider
+    telematics_provider-description: Supplies GPS, ELD, and IoT telematics services
+    freight_forwarder: Freight Forwarder
+    freight_forwarder-description: Manages international and multi-modal shipments
+    compliance_audit: Compliance / Audit
+    compliance_audit-description: Regulatory audits, safety, training
+    wash_detailing: Wash & Detailing
+    wash_detailing-description: Cleaning and sanitization services
+    tire_service: Tyre / Tire Service
+    tire_service-description: Tyre sales, repair, and fitting
+    body_paint: Body & Paint Shop
+    body_paint-description: Accident repair and refinishing
+    yard_storage: Storage / Yard
+    yard_storage-description: Short/long-term vehicle storage
+    charging_network: Charging Network
+    charging_network-description: EV charging infrastructure provider
+  vendor-statuses:
+    active: Active
+    active-description: Vendor is active and available
+    inactive: Inactive
+    inactive-description: Vendor is inactive or on hold
+    suspended: Suspended
+    suspended-description: Vendor is temporarily suspended
+    blacklisted: Blacklisted
+    blacklisted-description: Vendor is banned from operations
+    connected: Connected
+    connected-description: API connection healthy
+    syncing: Syncing
+    syncing-description: Data synchronization in progress
+    integration_error: Integration Error
+    integration_error-description: API connection failing—needs attention
+    under_review: Under Review
+    under_review-description: Being evaluated for approval
+    preferred: Preferred
+    preferred-description: Preferred supplier with negotiated terms
+    prequalified: Prequalified
+    prequalified-description: Meets minimum standards—conditional
+    terminated: Terminated
+    terminated-description: Relationship formally ended
+  contact-types:
+    customer: Customer
+    customer-description: End customer contact
+    vendor_contact: Vendor Contact
+    vendor_contact-description: Point of contact at vendor
+    driver_contact: Driver Contact
+    driver_contact-description: Driver or field contact
+    fleet_manager: Fleet Manager
+    fleet_manager-description: Contact for managing fleets
+    support: Support
+    support-description: General support or helpdesk contact
+    consignor: Consignor
+    consignor-description: Sender of goods
+    consignee: Consignee
+    consignee-description: Receiver of goods
+    accounts_payable: Accounts Payable
+    accounts_payable-description: Billing and payments contact
+    procurement: Procurement
+    procurement-description: Purchasing contact
+    site_security: Site Security
+    site_security-description: Gatehouse/security desk
+    dock_manager: Dock Manager
+    dock_manager-description: Loading dock operations contact
+    dispatcher: Dispatcher
+    dispatcher-description: Scheduling and operations contact
+  contact-statuses:
+    active: Active
+    active-description: Contact is valid and in use
+    inactive: Inactive
+    inactive-description: Contact is no longer valid
+    blocked: Blocked
+    blocked-description: Contact is blocked from use
+    primary: Primary
+    primary-description: Primary contact for an account/place
+    verified: Verified
+    verified-description: Email/phone verified
+    unverified: Unverified
+    unverified-description: Contact details not verified
+    do_not_contact: Do Not Contact
+    do_not_contact-description: Respect DNC for this contact
+    archived: Archived
+    archived-description: Kept for record; not actively used
+  fleet-types:
+    regional: Regional Fleet
+    regional-description: Fleet covering a specific region
+    long_haul: Long Haul Fleet
+    long_haul-description: Fleet for cross-country or international routes
+    urban: Urban Fleet
+    urban-description: Fleet for city/local deliveries
+    specialized: Specialized Fleet
+    specialized-description: Fleet for special cargo like hazmat or reefer
+    last_mile: Last-mile Fleet
+    last_mile-description: Dense urban, short-drop operations
+    linehaul: Linehaul / Middle-mile
+    linehaul-description: Terminal-to-terminal trunk routes
+    service: Service Fleet
+    service-description: Field service/technician vehicles
+    rental_pool: Rental Pool
+    rental_pool-description: Pool of shared/rental vehicles
+    electric: Electric Fleet
+    electric-description: EV-focused operations
+    moto_courier: Motorcycle Courier
+    moto_courier-description: Two-wheeler delivery fleet
+  fleet-statuses:
+    active: Active
+    active-description: Fleet is active and operational
+    inactive: Inactive
+    inactive-description: Fleet is inactive or dissolved
+    on_hold: On Hold
+    on_hold-description: Fleet operations are paused
+    scaling: Scaling
+    scaling-description: Actively adding vehicles/drivers
+    downsizing: Downsizing
+    downsizing-description: Reducing footprint
+    seasonal: Seasonal
+    seasonal-description: Operational during specific seasons
+    pilot: Pilot
+    pilot-description: Trial/limited-scope operations
+    decommissioning: Decommissioning
+    decommissioning-description: Winding down; reassigning assets
+  fuel-report-types:
+    refueling: Refueling
+    refueling-description: Standard refueling log
+    top_up: Top-up
+    top_up-description: Partial refuel
+    full_tank: Full Tank
+    full_tank-description: Complete refuel to full capacity
+    adjustment: Adjustment
+    adjustment-description: Correction or manual adjustment
+    card_txn: Card Transaction
+    card_txn-description: Imported from fuel card/processor
+    manual_entry: Manual Entry
+    manual_entry-description: Entered by user/driver
+    bulk_refuel: Bulk Refuel
+    bulk_refuel-description: Yard or tank bulk fueling event
+    def: DEF / AdBlue
+    def-description: Diesel Exhaust Fluid purchase
+    transfer: Transfer
+    transfer-description: Fuel moved between assets/tanks
+    refund: Refund / Reversal
+    refund-description: Refunded or reversed transaction
+  fuel-report-statuses:
+    recorded: Recorded
+    recorded-description: Fuel report has been logged
+    verified: Verified
+    verified-description: Fuel report verified by manager
+    disputed: Disputed
+    disputed-description: Fuel report is under review
+    rejected: Rejected
+    rejected-description: Fuel report was rejected
+    pending: Pending Review
+    pending-description: Awaiting manager verification
+    matched: Matched
+    matched-description: Matched to trip/vehicle automatically
+    unmatched: Unmatched
+    unmatched-description: No matching trip/vehicle found
+    flagged: Flagged Anomaly
+    flagged-description: Outlier (volume, price, location, time)
+    reimbursed: Reimbursed
+    reimbursed-description: Driver expense reimbursed
+  issue-statuses:
+    open: Open
+    open-description: Issue is open and unresolved
+    pending: Pending
+    pending-description: Issue is logged but work has not yet started
+    triage: Triage
+    triage-description: Initial assessment and classification
+    backlogged: Backlogged
+    backlogged-description: Issue is prioritized but not currently scheduled
+    in_progress: In Progress
+    in_progress-description: Issue is being worked on
+    requires_update: Requires Update
+    requires_update-description: Additional information is needed to proceed
+    in_review: In Review
+    in_review-description: Issue is under review or QA
+    re_opened: Re-opened
+    re_opened-description: Issue was closed/resolved but has been reopened
+    awaiting_parts: Awaiting Parts
+    awaiting_parts-description: Blocked pending required parts
+    awaiting_vendor: Awaiting Vendor
+    awaiting_vendor-description: Waiting on third-party action
+    monitoring: Monitoring
+    monitoring-description: Issue resolved but under observation
+    escalated: Escalated
+    escalated-description: Issue escalated for higher review
+    duplicate: Duplicate
+    duplicate-description: Merged into an existing issue
+    pending_review: Pending Review
+    pending_review-description: Awaiting manager or stakeholder review
+    resolved: Resolved
+    resolved-description: Issue has been resolved
+    completed: Completed
+    completed-description: Work is fully completed and verified
+    closed: Closed
+    closed-description: Issue is closed and no further action is needed
+    wont_fix: "Won't Fix"
+    wont_fix-description: Accepted risk—no action planned
+    canceled: Canceled
+    canceled-description: Issue was canceled before completion
+  issue-types:
+    vehicle: Vehicle
+    vehicle-description: Vehicle-related issues (mechanical, electrical, damage, accidents, etc.)
+    driver: Driver
+    driver-description: Driver-related issues (behavior, training, time management, documentation, safety)
+    route: Route
+    route-description: Routing and navigation issues (deviation, blockages, weather, efficiency)
+    payload-cargo: Payload / Cargo
+    payload-cargo-description: Cargo issues (damage, loss, documentation, temperature control)
+    software-technical: Software / Technical
+    software-technical-description: System/app/device issues (bugs, outages, integrations, security)
+    operational: Operational
+    operational-description: Process, resource, vendor, or cost issues; compliance & paperwork
+    customer: Customer
+    customer-description: Customer service, billing, communications, and order accuracy
+    security: Security
+    security-description: Unauthorized access, theft, vandalism, and data/security incidents
+    environmental-sustainability: Environmental / Sustainability
+    environmental-sustainability-description: Environmental hazards, emissions, waste, and green initiatives
+  issue-categories:
+    mechanical_problems: Mechanical Problems
+    mechanical_problems-description: Issues related to vehicle mechanical performance or breakdowns.
+    electrical_faults: Electrical Faults
+    electrical_faults-description: Electrical/battery faults impacting operation.
+    accidents_collisions: Accidents & Collisions
+    accidents_collisions-description: Any accident/incident involving the vehicle.
+    cosmetic_damages: Cosmetic Damages
+    cosmetic_damages-description: Non-critical bodywork or appearance issues.
+    tire_issues: Tire Issues
+    tire_issues-description: Wear, punctures, blowouts, alignment issues.
+    electronics_instruments: Electronics & Instruments
+    electronics_instruments-description: Dash, sensors, telematics hardware, or instrument faults.
+    maintenance_alerts: Maintenance Alerts
+    maintenance_alerts-description: Scheduled/overdue maintenance notifications.
+    fuel_efficiency: Fuel Efficiency Issues
+    fuel_efficiency-description: Abnormal consumption vs. baseline.
+    fuel_shortage: Fuel Shortage
+    fuel_shortage-description: Unexpected low fuel resulting in disruption.
+    behavior_concerns: Behavior Concerns
+    behavior_concerns-description: Conduct, professionalism, or policy adherence.
+    driver_documentation: Documentation
+    driver_documentation-description: Licenses, permits, or expired credentials.
+    time_management: Time Management
+    time_management-description: Delays, missed windows, or poor scheduling adherence.
+    driver_communication: Communication
+    driver_communication-description: Driver↔dispatch/customer communication gaps.
+    training_needs: Training Needs
+    training_needs-description: Upskilling or re-training required.
+    health_safety: Health & Safety Violations
+    health_safety-description: H&S non-compliance or incidents.
+    route_deviation: Route Deviation
+    route_deviation-description: Departed from planned route.
+    inefficient_routes: Inefficient Routes
+    inefficient_routes-description: Unnecessary time/cost/mileage.
+    route_safety: Safety Concerns
+    route_safety-description: Hazards along the route.
+    blocked_routes: Blocked Routes
+    blocked_routes-description: Road closures, restrictions, or access denied.
+    unfavorable_weather: Unfavorable Weather Conditions
+    unfavorable_weather-description: Weather delays or hazards.
+    environmental_considerations: Environmental Considerations
+    environmental_considerations-description: Environmental restrictions along route.
+    cargo_damage: Cargo Damage / Loss
+    cargo_damage-description: Goods damaged, spoiled, or missing.
+    damaged_goods: Damaged Goods
+    damaged_goods-description: Goods received/delivered damaged.
+    misplaced_goods: Misplaced Goods
+    misplaced_goods-description: Misrouted or lost items.
+    cargo_documentation: Documentation Issues
+    cargo_documentation-description: Incorrect/missing cargo docs.
+    temperature_sensitive_goods: Temperature-Sensitive Goods
+    temperature_sensitive_goods-description: Cold-chain or thermal control failures.
+    incorrect_cargo_loading: Incorrect Cargo Loading
+    incorrect_cargo_loading-description: Poor load plan or unsafe stacking.
+    bugs: Bugs
+    bugs-description: Defects impacting workflow.
+    system_outage: System Outage
+    system_outage-description: App/platform downtime or connectivity loss.
+    integration_failures: Integration Failures
+    integration_failures-description: 3rd-party/API sync or contract errors.
+    performance: Performance
+    performance-description: Slow or degraded system behavior.
+    feature_requests: Feature Requests
+    feature_requests-description: Requested improvements or capabilities.
+    security_vulnerabilities: Security Vulnerabilities
+    security_vulnerabilities-description: Potential exploit or insecure config.
+    compliance: Compliance
+    compliance-description: Regulatory or policy non-compliance.
+    paperwork_permits: Paperwork & Permits
+    paperwork_permits-description: Incorrect/expired documents or filings.
+    resource_allocation: Resource Allocation
+    resource_allocation-description: Insufficient/incorrect staffing or assets.
+    cost_overruns: Cost Overruns
+    cost_overruns-description: Budget/expense anomalies.
+    operational_communication: Communication
+    operational_communication-description: Internal comms failures.
+    vendor_management: Vendor Management Issues
+    vendor_management-description: 3rd-party coordination or SLA gaps.
+    customer_complaint: Customer Complaint
+    customer_complaint-description: Reported dissatisfaction or incident.
+    service_quality: Service Quality
+    service_quality-description: Service below expectation.
+    billing_discrepancies: Billing Discrepancies
+    billing_discrepancies-description: Invoice errors or disputes.
+    customer_communication: Communication Breakdown
+    customer_communication-description: Customer comms issues.
+    order_errors: Order Errors
+    order_errors-description: Wrong item/quantity/address/etc.
+    unauthorized_access: Unauthorized Access
+    unauthorized_access-description: Intrusion or improper access.
+    theft: Theft / Vandalism
+    theft-description: Stolen assets or malicious damage.
+    data_concerns: Data Concerns
+    data_concerns-description: Potential or actual data breach.
+    physical_security: Physical Security
+    physical_security-description: Facility or cargo security weaknesses.
+    data_integrity: Data Integrity Issues
+    data_integrity-description: Corruption or inconsistency of data.
+    fuel_consumption: Fuel Consumption
+    fuel_consumption-description: Excessive or abnormal usage patterns.
+    carbon_footprint: Carbon Footprint
+    carbon_footprint-description: Emissions or footprint tracking issues.
+    waste_management: Waste Management
+    waste_management-description: Handling and disposal of waste.
+    green_initiatives: Green Initiatives Opportunities
+    green_initiatives-description: Improvements to sustainability programs.
+  issue-priorities:
+    low: Low
+    low-description: Minor issue with little to no operational impact.
+    medium: Medium
+    medium-description: Moderate issue requiring attention but not urgent.
+    high: High
+    high-description: Serious issue affecting operations that needs prompt resolution.
+    critical: Critical
+    critical-description: Severe issue causing major disruption; requires immediate resolution.
+    scheduled_maintenance: Scheduled Maintenance
+    scheduled_maintenance-description: Planned maintenance tasks or service checks.
+    operational_suggestion: Operational Suggestion
+    operational_suggestion-description: Improvement idea or recommendation, not an urgent issue.
+  place-types:
+    warehouse: Warehouse
+    warehouse-description: Storage or distribution warehouse
+    depot: Depot
+    depot-description: Operational depot or hub
+    fuel_station: Fuel Station
+    fuel_station-description: Refueling station
+    checkpoint: Checkpoint
+    checkpoint-description: Border or security checkpoint
+    customer_location: Customer Location
+    customer_location-description: Customer delivery address
+    vendor_facility: Vendor Facility
+    vendor_facility-description: Vendor-owned site
+    port: Port
+    port-description: Shipping or receiving port
+    airport: Airport
+    airport-description: Air freight hub
+    distribution_center: Distribution Center
+    distribution_center-description: Regional DC / fulfillment
+    cross_dock: Cross-dock
+    cross_dock-description: Immediate transfer; minimal storage
+    micro_hub: Micro-hub
+    micro_hub-description: Urban mini-warehouse for last-mile
+    rest_area: Rest Area / Layover
+    rest_area-description: Driver rest/layover location
+    weigh_station: Weigh Station
+    weigh_station-description: Regulatory weigh site
+    toll_plaza: Toll Plaza
+    toll_plaza-description: Toll payment checkpoint
+    service_center: Service Center
+    service_center-description: Repair/maintenance facility
+    charging_station: Charging Station
+    charging_station-description: EV charging location
+  place-statuses:
+    active: Active
+    active-description: Place is active and valid
+    inactive: Inactive
+    inactive-description: Place is no longer used
+    restricted: Restricted
+    restricted-description: Place has restricted access
+    closed: Closed
+    closed-description: Place is permanently closed
+    new: New
+    new-description: Recently created—details may be incomplete
+    temp_closed: Temporarily Closed
+    temp_closed-description: Closed for a limited period
+    under_construction: Under Construction
+    under_construction-description: Site works ongoing
+    permit_required: Permit Required
+    permit_required-description: Entry requires permit/clearance
+    approach_caution: Approach with Caution
+    approach_caution-description: Known access difficulties or hazards
+  route-profile-options:
+    driving: Driving
+    driving-description: Optimized routes for motor vehicles.
+    bicycle: Bicycle
+    bicycle-description: Optimized routes for bicycles with bike paths where available.
+    walking: Walking
+    walking-description: Pedestrian-friendly routes suitable for walking.
+  pod-options:
+    scan: Scan
+    scan-description: Proof of delivery captured by scanning a QR code or barcode.
+    signature: Signature
+    signature-description: Proof of delivery confirmed with recipient signature.
+    photo: Photo
+    photo-description: Proof of delivery recorded with a photo of the delivered goods.
+    sms: SMS
+    sms-description: Proof of delivery sent and confirmed via SMS verification.
+  service-rate-calculation-methods:
+    per_meter: Per Meter
+    per_meter-description: Calculate cost based on the number of meters traveled.
+    fixed_meter: Fixed Rate
+    fixed_meter-description: Charge a fixed rate per meter regardless of distance.
+    parcel: Parcel Rate
+    parcel-description: Charge a dynamic rate based on parcel/payload weight and dimensions.
+    per_drop: Per Drop-off
+    per_drop-description: Cost applied per drop-off point.
+    algo: Algorithm
+    algo-description: Cost calculated dynamically using algorithmic logic.
+  service-rate-cod-calculation-methods:
+    flat: Flat Fee
+    flat-description: A fixed fee applied to all COD transactions.
+    percentage: Percentage
+    percentage-description: Fee calculated as a percentage of the COD amount.
+  service-rate-peak-hour-calculation-methods:
+    flat: Flat Fee
+    flat-description: A fixed surcharge applied during peak hours.
+    percentage: Percentage
+    percentage-description: A surcharge calculated as a percentage of the base fare during peak hours.
+  distance-units:
+    m: Meter
+    m-description: Distances measured in meters.
+    km: Kilometer
+    km-description: Distances measured in kilometers.
+    ft: Feet
+    ft-description: Distances measured in feet.
+    yd: Yard
+    yd-description: Distances measured in yards.
+    mi: Mile
+    mi-description: Distances measured in miles.
+  long-distance-units:
+    km: Kilometer
+    km-description: Distances measured in kilometers.
+    mi: Mile
+    mi-description: Distances measured in miles.
+  dimension-units:
+    cm: Centimeters
+    cm-description: Measurements in centimeters.
+    in: Inches
+    in-description: Measurements in inches.
+    ft: Feet
+    ft-description: Measurements in feet.
+    mm: Millimeters
+    mm-description: Measurements in millimeters.
+    m: Meters
+    m-description: Measurements in meters.
+    yd: Yards
+    yd-description: Measurements in yards.
+  weight-units:
+    g: Grams
+    g-description: Weight in grams.
+    oz: Ounces
+    oz-description: Weight in ounces.
+    lb: Pounds
+    lb-description: Weight in pounds.
+    kg: Kilograms
+    kg-description: Weight in kilograms.
+  service-area-types:
+    neighborhood: Neighborhood
+    neighborhood-description: A small, localized area within a city, typically residential or community-focused.
+    city: City
+    city-description: An urban area with its own municipal government and defined boundaries.
+    state: State
+    state-description: A major administrative division within a country, often with its own governing authority.
+    province: Province
+    province-description: A territorial division within a country, similar to a state, common in non-U.S. regions.
+    region: Region
+    region-description: A larger geographic area that may include multiple cities, states, or provinces.
+    country: Country
+    country-description: A sovereign nation with defined borders and central governance.
+    continent: Continent
+    continent-description: A global landmass encompassing multiple countries (e.g., Asia, Europe, Africa).
+  telematic-statuses:
+    initialized: Initialized
+    initialized-description: Provider entry has been created but not yet configured.
+    configured: Configured
+    configured-description: Provider credentials and settings are valid but connection not yet tested.
+    connecting: Connecting
+    connecting-description: Attempting to establish a connection with provider API.
+    connected: Connected
+    connected-description: Successfully authenticated and connected to provider API.
+    synchronizing: Synchronizing
+    synchronizing-description: Currently syncing data (devices, vehicles, positions, etc.) from provider.
+    active: Active
+    active-description: Integration is healthy and data syncs are occurring normally.
+    degraded: Degraded
+    degraded-description: Integration partially working; intermittent errors or missing data.
+    disconnected: Disconnected
+    disconnected-description: Connection lost or failed authentication.
+    error: Error
+    error-description: Provider integration encountered a fatal issue.
+    disabled: Disabled
+    disabled-description: Manually disabled by the user.
+    archived: Archived
+    archived-description: Deprecated or replaced integration, kept for record.
+  telematic-health-states:
+    healthy: Healthy
+    healthy-description: Integration tested and stable.
+    warning: Warning
+    warning-description: Minor issues detected (e.g., slow response, nearing quota).
+    critical: Critical
+    critical-description: Persistent failure or no data received in X hours.
+  device-types:
+    gps_tracker: GPS Tracker
+    gps_tracker-description: Standalone GPS tracking device installed in vehicle or asset.
+    obd2_plugin: OBD-II Plug-in Device
+    obd2_plugin-description: Plugs into vehicle OBD-II port; reads diagnostics, engine data, and transmits telematics.
+    can_bus_module: CAN Bus Module
+    can_bus_module-description: Hard-wired module connected to vehicle CAN bus for detailed vehicle subsystem data.
+    dashcam_unit: Dash Camera Telematics Unit
+    dashcam_unit-description: Camera + integrated telematics module capturing video and vehicle data.
+    battery_asset_tracker: Battery-Powered Asset Tracker
+    battery_asset_tracker-description: Self-powered wireless device for tracking non-powered assets (trailers, containers, equipment).
+    smartphone_app_device: Smartphone App Device
+    smartphone_app_device-description: Mobile device running telematics/tracking app using phone sensors and connectivity.
+    hardwired_black_box: Hard-wired Black Box Module
+    hardwired_black_box-description: Permanently installed telematics control unit wired to vehicle electrical system for fleet use.
+    mobile_edge_gateway: Mobile Edge / IoT Gateway
+    mobile_edge_gateway-description: Multi-sensor/IoT gateway installed in vehicle or asset to aggregate sensor data and telematics.
+    trailer_container_node: Trailer/Container Telematic Sensor Node
+    trailer_container_node-description: Specialised telematics node for trailers, containers, intermodal assets, tracking location and status.
+  sensor-types:
+    gps_gnss: GPS / GNSS Receiver
+    gps_gnss-description: Global positioning sensor providing latitude/longitude, speed and time information.
+    accelerometer: Accelerometer
+    accelerometer-description: Measures linear acceleration; used to detect harsh braking, rapid acceleration, and movement.
+    gyroscope_imu: Gyroscope / IMU
+    gyroscope_imu-description: Inertial Measurement Unit estimating orientation, yaw/pitch/roll of vehicle or asset.
+    fuel_level: Fuel Level Sensor
+    fuel_level-description: Measures remaining fuel in tank; used for fuel monitoring and consumption tracking.
+    tire_pressure: Tire Pressure Sensor (TPMS)
+    tire_pressure-description: Measures pressure (and often temperature) in tires for safety and maintenance.
+    engine_diagnostic: Engine Diagnostic / OBD Sensor
+    engine_diagnostic-description: Reads engine fault codes, RPM, engine hours, and other diagnostics via OBD or CAN.
+    temperature: Temperature Sensor
+    temperature-description: Monitors ambient or equipment temperature; used for refrigerated cargo, battery health etc.
+    humidity: Humidity Sensor
+    humidity-description: Detects moisture/humidity levels in cargo or enclosed spaces for condition monitoring.
+    door_hatch: Door / Hatch Sensor
+    door_hatch-description: Monitors open/close status of doors, hatches or compartments for security/tracking.
+    vibration_shock: Vibration / Shock Sensor
+    vibration_shock-description: Measures vibration or shock events; suitable for freight, containers or equipment stability monitoring.
+    battery_voltage: Battery Voltage Sensor
+    battery_voltage-description: Monitors battery or electrical system voltage to detect low power or charging issues.
+    geofence_event: Geofence / Entry-Exit Event Sensor
+    geofence_event-description: Triggers when asset enters/exits defined geographic zone; used for location-based alerts.
+    idle_time: Idle Time Sensor
+    idle_time-description: Tracks engine on with vehicle stationary; used to measure idling and optimize fuel/usage.
+    driver_behavior: Driver Behavior Sensor
+    driver_behavior-description: Aggregates data (speed, braking, cornering) to score driving behavior and safety.
+  device-statuses:
+    inactive: Inactive
+    inactive-description: Device record exists but has not yet been activated or assigned.
+    active: Active
+    active-description: Device is online and actively communicating with the platform.
+    online: Online
+    online-description: Device is currently connected and transmitting live data.
+    offline: Offline
+    offline-description: Device is powered off or has not transmitted data within the expected interval.
+    sleeping: Sleeping
+    sleeping-description: Device in low-power mode awaiting wake event or scheduled reporting interval.
+    idle: Idle
+    idle-description: Device is powered and connected but not moving or transmitting new telemetry.
+    maintenance: Maintenance
+    maintenance-description: Device is undergoing repair, firmware update, or service maintenance.
+    degraded: Degraded
+    degraded-description: Device is partially functional; intermittent connectivity or incomplete data.
+    error: Error
+    error-description: Device reported fault, hardware issue, or repeated communication errors.
+    disconnected: Disconnected
+    disconnected-description: Device lost connection to network or telematic gateway.
+    decommissioned: Decommissioned
+    decommissioned-description: Device permanently retired or removed from active fleet use.
+    disabled: Disabled
+    disabled-description: Device manually disabled by user or admin; data not being accepted.
+    pending_activation: Pending Activation
+    pending_activation-description: Device provisioned but not yet verified or linked to telematic source.
+    provisioning: Provisioning
+    provisioning-description: Device configuration or initialization is in progress.
+  sensor-statuses:
+    active: Active
+    active-description: Sensor is online and transmitting readings as expected.
+    inactive: Inactive
+    inactive-description: Sensor exists but is not currently operational or reporting.
+    online: Online
+    online-description: Sensor is connected and sending live data via its parent device.
+    offline: Offline
+    offline-description: Sensor has stopped sending data or is unreachable.
+    calibrating: Calibrating
+    calibrating-description: Sensor undergoing calibration or self-test to ensure measurement accuracy.
+    faulty: Faulty
+    faulty-description: Sensor hardware failure or inconsistent readings detected.
+    degraded: Degraded
+    degraded-description: Sensor partially functional; data irregularities or unstable connection.
+    maintenance: Maintenance
+    maintenance-description: Sensor temporarily disabled for maintenance, cleaning, or recalibration.
+    error: Error
+    error-description: Critical failure or unrecoverable error reported by sensor or gateway.
+    disconnected: Disconnected
+    disconnected-description: Sensor communication link lost with device or telematic gateway.
+    disabled: Disabled
+    disabled-description: Sensor manually disabled; no data being collected.
+    decommissioned: Decommissioned
+    decommissioned-description: Sensor permanently retired, replaced, or removed from service.
+  measurement-systems:
+    metric: Metric System
+    metric-description: Internationally adopted system based on meters, liters, and kilograms; used by most countries.
+    imperial: Imperial System
+    imperial-description: Traditional British system using miles, gallons, and pounds; still widely used in the United States.
+  fuel-volume-units:
+    liters: Liters (L)
+    liters-description: Metric unit for measuring liquid fuel; standard in most of the world.
+    gallons_us: Gallons (US gal)
+    gallons_us-description: US customary gallon, equal to 3.785 liters; commonly used in the United States.
+    gallons_imperial: Gallons (Imperial gal)
+    gallons_imperial-description: UK Imperial gallon, equal to 4.546 liters; historically used in the UK and some Commonwealth countries.
+  fuel-types:
+    petrol: Petrol (Gasoline)
+    petrol-description: Traditional internal combustion engine fuel, widely available.
+    diesel: Diesel
+    diesel-description: Fuel for compression ignition engines, offering higher efficiency and torque.
+    electric: Electric
+    electric-description: Battery-powered vehicles producing zero tailpipe emissions.
+    hybrid: Hybrid
+    hybrid-description: Combines petrol/diesel engine with an electric motor for better fuel economy.
+    lpg: Liquefied Petroleum Gas (LPG)
+    lpg-description: Alternative fuel derived from propane or butane, lower emissions.
+    cng: Compressed Natural Gas (CNG)
+    cng-description: Fuel stored at high pressure, cleaner than petrol or diesel.
+  vehicle-usage-types:
+    commercial: Commercial
+    commercial-description: Used for business operations such as deliveries, services, or company activities.
+    personal: Personal
+    personal-description: Used by an individual for private, non-business purposes.
+    mixed: Mixed
+    mixed-description: Used for both business and personal purposes.
+    rental: Rental
+    rental-description: Provided for short or long-term rental to third parties.
+    fleet: Fleet
+    fleet-description: Part of a company-managed group of vehicles or assets for organizational use.
+    operational: Operational
+    operational-description: Vehicles actively in use for company operations or service delivery.
+    standby: Standby
+    standby-description: Assets kept on standby for future or emergency use.
+    under_maintenance: Under Maintenance
+    under_maintenance-description: Vehicles currently undergoing repair, inspection, or service.
+    decommissioned: Decommissioned
+    decommissioned-description: Retired assets no longer part of active operations.
+    in_transit: In Transit
+    in_transit-description: Assets currently being transported between locations.
+    on_loan: On Loan
+    on_loan-description: Assets temporarily loaned to another department or client.
+  vehicle-ownership-types:
+    company_owned: Company Owned
+    company_owned-description: Vehicles fully owned and managed by the company.
+    leased: Leased
+    leased-description: Vehicles leased from a third-party vendor or lessor under contract.
+    rented: Rented
+    rented-description: Short-term rental assets used for temporary fleet expansion or projects.
+    financed: Financed
+    financed-description: Vehicles purchased through financing or loan agreements.
+    vendor_supplied: Vendor Supplied
+    vendor_supplied-description: Assets provided and maintained by external vendors.
+    customer_owned: Customer Owned
+    customer_owned-description: Assets owned by a customer but operated or tracked within the system.
+  vehicle-body-types:
+    sedan: Sedan
+    sedan-description: Standard passenger car body with a fixed roof and trunk.
+    suv: SUV
+    suv-description: Sport utility vehicle designed for passenger and cargo versatility.
+    pickup_truck: Pickup Truck
+    pickup_truck-description: Truck with an open cargo area and enclosed cab.
+    van: Van
+    van-description: Multi-purpose vehicle for transporting passengers or goods.
+    box_truck: Box Truck
+    box_truck-description: Enclosed cargo truck for logistics or delivery operations.
+    flatbed: Flatbed
+    flatbed-description: Truck with a flat, open platform for hauling oversized loads.
+    trailer: Trailer
+    trailer-description: Unpowered vehicle towed for freight transport.
+    bus: Bus
+    bus-description: Passenger transport vehicle with multiple seating rows.
+  vehicle-body-sub-types:
+    refrigerated_truck: Refrigerated Truck
+    refrigerated_truck-description: Temperature-controlled truck for transporting perishable goods.
+    tanker: Tanker
+    tanker-description: Vehicle designed for transporting liquids such as fuel or water.
+    tipper_truck: Tipper Truck
+    tipper_truck-description: Truck equipped with a hydraulic bed for dumping bulk materials.
+    car_carrier: Car Carrier
+    car_carrier-description: Trailer or truck configured for vehicle transport.
+    mini_van: Mini Van
+    mini_van-description: Compact van suitable for urban transport or light cargo.
+    panel_van: Panel Van
+    panel_van-description: Enclosed van used for deliveries or small logistics operations.
+    chassis_cab: Chassis Cab
+    chassis_cab-description: Truck base with customizable rear body configurations.
+    electric_bus: Electric Bus
+    electric_bus-description: Battery-powered bus used for sustainable public or private transport.
+    motorbike: Motorbike
+    motorbike-description: Two-wheeled asset for rapid, lightweight transportation.
+  transmission-types:
+    manual: Manual
+    manual-description: Vehicles requiring manual gear shifting by the driver.
+    automatic: Automatic
+    automatic-description: Vehicles equipped with fully automatic transmission systems.
+    semi_automatic: Semi-Automatic
+    semi_automatic-description: Combines manual control with automatic clutch operation.
+    cvt: CVT (Continuously Variable Transmission)
+    cvt-description: Uses a belt and pulley system for seamless gear ratio transitions.
+    dual_clutch: Dual-Clutch
+    dual_clutch-description: High-performance transmission with two clutches for faster shifting.
+    electric_drive: Electric Drive
+    electric_drive-description: Single-speed transmission system used in electric vehicles (EVs).
+  odometer-units:
+    m: Meter
+    m-description: Distances measured in meters.
+    km: Kilometer
+    km-description: Distances measured in kilometers.
+    ft: Feet
+    ft-description: Distances measured in feet.
+    yd: Yard
+    yd-description: Distances measured in yards.
+    mi: Mile
+    mi-description: Distances measured in miles.
+    hours: Hours
+    hours-description: Unit of time measurement, commonly used worldwide.

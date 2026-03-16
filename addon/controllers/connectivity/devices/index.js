@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
-import fleetOpsOptions from '../../../utils/fleet-ops-options';
+import { localizeFleetOpsOptions } from '../../../utils/fleet-ops-options';
 
 export default class ConnectivityDevicesIndexController extends Controller {
     @service deviceActions;
@@ -90,7 +90,7 @@ export default class ConnectivityDevicesIndexController extends Controller {
             filterable: true,
             filterParam: 'type',
             filterComponent: 'filter/multi-option',
-            filterOptions: fleetOpsOptions('deviceTypes'),
+            filterOptions: localizeFleetOpsOptions(this.intl, 'deviceTypes'),
         },
         {
             label: 'Serial Number',
@@ -109,7 +109,7 @@ export default class ConnectivityDevicesIndexController extends Controller {
             sortable: true,
             filterable: true,
             filterComponent: 'filter/multi-option',
-            filterOptions: fleetOpsOptions('deviceStatuses'),
+            filterOptions: localizeFleetOpsOptions(this.intl, 'deviceStatuses'),
         },
         {
             label: this.intl.t('column.created-at'),
