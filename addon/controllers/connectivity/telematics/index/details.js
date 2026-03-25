@@ -3,12 +3,13 @@ import { inject as service } from '@ember/service';
 
 export default class ConnectivityTelematicsIndexDetailsController extends Controller {
     @service hostRouter;
+    @service intl;
 
     get tabs() {
         return [
             {
                 route: 'connectivity.telematics.index.details.index',
-                label: 'Overview',
+                label: this.intl.t('common.overview'),
             },
         ];
     }

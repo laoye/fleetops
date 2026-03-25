@@ -48,7 +48,7 @@ export default class ConnectivityTelematicsIndexController extends Controller {
     /** bulk action buttons */
     @tracked bulkActions = [
         {
-            label: 'Delete selected...',
+            label: this.intl.t('common.delete-selected'),
             class: 'text-red-500',
             fn: this.telematicActions.bulkDelete,
         },
@@ -58,7 +58,7 @@ export default class ConnectivityTelematicsIndexController extends Controller {
     @tracked columns = [
         {
             sticky: true,
-            label: 'Provider',
+            label: this.intl.t('common.provider'),
             valuePath: 'provider',
             cellComponent: 'table/cell/anchor',
             cellClassNames: 'uppercase',

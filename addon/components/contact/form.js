@@ -8,6 +8,7 @@ export default class ContactFormComponent extends Component {
     @service fetch;
     @service notifications;
     @service currentUser;
+    @service intl;
 
     @action selectPlace(place) {
         if (!place) return;
@@ -51,7 +52,7 @@ export default class ContactFormComponent extends Component {
                 }
             );
         } catch (err) {
-            this.notifications.error('Unable to upload photo: ' + err.message);
+            this.notifications.error(this.intl.t('notifications.upload-photo-error') + ': ' + err.message);
         }
     }
 }

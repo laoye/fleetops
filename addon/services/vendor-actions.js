@@ -89,7 +89,7 @@ export default class VendorActionsService extends ResourceActionService {
     @action createVendorIntegration(provider, opts = {}) {
         const normalized = normalizeProvider(provider);
         if (!normalized) {
-            this.notifications.error('Invalid vendor provider configuration.');
+            this.notifications.error(this.intl.t('notifications.invalid-vendor-config'));
             return null;
         }
 
@@ -99,7 +99,7 @@ export default class VendorActionsService extends ResourceActionService {
         if (opts.autoSave) {
             // Return a promise if caller wants immediate persistence
             return record.save().catch((e) => {
-                this.notifications.error('Failed to create integration.');
+                this.notifications.error(this.intl.t('notifications.failed-create-integration'));
                 // bubble up so caller can handle
                 throw e;
             });

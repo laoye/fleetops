@@ -10,6 +10,7 @@ export default class DeviceManagerComponent extends Component {
     @service store;
     @service modalsManager;
     @service notifications;
+    @service intl;
     @tracked devices = [];
 
     get resourceName() {
@@ -33,8 +34,8 @@ export default class DeviceManagerComponent extends Component {
 
     @action addDevice() {
         this.modalsManager.show('modals/attach-device', {
-            title: 'Select device to attach',
-            acceptButtonText: 'Confirm & Attach Device',
+            title: this.intl.t('modals.select-device-attach'),
+            acceptButtonText: this.intl.t('modals.confirm-attach-device'),
             selectedDevice: null,
             confirm: async (modal) => {
                 const selectedDevice = modal.getOption('selectedDevice');
@@ -50,7 +51,7 @@ export default class DeviceManagerComponent extends Component {
                 try {
                     await selectedDevice.save();
                     await this.loadDevices.perform();
-                    this.notifications.success('Device attached successfully.');
+                    this.notifications.success(this.intl.t('notifications.device-attached'));
                     modal.done();
                 } catch (err) {
                     this.notifications.serverError(err);
@@ -72,7 +73,7 @@ export default class DeviceManagerComponent extends Component {
                 try {
                     await device.save();
                     await this.loadDevices.perform();
-                    this.notifications.success('Device removed.');
+                    this.notifications.success(this.intl.t('notifications.device-removed'));
                     modal.done();
                 } catch (error) {
                     this.notifications.serverError(error);

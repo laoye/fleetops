@@ -22,7 +22,7 @@
             {{yield to="footer"}}
         {{/if}}
         <div class="mt-1">
-            <div class="text-gray-300 dark:text-gray-500 text-xs">Last Modified: {{@resource.updatedAt}}</div>
+            <div class="text-gray-300 dark:text-gray-500 text-xs">{{t "vehicle.form.last-modified"}} {{@resource.updatedAt}}</div>
         </div>
     </Card.footer>
 </Layout::Resource::Card>

@@ -9,6 +9,7 @@ export default class VehicleFormComponent extends Component {
     @service fetch;
     @service currentUser;
     @service notifications;
+    @service intl;
     @service modalsManager;
     @tracked statusOptions = ['active', 'pending'];
 
@@ -48,7 +49,7 @@ export default class VehicleFormComponent extends Component {
                 }
             );
         } catch (err) {
-            this.notifications.error('Unable to upload photo: ' + err.message);
+            this.notifications.error(this.intl.t('notifications.upload-photo-error') + ': ' + err.message);
         }
     }
 }

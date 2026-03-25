@@ -126,33 +126,33 @@ export default class MapDrawerPositionListingComponent extends Component {
                 onClick: this.onPositionClicked,
             },
             {
-                label: 'Timestamp',
+                label: this.intl.t('common.timestamp'),
                 valuePath: 'timestamp',
                 cellComponent: 'table/cell/anchor',
                 onClick: this.onPositionClicked,
             },
             {
-                label: 'Latitude',
+                label: this.intl.t('common.latitude'),
                 valuePath: 'latitude',
                 cellComponent: 'table/cell/anchor',
                 onClick: this.onPositionClicked,
             },
             {
-                label: 'Longitude',
+                label: this.intl.t('common.longitude'),
                 valuePath: 'longitude',
                 cellComponent: 'table/cell/anchor',
                 onClick: this.onPositionClicked,
             },
             {
-                label: 'Speed (km/h)',
+                label: this.intl.t('common.speed-kmh'),
                 valuePath: 'speedKmh',
             },
             {
-                label: 'Heading',
+                label: this.intl.t('common.heading'),
                 valuePath: 'heading',
             },
             {
-                label: 'Altitude (m)',
+                label: this.intl.t('common.altitude-m'),
                 valuePath: 'altitude',
             },
         ];
@@ -203,12 +203,12 @@ export default class MapDrawerPositionListingComponent extends Component {
 
     @action startReplay() {
         if (this.positions.length === 0) {
-            this.notifications.warning('No positions to replay');
+            this.notifications.warning(this.intl.t('notifications.no-positions-replay'));
             return;
         }
 
         if (this.isReplaying && !this.isPaused) {
-            this.notifications.info('Replay is already running');
+            this.notifications.info(this.intl.t('notifications.replay-running'));
             return;
         }
 
@@ -317,12 +317,12 @@ export default class MapDrawerPositionListingComponent extends Component {
      */
     #initializeReplay() {
         if (!this.resource) {
-            this.notifications.warning('No resource provided for replay');
+            this.notifications.warning(this.intl.t('notifications.no-resource-replay'));
             return;
         }
 
         if (this.positions.length === 0) {
-            this.notifications.warning('No positions to replay');
+            this.notifications.warning(this.intl.t('notifications.no-positions-replay'));
             return;
         }
 
@@ -335,7 +335,7 @@ export default class MapDrawerPositionListingComponent extends Component {
             callback: (data) => {
                 if (data.type === 'complete') {
                     // Replay completed
-                    this.notifications.success('Replay completed');
+                    this.notifications.success(this.intl.t('notifications.replay-completed'));
                 }
             },
         });
@@ -374,12 +374,18 @@ export default class MapDrawerPositionListingComponent extends Component {
         });
 
         // Popup content (mirrors your template)
+        const posLabel = this.intl.t('common.position');
+        const timeLabel = this.intl.t('common.timestamp');
+        const speedLabel = this.intl.t('common.speed');
+        const headingLabel = this.intl.t('common.heading');
+        const altLabel = this.intl.t('common.altitude-m');
+        const na = 'N/A';
         const html = htmlSafe(`<div class="text-xs">
-        <div><strong>Position ${index + 1}</strong></div>
-        <div>Time: ${pos.timestamp ?? ''}</div>
-        <div>Speed: ${pos.speedKmh ?? 'N/A'} km/h</div>
-        <div>Heading: ${pos.heading ?? 'N/A'}°</div>
-        <div>Altitude: ${pos.altitude ?? 'N/A'} m</div>
+        <div><strong>${posLabel} ${index + 1}</strong></div>
+        <div>${timeLabel}: ${pos.timestamp ?? ''}</div>
+        <div>${speedLabel}: ${pos.speedKmh ?? na} km/h</div>
+        <div>${headingLabel}: ${pos.heading ?? na}°</div>
+        <div>${altLabel}: ${pos.altitude ?? na} m</div>
         </div>`);
 
         marker.bindPopup(html);

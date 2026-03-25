@@ -7,6 +7,7 @@ import { task } from 'ember-concurrency';
 export default class TelematicFormComponent extends Component {
     @service fetch;
     @service notifications;
+    @service intl;
     @tracked providers = [];
     @tracked selectedProvider = this.args.resource?.provider_descriptor ?? null;
     @tracked connectionTestResult;
@@ -16,7 +17,7 @@ export default class TelematicFormComponent extends Component {
             {
                 size: 'xs',
                 icon: 'plug',
-                text: 'Test Connection',
+                text: this.intl.t('common.test-connection'),
                 onClick: () => this.testConnection.perform(),
                 isLoading: this.testConnection.isRunning,
             },
@@ -62,16 +63,16 @@ export default class TelematicFormComponent extends Component {
             this.connectionTestResult = result;
 
             if (result.success) {
-                this.notifications.success('Connection successful!');
+                this.notifications.success(this.intl.t('notifications.connection-successful'));
             } else {
                 this.notifications.error(result.message);
             }
         } catch (error) {
             this.connectionTestResult = {
                 success: false,
-                message: error.message || 'Connection test failed',
+                message: error.message || this.intl.t('notifications.connection-failed'),
             };
-            this.notifications.error('Connection test failed');
+            this.notifications.error(this.intl.t('notifications.connection-failed'));
         }
     }
 }

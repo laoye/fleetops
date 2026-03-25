@@ -1,6 +1,11 @@
 fleet-ops:
   extension-name: Fleet-Ops
 
+ember-power-select:
+  search-message: Type to search
+  no-matches-message: No results found
+  loading-message: Loading...
+
 common:
   proof-of-delivery: Proof of Delivery
   ad-hoc: As-Hoc
@@ -41,6 +46,148 @@ common:
   edit-address: Edit Address
   new-address: New Address
   select-address: Select Address
+  delete-selected: Delete selected...
+  event: Event
+  device: Device
+  telematic: Telematic
+  provider: Provider
+  severity: Severity
+  ident: IDENT
+  protocol: Protocol
+  state: State
+  code: Code
+  serial-number: Serial Number
+  select-resource: "Select {resource}"
+  select-resource-for: "Select {resource} for {target}"
+  select-order-pickup: Select order pickup location
+  select-order-dropoff: Select order dropoff location
+  filter-by-order-config: Filter by order config
+  payload-id: Payload ID
+  without-driver-assigned: Without Driver Assigned
+  change-layout: Change the layout
+  created-between: Created Between
+  last-updated-between: Last Updated Between
+  select-issue-type: Select issue type
+  select-issue-category: Select issue category
+  confirm-and-save: "Confirm & Save"
+  start-upload: Start Upload
+  file-name: File Name
+  file-size: File Size
+  upload-date: Upload Date
+  uploading: Uploading...
+  processing: Processing...
+  test-connection: Test Connection
+  untitled-field: Untitled Field
+  overview: Overview
+  result: Result
+  positions: Positions
+  edit-details: Edit details
+  update-activity: Update activity
+  unassign-driver: Unassign driver
+  view-order-label: View order label
+  listen-socket-channel: Listen to socket channel
+  view-metadata: View metadata
+  cancel-order: Cancel order
+  delete-order: Delete order
+  confirm-delete-shift: Are you sure you want to delete this shift?
+  stop: Stop
+  pause: Pause
+  resume: Resume
+  play: Play
+  step-backward: Step backward
+  step-forward: Step forward
+  speed: Speed
+  timestamp: Timestamp
+  latitude: Latitude
+  longitude: Longitude
+  speed-kmh: Speed (km/h)
+  heading: Heading
+  altitude-m: Altitude (m)
+  select-date-range: Select date range
+  filter-by-telematic: Filter by Telematic
+  filter-by-device: Filter by Device
+  select-device: Select device
+  no-positions-found: No Positions Found
+  no-positions-hint: Try adjusting your filters or select a different date range.
+  position-data: Position Data
+  position-metrics: Position Metrics
+  total-distance: Total Distance
+  duration: Duration
+  max-speed: Max Speed
+  avg-speed: Avg Speed
+  speeding-events: Speeding Events
+  dwell-times: Dwell Times
+  acceleration-events: Acceleration Events
+  online: Online
+  offline: Offline
+  filter-by-order: Filter by order
+  reset: Reset
+  pickup: Pickup
+  dropoff: Dropoff
+  customer: Customer
+  driver: Driver
+  driver-license: Drivers License
+  metadata: Metadata
+  active-manpower: Active Manpower
+  amount: Amount
+  avatar: Avatar
+  back: Back
+  board: Board
+  building: Building
+  cancel: Cancel
+  clear: Clear
+  cost: Cost
+  create: Create
+  create-a-new-resource: "Create a new {resource}"
+  create-new-resource: "Create new {resource}"
+  date-created: Date Created
+  delete-resource-name: "Delete {resourceName}"
+  distance: Distance
+  edit: Edit
+  edit-resource-name: "Edit {resourceName}"
+  edit-resource-type-name: "Edit {resourceType} {resourceName}"
+  host: Host
+  id: ID
+  item: Item
+  key: Key
+  label: Label
+  last-seen-at: Last Seen At
+  loading-resource: "Loading {resource}..."
+  manage-message: Manage Message
+  map: Map
+  namespace: Namespace
+  neighborhood: Neighborhood
+  new: New
+  "no": "No"
+  odometer: Odometer
+  photos: Photos
+  plate-number: Plate Number
+  priority: Priority
+  remove: Remove
+  reporter: Reporter
+  sandbox: Sandbox
+  save-changes: Save Changes
+  search: Search
+  security-access-code: Security Access Code
+  select-field: Select Field
+  service: Service
+  service-area: Service Area
+  street: Street
+  table: Table
+  task: Task
+  total: Total
+  unauthorized: Unauthorized
+  unauthorized-to: "You are not authorized to {action}"
+  upload-image: Upload Image
+  upload-image-supported: "Supported formats: JPG, PNG, GIF"
+  value: Value
+  vehicle: Vehicle
+  vendor: Vendor
+  vin-number: VIN Number
+  website: Website
+  website-url: Website URL
+  "yes": "Yes"
+  zone: Zone
 
 menu:
   operations: Operations
@@ -174,6 +321,9 @@ resource:
   work-orders: Work Orders
   zone: Zone
   zones: Zones
+  reporter: Reporter
+  assignee: Assignee
+  user: User
 
 order-status:
   created: Created
@@ -222,6 +372,7 @@ column:
   postal-code: Postal Code
   state: State
   make: Make
+  manage-message: Manage your resources
   model: Model
   plate-number: Plate Number
   year: Year
@@ -338,11 +489,16 @@ activity:
         and: Logical AND, true if both operands are true
         or: Logical OR, true if at least one operand is true
         not: Logical NOT, inverts the truth value
+      add-condition: Add condition
+      no-activity-logic: No activity logic
+      no-activity-logic-hint: Add your first activity logic to create computed activity decisions
     event-selector:
       activity-events: Activity Events
       activity-events-select-to-fire: Select which events will be activated when this activity occurs.
       activity-events-select-events-info: Select the specific event you want to trigger in response to this activity.
       select-event-to-add: Select event to add...
+      no-activity-events: No activity events
+      no-activity-events-hint: Select and add events to fire once activity is reached
       events:
         order:
           dispatched: Triggers when an order is successfully dispatched.
@@ -558,6 +714,7 @@ order:
     notes-title: Notes
     optimize-route: Optimize Route
     optimize-route-help-text: Fleetbase will automatically optimize the route.
+    optimize-route-engine-help-text: Optimize route using an integrated optimization engine
     order-type: Order Type
     order-type-help-text: Selecting the order type will tell fleetbase what order configurations to use.
     order-type-placeholder: Select Order Type
@@ -677,6 +834,13 @@ order:
   kanban:
     status-updated: Order activity updated to {status} status.
     cannot-update-status: Order unable to move to {status} status.
+  details:
+    no-driver-assigned: No driver assigned
+    no-vehicle-assigned: No vehicle assigned
+    no-customer: No customer
+    no-facilitator: No facilitator
+    no-driver: No driver
+    no-phone: No phone
 
 order-config-manager:
   title: Orders Configuration
@@ -904,6 +1068,115 @@ vehicle:
     year: Year
   actions:
     locate-vehicle: Locate Vehicle on Map
+  sections:
+    vehicle-identification: Vehicle Identification
+    assignment-status: Assignment & Status
+    location: Location
+    measurement-units: Measurement & Units
+    odometer-usage: Odometer & Usage
+    body-usage: Body & Usage
+    technical-specifications: Technical Specifications
+    powertrain-engine: Powertrain & Engine
+    capacity-dimensions: Capacity & Dimensions
+    regulatory-compliance: Regulatory & Compliance
+    financial-lifecycle: Financial & Lifecycle
+    asset-values: Asset Values
+    lifecycle-service-life: Lifecycle & Service Life
+    financing-loan: Financing (Loan)
+  form:
+    trim: Trim
+    color: Color
+    vehicle-color-placeholder: Vehicle Color
+    serial-number: Serial Number
+    class: Class
+    call-sign: Call Sign
+    system-of-measurement: System of Measurement
+    select-system-of-measurement: Select System of Measurement
+    fuel-volume-unit: Fuel Volume Unit
+    select-fuel-volume-unit: Select Fuel Volume Unit
+    current-odometer: "Current Odometer ({unit})"
+    current-odometer-placeholder: Current Odometer Reading
+    odometer-unit: Odometer Unit
+    select-unit: Select unit
+    odometer-at-purchase: Odometer at Purchase
+    odometer-at-purchase-placeholder: Odometer reading at purchase
+    body-type: Body Type
+    select-body-type: Select body type
+    body-subtype: Body Subtype
+    select-body-subtype: Select body sub-type
+    usage-type: Usage Type
+    select-usage-type: Select usage type
+    ownership-type: Ownership Type
+    select-ownership-type: Select ownership type
+    fuel-type: Fuel Type
+    select-fuel-type: Select fuel type
+    transmission: Transmission
+    select-transmission: Select transmission
+    engine-number: Engine Number
+    engine-make: Engine Make
+    engine-model: Engine Model
+    engine-family: Engine Family
+    engine-configuration: Engine Configuration
+    engine-configuration-placeholder: e.g., DOHC, SOHC, OHV
+    engine-manufacturer: Engine Manufacturer
+    cylinder-arrangement: Cylinder Arrangement
+    cylinder-arrangement-placeholder: e.g., Inline, V-type, Flat
+    number-of-cylinders: Number of Cylinders
+    number-of-cylinders-placeholder: e.g., 4, 6, 8
+    engine-size: Engine Size
+    engine-displacement: Engine Displacement
+    horsepower: Horsepower
+    horsepower-rpm: Horsepower RPM
+    rpm-at-max-horsepower: RPM at Max Horsepower
+    torque: Torque
+    torque-rpm: Torque RPM
+    rpm-at-max-torque: RPM at Max Torque
+    fuel-capacity: Fuel Capacity
+    fuel-tank-capacity: Fuel Tank Capacity
+    payload-capacity: Payload Capacity
+    maximum-payload: Maximum Payload
+    towing-capacity: Towing Capacity
+    seating-capacity: Seating Capacity
+    number-of-seats: Number of Seats
+    vehicle-weight: Vehicle Weight
+    length: Length
+    width: Width
+    height: Height
+    cargo-volume: Cargo Volume
+    passenger-volume: Passenger Volume
+    interior-volume: Interior Volume
+    ground-clearance: Ground Clearance
+    bed-length: Bed Length
+    emission-standard: Emission Standard
+    emission-standard-placeholder: "e.g., Euro 6, EPA Tier 3"
+    dpf-equipped: DPF Equipped
+    scr-equipped: SCR Equipped
+    gvwr: GVWR (Gross Vehicle Weight Rating)
+    gcwr: GCWR (Gross Combined Weight Rating)
+    currency: Currency
+    acquisition-cost: Acquisition Cost
+    current-value: Current Value
+    insurance-value: Insurance Value
+    depreciation-rate: Depreciation Rate (%)
+    estimated-service-life-distance: Estimated Service Life (Distance)
+    service-life-distance-unit: Service Life Distance Unit
+    estimated-service-life-months: Estimated Service Life (Months)
+    purchase-date: Purchase Date
+    lease-expiry-date: Lease Expiry Date
+    loan-amount: Loan Amount
+    number-of-payments: Number of Payments
+    first-payment-date: First Payment Date
+    create-new-vehicle: Create a new vehicle
+    no-vehicle: No vehicle
+    pos-prefix: "Pos:"
+    online: Online
+    offline: Offline
+    last-modified: "Last Modified:"
+    details: Details
+    select-driver: Select Driver
+    overview-tab: Overview
+    positions-tab: Positions
+    devices-tab: Devices
 
 vendor:
   fields:
@@ -1114,6 +1387,50 @@ scheduler:
     scheduled-orders: Scheduled Orders
     unauthorized-to-schedule: You are not authorized to schedule orders.
     scheduling-for: Scheduling for {orderId}
+    shift: Shift
+    shift-details: Shift Details
+
+notifications:
+  schedule-created: Schedule created successfully
+  schedule-item-created: Schedule item created successfully
+  schedule-item-updated: Schedule item updated successfully
+  schedule-item-deleted: Schedule item deleted successfully
+  availability-set: Availability set successfully
+  invalid-vendor-config: Invalid vendor provider configuration.
+  failed-create-integration: Failed to create integration.
+  draw-service-area: "Use drawing controls to the right to draw a service area, complete point connections to save service area."
+  service-area-required: Service Area required to create Zone!
+  layer-saved: "New {type} '{name}' saved."
+  service-area-saved: "New service area '{name}' saved."
+  draw-zone: "Use the drawing controls to the right to draw a zone within the service area, complete point connections to save the zone."
+  zone-added: "New zone '{zoneName}' added to '{serviceAreaName}' service area."
+  device-attached: Device attached successfully.
+  device-removed: Device removed.
+  device-created: Device created successfully.
+  sensor-created: Sensor created successfully.
+  telematic-created: Telematic created successfully.
+  user-created: New user created successfully!
+  upload-photo-error: Unable to upload photo
+  settings-saved: Settings saved.
+  stripe-required: You must configure Stripe first to accept payments.
+  purchase-error: Something went wrong trying to complete purchase.
+  customer-password-reset: Customer password reset.
+  connection-successful: Connection successful!
+  connection-failed: Connection test failed
+  no-positions-replay: No positions to replay
+  replay-running: Replay is already running
+  no-resource-replay: No resource provided for replay
+  no-resource-position: No resource provided for position query
+  replay-completed: Replay completed
+  report-validation-error: Error validating report configuration
+  shift-updated: Shift updated successfully
+  shift-deleted: Shift deleted successfully
+  shift-rescheduled: Shift rescheduled successfully
+  shift-created: Shift created successfully
+  notification-settings-saved: Notification settings successfully saved.
+  routing-setting-saved: Routing setting saved.
+  payments-unavailable: "This system is unable to accept or process payments at this time, contact the system administrator to configure payments."
+  payments-already-enabled: Your account is already enabled to accept payments.
 
 modals:
   new-custom-field-group:
@@ -1463,6 +1780,7 @@ modals:
     webhook-text: Integrated vendors will typically require this so that Fleetbase can receive activity updates on the order. Do not change unless you know what you are doing! Changing this may break your order updates!
     cancel-credentials: Cancel credentials reset
     reset-message: Sensitive credentials can only be reset, to update credentials you must re-enter the credentials.
+    click-to-reset: Click here to reset
     optionally: Optionally supply your own
     configure-vendor: to configure this vendor.
     select: Select
@@ -1482,6 +1800,25 @@ modals:
     customize-fill-color: Customize the fill color for this zone.
     optionally: Optionally give the zone a description.
     description-zone: Description of Zone
+
+  create-new-layer: Create new Layer
+  save-service-area: Save Service Area
+  edit-service-area: Edit Service Area
+  save-zone: Save Zone
+  edit-zone: Edit Zone
+  import-orders: Import order(s) with spreadsheets
+  waypoint-label: Waypoint Label
+  order-label-text: Order Label
+  select-device-attach: Select device to attach
+  confirm-attach-device: "Confirm & Attach Device"
+  new-place: New Place
+  edit-place: Edit Place
+  finalizing-purchase: Finalizing Purchase
+  create-new-user: Create a new user
+  reset-customer-credentials: Reset Customer Credentials
+  reset-credentials-button: Reset Credentials
+  add-driver-shift: Add Driver Shift
+  create-shift: Create Shift
 
 widget:
   fleet-ops-quickstart:

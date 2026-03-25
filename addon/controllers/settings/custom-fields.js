@@ -1,60 +1,63 @@
 import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 
 export default class SettingsCustomFieldsController extends Controller {
+    @service intl;
+
     get subjects() {
         return [
             {
                 model: 'driver',
                 type: 'fleet-ops:driver',
-                label: 'Driver',
+                label: this.intl.t('resource.driver'),
                 groups: [],
             },
             {
                 model: 'vehicle',
                 type: 'fleet-ops:vehicle',
-                label: 'Vehicle',
+                label: this.intl.t('resource.vehicle'),
                 groups: [],
             },
             {
                 model: 'contact',
                 type: 'fleet-ops:contact',
-                label: 'Contact',
+                label: this.intl.t('resource.contact'),
                 groups: [],
             },
             {
                 model: 'vendor',
                 type: 'fleet-ops:vendor',
-                label: 'Vendor',
+                label: this.intl.t('resource.vendor'),
                 groups: [],
             },
             {
                 model: 'place',
                 type: 'fleet-ops:place',
-                label: 'Place',
+                label: this.intl.t('resource.place'),
                 groups: [],
             },
             {
                 model: 'entity',
                 type: 'fleet-ops:entity',
-                label: 'Entity',
+                label: this.intl.t('resource.entity'),
                 groups: [],
             },
             {
                 model: 'fleet',
                 type: 'fleet-ops:fleet',
-                label: 'Fleet',
+                label: this.intl.t('resource.fleet'),
                 groups: [],
             },
             {
                 model: 'issue',
                 type: 'fleet-ops:issue',
-                label: 'Issue',
+                label: this.intl.t('resource.issue'),
                 groups: [],
             },
             {
                 model: 'fuel-report',
                 type: 'fleet-ops:fuel-report',
-                label: 'Fuel Report',
+                label: this.intl.t('resource.fuel-report'),
                 groups: [],
             },
         ];

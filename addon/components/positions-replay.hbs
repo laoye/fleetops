@@ -30,12 +30,12 @@
                                     <div class="text-xs font-semibold">{{this.resourceName}}</div>
                                     <div class="text-xs">ID: {{n-a this.resource.public_id}}</div>
                                     {{#if (eq this.resourceType "vehicle")}}
-                                        <div class="text-xs">Serial No: {{n-a this.resource.serial_number this.resource.vin this.resource.internal_id this.resource.id}}</div>
-                                        <div class="text-xs">Driver: {{n-a this.resource.driver_name}}</div>
+                                        <div class="text-xs">{{t "common.serial-number"}}: {{n-a this.resource.serial_number this.resource.vin this.resource.internal_id this.resource.id}}</div>
+                                        <div class="text-xs">{{t "resource.driver"}}: {{n-a this.resource.driver_name}}</div>
                                     {{/if}}
-                                    <div class="text-xs">Status:
-                                        <span class="{{if this.resource.online 'text-green-500' 'text-red-400'}}">{{if this.resource.online "Online" "Offline"}}</span></div>
-                                    <div class="text-xs truncate">Pos: {{point-coordinates this.resource.location}}</div>
+                                    <div class="text-xs">{{t "common.status"}}:
+                                        <span class="{{if this.resource.online 'text-green-500' 'text-red-400'}}">{{if this.resource.online (t "common.online") (t "common.offline")}}</span></div>
+                                    <div class="text-xs truncate">{{t "common.pos"}}: {{point-coordinates this.resource.location}}</div>
                                 </div>
                             </div>
                         </marker.popup>
@@ -43,11 +43,11 @@
                             <div class="flex items-center space-x-1">
                                 <div class="text-xs font-semibold">{{this.resource.displayName}}</div>
                                 <div>•</div>
-                                <div class="text-xs {{if this.resource.online 'text-green-500' 'text-red-400'}}">{{if this.resource.online "Online" "Offline"}}</div>
+                                <div class="text-xs {{if this.resource.online 'text-green-500' 'text-red-400'}}">{{if this.resource.online (t "common.online") (t "common.offline")}}</div>
                             </div>
                             <div class="text-xs">ID: {{n-a this.resource.public_id}}</div>
                             {{#if (eq this.resourceType "vehicle")}}
-                                <div class="text-xs">Serial No: {{or this.resource.serial_number this.resource.vin this.resource.internal_id this.resource.id "-"}}</div>
+                                <div class="text-xs">{{t "common.serial-number"}}: {{or this.resource.serial_number this.resource.vin this.resource.internal_id this.resource.id "-"}}</div>
                             {{/if}}
                             <div class="text-xs truncate"><FaIcon @icon="location-dot" @size="xs" class="mr-0.5" />{{point-coordinates this.resource.location}}</div>
                         </marker.tooltip>
@@ -65,11 +65,11 @@
                     >
                         <marker.popup>
                             <div class="text-xs">
-                                <div><strong>Position {{add index 1}}</strong></div>
-                                <div>Time: {{position.timestamp}}</div>
-                                <div>Speed: {{position.speedKmh}} km/h</div>
-                                <div>Heading: {{or position.heading "N/A"}}°</div>
-                                <div>Altitude: {{or position.altitude "N/A"}} m</div>
+                                <div><strong>{{t "common.position"}} {{add index 1}}</strong></div>
+                                <div>{{t "common.timestamp"}}: {{position.timestamp}}</div>
+                                <div>{{t "common.speed"}}: {{position.speedKmh}} km/h</div>
+                                <div>{{t "common.heading"}}: {{or position.heading "N/A"}}°</div>
+                                <div>{{t "common.altitude-m"}}: {{or position.altitude "N/A"}} m</div>
                             </div>
                         </marker.popup>
                     </layers.circle-marker>
@@ -82,27 +82,27 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
             <div class="filter-group relative">
                 <label class="block uppercase tracking-wide text-xs font-medium text-gray-700 dark:text-gray-400 mb-0.5">
-                    Date Range
+                    {{t "common.select-date-range"}}
                 </label>
                 <DatePicker
                     @value={{this.dateFilter}}
                     @range={{true}}
                     @onSelect={{this.onDateRangeChanged}}
                     @autoClose={{true}}
-                    @placeholder="Select date range"
+                    @placeholder={{t "common.select-date-range"}}
                     class="w-full form-input form-input-sm"
                 />
             </div>
 
             <div class="filter-group">
                 <label class="block uppercase tracking-wide text-xs font-medium text-gray-700 dark:text-gray-400 mb-0.5">
-                    Order
+                    {{t "resource.order"}}
                 </label>
                 <ModelSelect
                     @modelName="order"
                     @selectedModel={{this.selectedOrder}}
                     @query={{this.orderFilters}}
-                    @placeholder="Filter by order"
+                    @placeholder={{t "common.filter-by-order"}}
                     @triggerClass="form-select form-input form-input-sm"
                     @infiniteScroll={{false}}
                     @renderInPlace={{true}}
@@ -126,26 +126,26 @@
         <div class="replay-controls px-3 py-2">
             <div class="flex items-center justify-between space-x-2">
                 <div class="flex items-center space-x-2">
-                    <Button @type="danger" @text="Stop" @icon="stop" @size="xs" @disabled={{not (or this.isReplaying this.isPaused)}} @onClick={{this.stopReplay}} />
+                    <Button @type="danger" @text={{t "common.stop"}} @icon="stop" @size="xs" @disabled={{not (or this.isReplaying this.isPaused)}} @onClick={{this.stopReplay}} />
 
                     {{#if (or this.isReplaying this.isPaused)}}
                         {{#if this.isReplaying}}
-                            <Button @type="warning" @text="Pause" @icon="pause" @size="xs" @onClick={{this.pauseReplay}} />
+                            <Button @type="warning" @text={{t "common.pause"}} @icon="pause" @size="xs" @onClick={{this.pauseReplay}} />
                         {{else}}
-                            <Button @type="success" @text="Resume" @icon="play" @size="xs" @onClick={{this.startReplay}} />
+                            <Button @type="success" @text={{t "common.resume"}} @icon="play" @size="xs" @onClick={{this.startReplay}} />
                         {{/if}}
                     {{else}}
-                        <Button @type="success" @text="Play" @icon="play" @size="xs" @disabled={{not this.hasPositions}} @onClick={{this.startReplay}} />
+                        <Button @type="success" @text={{t "common.play"}} @icon="play" @size="xs" @disabled={{not this.hasPositions}} @onClick={{this.startReplay}} />
                     {{/if}}
 
                     <div class="step-controls flex items-center space-x-1 border-l border-gray-300 dark:border-gray-700 pl-2 ml-2">
-                        <Button @type="default" @icon="backward-step" @size="xs" @disabled={{not this.hasPositions}} @onClick={{this.stepBackward}} title="Step backward" />
-                        <Button @type="default" @icon="forward-step" @size="xs" @disabled={{not this.hasPositions}} @onClick={{this.stepForward}} title="Step forward" />
+                        <Button @type="default" @icon="backward-step" @size="xs" @disabled={{not this.hasPositions}} @onClick={{this.stepBackward}} title={{t "common.step-backward"}} />
+                        <Button @type="default" @icon="forward-step" @size="xs" @disabled={{not this.hasPositions}} @onClick={{this.stepForward}} title={{t "common.step-forward"}} />
                     </div>
 
                     <div class="speed-control border-l border-gray-300 dark:border-gray-700 pl-2 ml-2">
                         <label class="text-xs uppercase tracking-wide font-medium text-gray-700 dark:text-gray-400 mr-1">
-                            Speed:
+                            {{t "common.speed"}}:
                         </label>
                         <Select
                             @value={{this.replaySpeed}}
@@ -178,50 +178,50 @@
     {{#if this.hasPositions}}
         <div class="flex flex-col border-b border-gray-200 dark:border-gray-700">
             <div class="px-3 mb-1">
-                <h3 class="text-[11px] uppercase tracking-wide text-gray-500 font-semibold">Position Metrics</h3>
+                <h3 class="text-[11px] uppercase tracking-wide text-gray-500 font-semibold">{{t "common.position-metrics"}}</h3>
             </div>
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 px-2 pb-2">
                 <div class="metric-card">
-                    <div class="metric-label truncate text-xs text-gray-500 dark:text-gray-400">Total Distance</div>
+                    <div class="metric-label truncate text-xs text-gray-500 dark:text-gray-400">{{t "common.total-distance"}}</div>
                     <div class="metric-value font-semibold text-blue-600 dark:text-blue-400">
                         {{this.totalDistance}}
                         km
                     </div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-label truncate text-xs text-gray-500 dark:text-gray-400">Duration</div>
+                    <div class="metric-label truncate text-xs text-gray-500 dark:text-gray-400">{{t "common.duration"}}</div>
                     <div class="metric-value font-semibold text-green-600 dark:text-green-400">
                         {{this.formattedDuration}}
                     </div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-label truncate text-xs text-gray-500 dark:text-gray-400">Max Speed</div>
+                    <div class="metric-label truncate text-xs text-gray-500 dark:text-gray-400">{{t "common.max-speed"}}</div>
                     <div class="metric-value font-semibold text-orange-600 dark:text-orange-400">
                         {{this.maxSpeed}}
                         km/h
                     </div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-label truncate text-xs text-gray-500 dark:text-gray-400">Avg Speed</div>
+                    <div class="metric-label truncate text-xs text-gray-500 dark:text-gray-400">{{t "common.avg-speed"}}</div>
                     <div class="metric-value font-semibold text-purple-600 dark:text-purple-400">
                         {{this.avgSpeed}}
                         km/h
                     </div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-label truncate text-xs text-gray-500 dark:text-gray-400">Speeding Events</div>
+                    <div class="metric-label truncate text-xs text-gray-500 dark:text-gray-400">{{t "common.speeding-events"}}</div>
                     <div class="metric-value font-semibold text-red-600 dark:text-red-400">
                         {{this.speedingCount}}
                     </div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-label truncate text-xs text-gray-500 dark:text-gray-400">Dwell Times</div>
+                    <div class="metric-label truncate text-xs text-gray-500 dark:text-gray-400">{{t "common.dwell-times"}}</div>
                     <div class="metric-value font-semibold text-yellow-600 dark:text-yellow-400">
                         {{this.dwellCount}}
                     </div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-label truncate text-xs text-gray-500 dark:text-gray-400">Acceleration Events</div>
+                    <div class="metric-label truncate text-xs text-gray-500 dark:text-gray-400">{{t "common.acceleration-events"}}</div>
                     <div class="metric-value font-semibold text-indigo-600 dark:text-indigo-400">
                         {{this.accelerationCount}}
                     </div>
@@ -262,7 +262,7 @@
     {{#if this.hasPositions}}
         <div class="positions-replay-table">
             <div class="px-3">
-                <h3 class="text-[11px] uppercase tracking-wide text-gray-500 font-semibold">Position Data</h3>
+                <h3 class="text-[11px] uppercase tracking-wide text-gray-500 font-semibold">{{t "common.position-data"}}</h3>
             </div>
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
@@ -272,22 +272,22 @@
                                 #
                             </th>
                             <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Timestamp
+                                {{t "common.timestamp"}}
                             </th>
                             <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Latitude
+                                {{t "common.latitude"}}
                             </th>
                             <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Longitude
+                                {{t "common.longitude"}}
                             </th>
                             <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Speed (km/h)
+                                {{t "common.speed-kmh"}}
                             </th>
                             <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Heading
+                                {{t "common.heading"}}
                             </th>
                             <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Altitude (m)
+                                {{t "common.altitude-m"}}
                             </th>
                         </tr>
                     </thead>
@@ -328,10 +328,10 @@
             <div class="empty-state bg-white dark:bg-gray-800 rounded-lg shadow-sm p-12 text-center">
                 <FaIcon @icon="map-marked-alt" @size="2x" class="text-gray-400 mb-2" />
                 <h3 class="text-base font-semibold text-gray-700 dark:text-gray-300">
-                    No Positions Found
+                    {{t "common.no-positions-found"}}
                 </h3>
                 <p class="text-sm text-gray-500 dark:text-gray-400">
-                    Try adjusting your filters or select a different date range.
+                    {{t "common.no-positions-hint"}}
                 </p>
             </div>
         {{/if}}

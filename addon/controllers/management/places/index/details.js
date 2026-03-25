@@ -5,13 +5,14 @@ import { isArray } from '@ember/array';
 export default class ManagementPlacesIndexDetailsController extends Controller {
     @service('universe/menu-service') menuService;
     @service hostRouter;
+    @service intl;
 
     get tabs() {
         const registeredTabs = this.menuService.getMenuItems('fleet-ops:component:place:details');
         return [
             {
                 route: 'management.places.index.details.index',
-                label: 'Overview',
+                label: this.intl.t('common.overview'),
             },
             ...(isArray(registeredTabs) ? registeredTabs : []),
         ];

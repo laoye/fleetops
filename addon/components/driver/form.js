@@ -8,6 +8,7 @@ export default class DriverFormComponent extends Component {
     @service currentUser;
     @service notifications;
     @service modalsManager;
+    @service intl;
     @service('universe/extension-manager') extensionManager;
 
     get userAccountActionButtons() {
@@ -26,7 +27,7 @@ export default class DriverFormComponent extends Component {
                     });
 
                     this.modalsManager.show('modals/user-form', {
-                        title: 'Create a new user',
+                        title: this.intl.t('modals.create-new-user'),
                         user,
                         formPermission: 'iam create user',
                         uploadNewPhoto: (file) => {
@@ -52,7 +53,7 @@ export default class DriverFormComponent extends Component {
 
                             try {
                                 await user.save();
-                                this.notifications.success('New user created successfully!');
+                                this.notifications.success(this.intl.t('notifications.user-created'));
                                 modal.done();
                             } catch (error) {
                                 this.notifications.serverError(error);
@@ -84,7 +85,7 @@ export default class DriverFormComponent extends Component {
                 }
             );
         } catch (err) {
-            this.notifications.error('Unable to upload photo: ' + err.message);
+            this.notifications.error(this.intl.t('notifications.upload-photo-error') + ': ' + err.message);
         }
     }
 }

@@ -1,6 +1,11 @@
 fleet-ops:
   extension-name: 车队运营
 
+ember-power-select:
+  search-message: 输入以搜索
+  no-matches-message: 未找到匹配结果
+  loading-message: 加载中...
+
 common:
   proof-of-delivery: 交付证明
   ad-hoc: 即时派单
@@ -41,6 +46,148 @@ common:
   edit-address: 编辑地址
   new-address: 新建地址
   select-address: 选择地址
+  delete-selected: 删除已选...
+  event: 事件
+  device: 设备
+  telematic: 远程信息处理
+  provider: 提供商
+  severity: 严重程度
+  ident: 标识
+  protocol: 协议
+  state: 状态
+  code: 代码
+  serial-number: 序列号
+  select-resource: "选择{resource}"
+  select-resource-for: "为{target}选择{resource}"
+  select-order-pickup: 选择订单取货地点
+  select-order-dropoff: 选择订单送货地点
+  filter-by-order-config: 按订单配置筛选
+  payload-id: 载荷ID
+  without-driver-assigned: 未分配司机
+  change-layout: 更改布局
+  created-between: 创建时间范围
+  last-updated-between: 最后更新时间范围
+  select-issue-type: 选择问题类型
+  select-issue-category: 选择问题类别
+  confirm-and-save: 确认并保存
+  start-upload: 开始上传
+  file-name: 文件名
+  file-size: 文件大小
+  upload-date: 上传日期
+  uploading: 上传中...
+  processing: 处理中...
+  test-connection: 测试连接
+  untitled-field: 未命名字段
+  overview: 概览
+  result: 结果
+  positions: 位置记录
+  edit-details: 编辑详情
+  update-activity: 更新活动
+  unassign-driver: 取消分配司机
+  view-order-label: 查看订单标签
+  listen-socket-channel: 监听 Socket 频道
+  view-metadata: 查看元数据
+  cancel-order: 取消订单
+  delete-order: 删除订单
+  confirm-delete-shift: 确定要删除此班次吗？
+  stop: 停止
+  pause: 暂停
+  resume: 继续
+  play: 播放
+  step-backward: 后退一步
+  step-forward: 前进一步
+  speed: 速度
+  timestamp: 时间戳
+  latitude: 纬度
+  longitude: 经度
+  speed-kmh: 速度 (km/h)
+  heading: 航向
+  altitude-m: 海拔 (m)
+  select-date-range: 选择日期范围
+  filter-by-telematic: 按远程信息设备筛选
+  filter-by-device: 按设备筛选
+  select-device: 选择设备
+  no-positions-found: 未找到位置数据
+  no-positions-hint: 请调整筛选条件或选择其他日期范围。
+  position-data: 位置数据
+  position-metrics: 位置指标
+  total-distance: 总距离
+  duration: 持续时间
+  max-speed: 最大速度
+  avg-speed: 平均速度
+  speeding-events: 超速事件
+  dwell-times: 停留时间
+  acceleration-events: 加速事件
+  online: 在线
+  offline: 离线
+  filter-by-order: 按订单筛选
+  reset: 重置
+  pickup: 取货
+  dropoff: 送货
+  customer: 客户
+  driver: 司机
+  driver-license: 驾驶证
+  metadata: 元数据
+  active-manpower: 在岗人数
+  amount: 金额
+  avatar: 头像
+  back: 返回
+  board: 看板
+  building: 楼栋
+  cancel: 取消
+  clear: 清除
+  cost: 费用
+  create: 创建
+  create-a-new-resource: "创建新{resource}"
+  create-new-resource: "创建新{resource}"
+  date-created: 创建日期
+  delete-resource-name: "删除 {resourceName}"
+  distance: 距离
+  edit: 编辑
+  edit-resource-name: "编辑 {resourceName}"
+  edit-resource-type-name: "编辑{resourceType} {resourceName}"
+  host: 主机
+  id: ID
+  item: 项目
+  key: 键
+  label: 标签
+  last-seen-at: 最后在线
+  loading-resource: "正在加载{resource}..."
+  manage-message: 管理消息
+  map: 地图
+  namespace: 命名空间
+  neighborhood: 街区
+  new: 新建
+  "no": "否"
+  odometer: 里程表
+  photos: 照片
+  plate-number: 车牌号
+  priority: 优先级
+  remove: 移除
+  reporter: 报告人
+  sandbox: 沙箱
+  save-changes: 保存更改
+  search: 搜索
+  security-access-code: 安全访问码
+  select-field: 选择字段
+  service: 服务
+  service-area: 服务区域
+  street: 街道
+  table: 表格
+  task: 任务
+  total: 合计
+  unauthorized: 未授权
+  unauthorized-to: "您无权执行{action}"
+  upload-image: 上传图片
+  upload-image-supported: "支持格式：JPG、PNG、GIF"
+  value: 值
+  vehicle: 车辆
+  vendor: 供应商
+  vin-number: 车辆识别号
+  website: 网站
+  website-url: 网站地址
+  "yes": "是"
+  zone: 区域
 
 menu:
   operations: 运营管理
@@ -174,6 +321,9 @@ resource:
   work-orders: 工单
   zone: 区域
   zones: 区域
+  reporter: 报告人
+  assignee: 受让人
+  user: 用户
 
 order-status:
   created: 已创建
@@ -222,6 +372,7 @@ column:
   postal-code: 邮编
   state: 省/州
   make: 品牌
+  manage-message: 管理您的资源
   model: 型号
   plate-number: 车牌号
   year: 年份
@@ -338,11 +489,16 @@ activity:
         and: 逻辑与，两个操作数都为真时为真
         or: 逻辑或，至少一个操作数为真时为真
         not: 逻辑非，反转真值
+      add-condition: 添加条件
+      no-activity-logic: 无活动逻辑
+      no-activity-logic-hint: 添加您的第一个活动逻辑以创建计算型活动决策
     event-selector:
       activity-events: 活动事件
       activity-events-select-to-fire: 选择此活动发生时将触发的事件。
       activity-events-select-events-info: 选择要响应此活动而触发的特定事件。
       select-event-to-add: 选择要添加的事件...
+      no-activity-events: 无活动事件
+      no-activity-events-hint: 选择并添加在到达此活动时要触发的事件
       events:
         order:
           dispatched: 当订单成功派遣时触发。
@@ -558,6 +714,7 @@ order:
     notes-title: 备注
     optimize-route: 优化路线
     optimize-route-help-text: Fleetbase 将自动优化路线。
+    optimize-route-engine-help-text: 使用集成优化引擎优化路线
     order-type: 订单类型
     order-type-help-text: 选择订单类型将告知 Fleetbase 使用什么订单配置。
     order-type-placeholder: 选择订单类型
@@ -677,6 +834,13 @@ order:
   kanban:
     status-updated: 订单活动已更新为 {status} 状态。
     cannot-update-status: 订单无法移动到 {status} 状态。
+  details:
+    no-driver-assigned: 未分配司机
+    no-vehicle-assigned: 未分配车辆
+    no-customer: 无客户
+    no-facilitator: 无协调方
+    no-driver: 无司机
+    no-phone: 无电话
 
 order-config-manager:
   title: 订单配置管理
@@ -904,6 +1068,115 @@ vehicle:
     year: 年份
   actions:
     locate-vehicle: 在地图上定位车辆
+  sections:
+    vehicle-identification: 车辆识别
+    assignment-status: 分配与状态
+    location: 位置
+    measurement-units: 计量与单位
+    odometer-usage: 里程表与使用
+    body-usage: 车身与用途
+    technical-specifications: 技术规格
+    powertrain-engine: 动力系统与发动机
+    capacity-dimensions: 容量与尺寸
+    regulatory-compliance: 法规与合规
+    financial-lifecycle: 财务与生命周期
+    asset-values: 资产价值
+    lifecycle-service-life: 生命周期与服务年限
+    financing-loan: 融资（贷款）
+  form:
+    trim: 饰件
+    color: 颜色
+    vehicle-color-placeholder: 车辆颜色
+    serial-number: 序列号
+    class: 等级
+    call-sign: 呼号
+    system-of-measurement: 计量系统
+    select-system-of-measurement: 选择计量系统
+    fuel-volume-unit: 燃油容量单位
+    select-fuel-volume-unit: 选择燃油容量单位
+    current-odometer: "当前里程表 ({unit})"
+    current-odometer-placeholder: 当前里程表读数
+    odometer-unit: 里程表单位
+    select-unit: 选择单位
+    odometer-at-purchase: 购入里程
+    odometer-at-purchase-placeholder: 购入时里程表读数
+    body-type: 车身类型
+    select-body-type: 选择车身类型
+    body-subtype: 车身子类型
+    select-body-subtype: 选择车身子类型
+    usage-type: 使用类型
+    select-usage-type: 选择使用类型
+    ownership-type: 所有权类型
+    select-ownership-type: 选择所有权类型
+    fuel-type: 燃料类型
+    select-fuel-type: 选择燃料类型
+    transmission: 变速箱
+    select-transmission: 选择变速箱
+    engine-number: 发动机编号
+    engine-make: 发动机品牌
+    engine-model: 发动机型号
+    engine-family: 发动机系列
+    engine-configuration: 发动机配置
+    engine-configuration-placeholder: "例如 DOHC, SOHC, OHV"
+    engine-manufacturer: 发动机制造商
+    cylinder-arrangement: 气缸排列
+    cylinder-arrangement-placeholder: "例如 直列, V型, 水平对置"
+    number-of-cylinders: 气缸数量
+    number-of-cylinders-placeholder: "例如 4, 6, 8"
+    engine-size: 发动机尺寸
+    engine-displacement: 发动机排量
+    horsepower: 马力
+    horsepower-rpm: 马力转速
+    rpm-at-max-horsepower: 最大马力时转速
+    torque: 扭矩
+    torque-rpm: 扭矩转速
+    rpm-at-max-torque: 最大扭矩时转速
+    fuel-capacity: 燃油容量
+    fuel-tank-capacity: 油箱容量
+    payload-capacity: 载荷能力
+    maximum-payload: 最大载荷
+    towing-capacity: 牵引能力
+    seating-capacity: 座位数
+    number-of-seats: 座椅数量
+    vehicle-weight: 车辆重量
+    length: 长度
+    width: 宽度
+    height: 高度
+    cargo-volume: 货物容积
+    passenger-volume: 乘客容积
+    interior-volume: 内部容积
+    ground-clearance: 离地间隙
+    bed-length: 货箱长度
+    emission-standard: 排放标准
+    emission-standard-placeholder: "例如 Euro 6, EPA Tier 3"
+    dpf-equipped: 配备 DPF
+    scr-equipped: 配备 SCR
+    gvwr: GVWR（整车总质量额定值）
+    gcwr: GCWR（总组合质量额定值）
+    currency: 货币
+    acquisition-cost: 购置成本
+    current-value: 当前价值
+    insurance-value: 保险价值
+    depreciation-rate: 折旧率 (%)
+    estimated-service-life-distance: 预计使用寿命（距离）
+    service-life-distance-unit: 使用寿命距离单位
+    estimated-service-life-months: 预计使用寿命（月）
+    purchase-date: 购买日期
+    lease-expiry-date: 租赁到期日
+    loan-amount: 贷款金额
+    number-of-payments: 付款次数
+    first-payment-date: 首次付款日期
+    create-new-vehicle: 创建新车辆
+    no-vehicle: 无车辆
+    pos-prefix: "位置:"
+    online: 在线
+    offline: 离线
+    last-modified: "最后修改:"
+    details: 详情
+    select-driver: 选择司机
+    overview-tab: 概览
+    positions-tab: 位置记录
+    devices-tab: 设备
 
 vendor:
   fields:
@@ -1114,6 +1387,50 @@ scheduler:
     scheduled-orders: 已计划的订单
     unauthorized-to-schedule: 您无权安排订单计划。
     scheduling-for: 正在为 {orderId} 安排计划
+    shift: 班次
+    shift-details: 班次详情
+
+notifications:
+  schedule-created: 排班创建成功
+  schedule-item-created: 排班项创建成功
+  schedule-item-updated: 排班项更新成功
+  schedule-item-deleted: 排班项删除成功
+  availability-set: 可用性设置成功
+  invalid-vendor-config: 供应商提供商配置无效。
+  failed-create-integration: 创建集成失败。
+  draw-service-area: 使用右侧绘图控件绘制服务区域，完成点连接以保存服务区域。
+  service-area-required: 创建区域需要服务区域！
+  layer-saved: "新{type}'{name}'已保存。"
+  service-area-saved: "新服务区域'{name}'已保存。"
+  draw-zone: 使用右侧绘图控件在服务区域内绘制区域，完成点连接以保存区域。
+  zone-added: "新区域'{zoneName}'已添加到'{serviceAreaName}'服务区域。"
+  device-attached: 设备附加成功。
+  device-removed: 设备已移除。
+  device-created: 设备创建成功。
+  sensor-created: 传感器创建成功。
+  telematic-created: 远程信息处理创建成功。
+  user-created: 新用户创建成功！
+  upload-photo-error: 无法上传照片
+  settings-saved: 设置已保存。
+  stripe-required: 您必须先配置Stripe才能接受付款。
+  purchase-error: 完成购买时出错。
+  customer-password-reset: 客户密码已重置。
+  connection-successful: 连接成功！
+  connection-failed: 连接测试失败
+  no-positions-replay: 没有可回放的位置
+  replay-running: 回放已在运行
+  no-resource-replay: 未提供回放资源
+  no-resource-position: 未提供位置查询资源
+  replay-completed: 回放完成
+  report-validation-error: 验证报告配置出错
+  shift-updated: 班次更新成功
+  shift-deleted: 班次删除成功
+  shift-rescheduled: 班次重新安排成功
+  shift-created: 班次创建成功
+  notification-settings-saved: 通知设置保存成功。
+  routing-setting-saved: 路由设置已保存。
+  payments-unavailable: 系统目前无法接受或处理付款，请联系系统管理员配置付款。
+  payments-already-enabled: 您的账户已启用接受付款功能。
 
 modals:
   new-custom-field-group:
@@ -1462,6 +1779,7 @@ modals:
     webhook-text: 集成供应商通常需要此项以便 Fleetbase 能接收订单的活动更新。除非您知道自己在做什么，否则不要更改！更改此项可能会中断您的订单更新！
     cancel-credentials: 取消凭证重置
     reset-message: 敏感凭证只能重置，要更新凭证您必须重新输入。
+    click-to-reset: 点击此处重置
     optionally: 可选提供您自己的
     configure-vendor: 来配置此供应商。
     select: 选择
@@ -1481,6 +1799,25 @@ modals:
     customize-fill-color: 自定义此区域的填充颜色。
     optionally: 可选为区域添加描述。
     description-zone: 区域描述
+
+  create-new-layer: 创建新图层
+  save-service-area: 保存服务区域
+  edit-service-area: 编辑服务区域
+  save-zone: 保存区域
+  edit-zone: 编辑区域
+  import-orders: 通过电子表格导入订单
+  waypoint-label: 途经点标签
+  order-label-text: 订单标签
+  select-device-attach: 选择要附加的设备
+  confirm-attach-device: 确认并附加设备
+  new-place: 新建地点
+  edit-place: 编辑地点
+  finalizing-purchase: 正在完成购买
+  create-new-user: 创建新用户
+  reset-customer-credentials: 重置客户凭据
+  reset-credentials-button: 重置凭据
+  add-driver-shift: 添加司机班次
+  create-shift: 创建班次
 
 widget:
   fleet-ops-quickstart:

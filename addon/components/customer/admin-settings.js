@@ -9,6 +9,7 @@ export default class CustomerAdminSettingsComponent extends Component {
     @service fetch;
     @service store;
     @service notifications;
+    @service intl;
     @tracked orderConfigs = [];
     @tracked enabledOrderConfigs = [];
     @tracked paymentsEnabled = false;
@@ -58,7 +59,7 @@ export default class CustomerAdminSettingsComponent extends Component {
 
         try {
             yield this.fetch.post('fleet-ops/settings/customer-enabled-order-configs', { enabledOrderConfigs: this.enabledOrderConfigs });
-            this.notifications.success('Settings saved.');
+            this.notifications.success(this.intl.t('notifications.settings-saved'));
         } catch (error) {
             this.notifications.serverError(error);
         }
@@ -67,14 +68,14 @@ export default class CustomerAdminSettingsComponent extends Component {
     @task *togglePayments(enabled) {
         if (!this.isStripeEnabled) {
             this.paymentsEnabled = false;
-            return this.notifications.warning('You must configure Stripe first to accept payments.');
+            return this.notifications.warning(this.intl.t('notifications.stripe-required'));
         }
 
         this.paymentsEnabled = enabled;
 
         try {
             yield this.fetch.post('fleet-ops/settings/customer-payments-config', { paymentsConfig: { paymentsEnabled: this.paymentsEnabled, paymentGateway: 'stripe' } });
-            this.notifications.success('Settings saved.');
+            this.notifications.success(this.intl.t('notifications.settings-saved'));
         } catch (error) {
             this.notifications.serverError(error);
         }

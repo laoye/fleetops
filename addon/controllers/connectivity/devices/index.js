@@ -47,7 +47,7 @@ export default class ConnectivityDevicesIndexController extends Controller {
     /** bulk action buttons */
     @tracked bulkActions = [
         {
-            label: 'Delete selected...',
+            label: this.intl.t('common.delete-selected'),
             class: 'text-red-500',
             fn: this.deviceActions.bulkDelete,
         },
@@ -69,7 +69,7 @@ export default class ConnectivityDevicesIndexController extends Controller {
             filterComponent: 'filter/string',
         },
         {
-            label: 'Telematic',
+            label: this.intl.t('common.telematic'),
             valuePath: 'telematic.provider',
             cellComponent: 'table/cell/anchor',
             action: this.telematicActions.transition.view,
@@ -78,12 +78,12 @@ export default class ConnectivityDevicesIndexController extends Controller {
             sortable: true,
             filterable: true,
             filterComponent: 'filter/model',
-            filterComponentPlaceholder: 'Select telematic',
+            filterComponentPlaceholder: this.intl.t('common.select-resource', { resource: this.intl.t('resource.telematic') }),
             filterParam: 'telematic',
             model: 'telematic',
         },
         {
-            label: 'Type',
+            label: this.intl.t('column.type'),
             valuePath: 'type',
             resizable: true,
             sortable: true,
@@ -93,7 +93,7 @@ export default class ConnectivityDevicesIndexController extends Controller {
             filterOptions: localizeFleetOpsOptions(this.intl, 'deviceTypes'),
         },
         {
-            label: 'Serial Number',
+            label: this.intl.t('common.serial-number'),
             valuePath: 'serial_number',
             resizable: true,
             sortable: true,

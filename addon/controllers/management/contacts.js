@@ -5,16 +5,17 @@ import getCurrentNestedController from '@fleetbase/ember-core/utils/get-current-
 
 export default class ManagementContactsController extends Controller {
     @service hostRouter;
+    @service intl;
 
     get tabs() {
         return [
             {
                 route: 'management.contacts.index',
-                label: 'Contacts',
+                label: this.intl.t('resource.contacts'),
             },
             {
                 route: 'management.contacts.customers',
-                label: 'Customers',
+                label: this.intl.t('resource.customers'),
             },
         ];
     }

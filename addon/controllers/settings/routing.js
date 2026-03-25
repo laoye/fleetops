@@ -6,6 +6,7 @@ import { task } from 'ember-concurrency';
 export default class SettingsRoutingController extends Controller {
     @service fetch;
     @service notifications;
+    @service intl;
     @service currentUser;
     @service leafletRoutingControl;
     @tracked routerService = 'osrm';
@@ -32,7 +33,7 @@ export default class SettingsRoutingController extends Controller {
             yield this.performAdditionalSaveTasks();
             // Save in local memory too
             this.currentUser.setOption('routing', { router: this.routerService, unit: this.routingUnit });
-            this.notifications.success('Routing setting saved.');
+            this.notifications.success(this.intl.t('notifications.routing-setting-saved'));
         } catch (error) {
             this.notifications.serverError(error);
         }

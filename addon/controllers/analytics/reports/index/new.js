@@ -40,7 +40,7 @@ export default class AnalyticsReportsIndexNewController extends Controller {
             }
         } catch (err) {
             if (err.message) {
-                this.notifications.error(err?.validation_errors?.firstObject ?? err?.message ?? 'Error validating report configuration');
+                this.notifications.error(err?.validation_errors?.firstObject ?? err?.message ?? this.intl.t('notifications.report-validation-error'));
             } else {
                 this.notifications.serverError(err);
             }

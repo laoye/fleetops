@@ -1,4 +1,4 @@
-<ContentPanel @title="Details" @open={{true}} @isLoading={{@isLoading}} @actionButtons={{this.actionButtons}} @wrapperClass="bordered-top">
+<ContentPanel @title={{t "common.details"}} @open={{true}} @isLoading={{@isLoading}} @actionButtons={{this.actionButtons}} @wrapperClass="bordered-top">
     <:title>
         <div class="ml-2 flex flex-row space-x-1">
             {{#if @resource.dispatched}}
@@ -16,7 +16,7 @@
                     <span>{{t "order.fields.driver-assigned"}}</span>
                 </div>
                 <div class="field-value">
-                    <Driver::Pill @driver={{@resource.driver_assigned}} @onClick={{this.focusOrderAssignedDriver}} @titleFallback="No driver assigned" @titleClass={{unless @resource.driver_assigned "text-gray-300"}} />
+                    <Driver::Pill @driver={{@resource.driver_assigned}} @onClick={{this.focusOrderAssignedDriver}} @titleFallback={{t "order.details.no-driver-assigned"}} @titleClass={{unless @resource.driver_assigned "text-gray-300"}} />
                 </div>
             </div>
             <div class="field-info-container">
@@ -24,7 +24,7 @@
                     <span>{{t "order.fields.vehicle-assigned"}}</span>
                 </div>
                 <div class="field-value">
-                    <Vehicle::Pill @vehicle={{@resource.vehicle_assigned}} @titleFallback="No vehicle assigned" @titleClass={{unless @resource.vehicle_assigned "text-gray-300"}} />
+                    <Vehicle::Pill @vehicle={{@resource.vehicle_assigned}} @titleFallback={{t "order.details.no-vehicle-assigned"}} @titleClass={{unless @resource.vehicle_assigned "text-gray-300"}} />
                 </div>
             </div>
             <div class="field-info-container">
@@ -48,8 +48,8 @@
                                 />
                             </div>
                             <div>
-                                <div class="text-sm {{unless @resource.customer 'text-gray-300'}}">{{n-a @resource.customer.name "No customer"}}</div>
-                                <div class="text-xs text-gray-400 dark:text-gray-500">{{n-a @resource.customer.phone "No phone"}}</div>
+                                <div class="text-sm {{unless @resource.customer 'text-gray-300'}}">{{n-a @resource.customer.name (t "order.details.no-customer")}}</div>
+                                <div class="text-xs text-gray-400 dark:text-gray-500">{{n-a @resource.customer.phone (t "order.details.no-phone")}}</div>
                             </div>
                         </div>
                     </div>
@@ -70,8 +70,8 @@
                             />
                         </div>
                         <div>
-                            <div class="text-sm {{unless @resource.facilitator 'text-gray-300'}}">{{n-a @resource.facilitator.name "No facilitator"}}</div>
-                            <div class="text-xs text-gray-400 dark:text-gray-500">{{n-a @resource.facilitator.phone "No phone"}}</div>
+                            <div class="text-sm {{unless @resource.facilitator 'text-gray-300'}}">{{n-a @resource.facilitator.name (t "order.details.no-facilitator")}}</div>
+                            <div class="text-xs text-gray-400 dark:text-gray-500">{{n-a @resource.facilitator.phone (t "order.details.no-phone")}}</div>
                         </div>
                     </div>
                 </div>

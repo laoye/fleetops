@@ -7,6 +7,7 @@ export default class SensorFormComponent extends Component {
     @service fetch;
     @service currentUser;
     @service notifications;
+    @service intl;
 
     @action selectTelematic(telematic) {
         this.args.resource.setProperties({
@@ -35,7 +36,7 @@ export default class SensorFormComponent extends Component {
                 }
             );
         } catch (err) {
-            this.notifications.error('Unable to upload photo: ' + err.message);
+            this.notifications.error(this.intl.t('notifications.upload-photo-error') + ': ' + err.message);
         }
     }
 }

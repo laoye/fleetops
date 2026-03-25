@@ -21,7 +21,7 @@ export default class ConnectivityTelematicsIndexNewController extends Controller
 
             yield this.hostRouter.refresh();
             yield this.hostRouter.transitionTo('console.fleet-ops.connectivity.telematics.index.details', telematic);
-            this.notifications.success('Telematic created successfully.');
+            this.notifications.success(this.intl.t('notifications.telematic-created'));
             this.resetForm();
         } catch (err) {
             this.notifications.serverError(err);

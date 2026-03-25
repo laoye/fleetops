@@ -49,7 +49,7 @@
                                 <div class="text-xs font-semibold">{{driver.name}}</div>
                                 <div class="text-xs">{{t "common.phone"}}: {{n-a driver.phone}}</div>
                                 <div class="text-xs">{{t "resource.vehicle"}}: {{n-a driver.vehicle_name}}</div>
-                                <div class="text-xs">{{t "common.status"}}: <span class="{{if driver.online 'text-green-500' 'text-red-400'}}">{{if driver.online "Online" "Offline"}}</span></div>
+                                <div class="text-xs">{{t "common.status"}}: <span class="{{if driver.online 'text-green-500' 'text-red-400'}}">{{if driver.online (t "common.online") (t "common.offline")}}</span></div>
                                 <div class="text-xs truncate">{{t "common.pos"}}: {{point-coordinates driver.location}}</div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                         <div class="flex items-center space-x-1">
                             <div class="text-xs font-semibold">{{driver.name}}</div>
                             <div>•</div>
-                            <div class="text-xs {{if driver.online 'text-green-500' 'text-red-400'}}">{{if driver.online "Online" "Offline"}}</div>
+                            <div class="text-xs {{if driver.online 'text-green-500' 'text-red-400'}}">{{if driver.online (t "common.online") (t "common.offline")}}</div>
                         </div>
                         <div class="text-xs truncate"><FaIcon @icon="location-dot" @size="xs" class="mr-0.5" />{{point-coordinates driver.location}}</div>
                     </marker.tooltip>
@@ -85,10 +85,10 @@
                             <div class="flex-1">
                                 <div class="text-xs font-semibold">{{vehicle.displayName}}</div>
                                 <div class="text-xs">ID: {{n-a vehicle.public_id}}</div>
-                                <div class="text-xs">Serial No: {{n-a vehicle.serial_number vehicle.vin vehicle.internal_id vehicle.id}}</div>
-                                <div class="text-xs">Driver: {{n-a vehicle.driver_name}}</div>
-                                <div class="text-xs">Status: <span class="{{if vehicle.online 'text-green-500' 'text-red-400'}}">{{if vehicle.online "Online" "Offline"}}</span></div>
-                                <div class="text-xs truncate">Pos: {{point-coordinates vehicle.location}}</div>
+                                <div class="text-xs">{{t "common.serial-number"}}: {{n-a vehicle.serial_number vehicle.vin vehicle.internal_id vehicle.id}}</div>
+                                <div class="text-xs">{{t "resource.driver"}}: {{n-a vehicle.driver_name}}</div>
+                                <div class="text-xs">{{t "common.status"}}: <span class="{{if vehicle.online 'text-green-500' 'text-red-400'}}">{{if vehicle.online (t "common.online") (t "common.offline")}}</span></div>
+                                <div class="text-xs truncate">{{t "common.pos"}}: {{point-coordinates vehicle.location}}</div>
                             </div>
                         </div>
                     </marker.popup>
@@ -96,10 +96,10 @@
                         <div class="flex items-center space-x-1">
                             <div class="text-xs font-semibold">{{vehicle.displayName}}</div>
                             <div>•</div>
-                            <div class="text-xs {{if vehicle.online 'text-green-500' 'text-red-400'}}">{{if vehicle.online "Online" "Offline"}}</div>
+                            <div class="text-xs {{if vehicle.online 'text-green-500' 'text-red-400'}}">{{if vehicle.online (t "common.online") (t "common.offline")}}</div>
                         </div>
                         <div class="text-xs">ID: {{n-a vehicle.public_id}}</div>
-                        <div class="text-xs">Serial No: {{or vehicle.serial_number vehicle.vin vehicle.internal_id vehicle.id "-"}}</div>
+                        <div class="text-xs">{{t "common.serial-number"}}: {{or vehicle.serial_number vehicle.vin vehicle.internal_id vehicle.id "-"}}</div>
                         <div class="text-xs truncate"><FaIcon @icon="location-dot" @size="xs" class="mr-0.5" />{{point-coordinates vehicle.location}}</div>
                     </marker.tooltip>
                 </layers.tracking-marker>

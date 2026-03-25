@@ -6,13 +6,14 @@ import { debug } from '@ember/debug';
 export default class OrderDetailsRouteComponent extends Component {
     @service orderActions;
     @service modalsManager;
+    @service intl;
     @service fetch;
 
     get actionButtons() {
         return [
             {
                 type: 'default',
-                text: 'Edit',
+                text: this.intl.t('common.edit'),
                 icon: 'pencil',
                 iconPrefix: 'fas',
                 permission: 'fleet-ops update-route-for order',
@@ -27,9 +28,9 @@ export default class OrderDetailsRouteComponent extends Component {
     @action async viewWaypointLabel(waypoint) {
         // render dialog to display label within
         this.modalsManager.show(`modals/order-label`, {
-            title: 'Waypoint Label',
+            title: this.intl.t('modals.waypoint-label'),
             modalClass: 'modal-xl',
-            acceptButtonText: 'Done',
+            acceptButtonText: this.intl.t('common.done'),
             hideDeclineButton: true,
         });
 

@@ -22,7 +22,7 @@ export default class MapDrawerDeviceEventListingComponent extends Component {
     get columns() {
         return [
             {
-                label: 'Event',
+                label: this.intl.t('common.event'),
                 valuePath: 'event_type',
                 cellComponent: 'table/cell/anchor',
                 cellClassNames: 'uppercase',
@@ -35,7 +35,7 @@ export default class MapDrawerDeviceEventListingComponent extends Component {
                 filterComponent: 'filter/string',
             },
             {
-                label: 'Device',
+                label: this.intl.t('common.device'),
                 valuePath: 'device.displayName',
                 cellComponent: 'table/cell/anchor',
                 action: this.deviceActions.panel.view,
@@ -44,12 +44,12 @@ export default class MapDrawerDeviceEventListingComponent extends Component {
                 sortable: true,
                 filterable: true,
                 filterComponent: 'filter/model',
-                filterComponentPlaceholder: 'Select device',
+                filterComponentPlaceholder: this.intl.t('common.select-device'),
                 filterParam: 'device',
                 model: 'device',
             },
             {
-                label: 'Provider',
+                label: this.intl.t('common.provider'),
                 valuePath: 'provider',
                 resizable: true,
                 sortable: true,
@@ -58,7 +58,7 @@ export default class MapDrawerDeviceEventListingComponent extends Component {
                 filterComponent: 'filter/string',
             },
             {
-                label: 'Severity',
+                label: this.intl.t('common.severity'),
                 valuePath: 'severity',
                 resizable: true,
                 sortable: true,
@@ -67,28 +67,28 @@ export default class MapDrawerDeviceEventListingComponent extends Component {
                 filterComponent: 'filter/string',
             },
             {
-                label: 'IDENT',
+                label: this.intl.t('common.ident'),
                 valuePath: 'ident',
                 hidden: true,
                 resizable: true,
                 sortable: true,
             },
             {
-                label: 'Protocol',
+                label: this.intl.t('common.protocol'),
                 valuePath: 'protocol',
                 hidden: true,
                 resizable: true,
                 sortable: true,
             },
             {
-                label: 'State',
+                label: this.intl.t('common.state'),
                 valuePath: 'state',
                 hidden: true,
                 resizable: true,
                 sortable: true,
             },
             {
-                label: 'Code',
+                label: this.intl.t('common.code'),
                 valuePath: 'code',
                 resizable: true,
                 sortable: true,

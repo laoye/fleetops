@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { isArray } from '@ember/array';
 
 export default class ManagementVehiclesIndexDetailsController extends Controller {
+    @service intl;
     @service('universe/menu-service') menuService;
     @service hostRouter;
 
@@ -11,15 +12,15 @@ export default class ManagementVehiclesIndexDetailsController extends Controller
         return [
             {
                 route: 'management.vehicles.index.details.index',
-                label: 'Overview',
+                label: this.intl.t('vehicle.form.overview-tab'),
             },
             {
                 route: 'management.vehicles.index.details.positions',
-                label: 'Positions',
+                label: this.intl.t('vehicle.form.positions-tab'),
             },
             {
                 route: 'management.vehicles.index.details.devices',
-                label: 'Devices',
+                label: this.intl.t('vehicle.form.devices-tab'),
             },
             ...(isArray(registeredTabs) ? registeredTabs : []),
         ];

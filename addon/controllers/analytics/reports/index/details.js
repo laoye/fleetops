@@ -4,17 +4,20 @@ import { inject as service } from '@ember/service';
 
 export default class AnalyticsReportsIndexDetailsController extends Controller {
     @service hostRouter;
-    @tracked tabs = [
-        {
-            route: 'analytics.reports.index.details.index',
-            label: 'Overview',
-        },
-        {
-            route: 'analytics.reports.index.details.result',
-            label: 'Result',
-            icon: 'table',
-        },
-    ];
+    @service intl;
+    get tabs() {
+        return [
+            {
+                route: 'analytics.reports.index.details.index',
+                label: this.intl.t('common.overview'),
+            },
+            {
+                route: 'analytics.reports.index.details.result',
+                label: this.intl.t('common.result'),
+                icon: 'table',
+            },
+        ];
+    }
     @tracked actionButtons = [
         {
             icon: 'pencil',

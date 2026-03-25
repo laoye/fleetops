@@ -167,7 +167,7 @@
                         <div>
                             <div class="rounded-md border border-blue-300 dark:border-blue-600 bg-blue-100 dark:bg-blue-500 text-blue-900 dark:text-white text-sm px-4 py-2 mb-4">
                                 <p class="mb-2">{{t "modals.vendor-form.reset-message"}}</p>
-                                <Button @type="default" @size="xs" @icon="repeat" @text="Click here to reset" @onClick={{@options.toggleCredentialsReset}} />
+                                <Button @type="default" @size="xs" @icon="repeat" @text={{t "modals.vendor-form.click-to-reset"}} @onClick={{@options.toggleCredentialsReset}} />
                             </div>
                         </div>
                         {{#each @options.vendor.provider_settings.credential_params as |param|}}

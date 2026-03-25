@@ -6,6 +6,7 @@ export default class EntityFormComponent extends Component {
     @service fetch;
     @service currentUser;
     @service notifications;
+    @service intl;
 
     @task *handlePhotoUpload(file) {
         try {
@@ -26,7 +27,7 @@ export default class EntityFormComponent extends Component {
                 }
             );
         } catch (err) {
-            this.notifications.error('Unable to upload photo: ' + err.message);
+            this.notifications.error(this.intl.t('notifications.upload-photo-error') + ': ' + err.message);
         }
     }
 }

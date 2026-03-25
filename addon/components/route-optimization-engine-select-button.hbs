@@ -1,11 +1,11 @@
 <DropdownButton
-    @text="Optimize Route"
+    @text={{t "order.fields.optimize-route"}}
     @icon="caret-down"
     @type="magic"
     @size="sm"
     @iconPrefix="fas"
     @triggerClass="hidden md:flex"
-    @helpText="Optimize route using an integrated optimization engine"
+    @helpText={{t "order.fields.optimize-route-engine-help-text"}}
     @disabled={{@disabled}}
     @isLoading={{@isLoading}}
     @renderInPlace={{true}}

@@ -4,12 +4,15 @@ import { inject as service } from '@ember/service';
 
 export default class ManagementContactsCustomersDetailsController extends Controller {
     @service hostRouter;
-    @tracked tabs = [
-        {
-            route: 'management.contacts.customers.details.index',
-            label: 'Overview',
-        },
-    ];
+    @service intl;
+    get tabs() {
+        return [
+            {
+                route: 'management.contacts.customers.details.index',
+                label: this.intl.t('common.overview'),
+            },
+        ];
+    }
     @tracked actionButtons = [
         {
             icon: 'pencil',

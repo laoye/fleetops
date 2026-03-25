@@ -6,6 +6,7 @@ export default class DriverSchedulingService extends Service {
     @service store;
     @service fetch;
     @service notifications;
+    @service intl;
     @tracked currentSchedule = null;
     @tracked scheduleItems = [];
     @tracked constraints = [];
@@ -34,7 +35,7 @@ export default class DriverSchedulingService extends Service {
         try {
             const schedule = this.store.createRecord('schedule', data);
             yield schedule.save();
-            this.notifications.success('Schedule created successfully');
+            this.notifications.success(this.intl.t('notifications.schedule-created'));
             return schedule;
         } catch (error) {
             this.notifications.serverError(error);
@@ -49,7 +50,7 @@ export default class DriverSchedulingService extends Service {
         try {
             const item = this.store.createRecord('schedule-item', data);
             yield item.save();
-            this.notifications.success('Schedule item created successfully');
+            this.notifications.success(this.intl.t('notifications.schedule-item-created'));
             return item;
         } catch (error) {
             this.notifications.serverError(error);
@@ -64,7 +65,7 @@ export default class DriverSchedulingService extends Service {
         try {
             item.setProperties(data);
             yield item.save();
-            this.notifications.success('Schedule item updated successfully');
+            this.notifications.success(this.intl.t('notifications.schedule-item-updated'));
             return item;
         } catch (error) {
             this.notifications.serverError(error);
@@ -78,7 +79,7 @@ export default class DriverSchedulingService extends Service {
     @task *deleteScheduleItem(item) {
         try {
             yield item.destroyRecord();
-            this.notifications.success('Schedule item deleted successfully');
+            this.notifications.success(this.intl.t('notifications.schedule-item-deleted'));
         } catch (error) {
             this.notifications.serverError(error);
             throw error;
@@ -128,7 +129,7 @@ export default class DriverSchedulingService extends Service {
         try {
             const availability = this.store.createRecord('schedule-availability', data);
             yield availability.save();
-            this.notifications.success('Availability set successfully');
+            this.notifications.success(this.intl.t('notifications.availability-set'));
             return availability;
         } catch (error) {
             this.notifications.serverError(error);

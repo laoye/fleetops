@@ -4,12 +4,15 @@ import { inject as service } from '@ember/service';
 
 export default class OperationsServiceRatesIndexDetailsController extends Controller {
     @service hostRouter;
-    @tracked tabs = [
-        {
-            route: 'operations.service-rates.index.details.index',
-            label: 'Overview',
-        },
-    ];
+    @service intl;
+    get tabs() {
+        return [
+            {
+                route: 'operations.service-rates.index.details.index',
+                label: this.intl.t('common.overview'),
+            },
+        ];
+    }
     @tracked actionButtons = [
         {
             icon: 'pencil',

@@ -21,7 +21,7 @@
                         </div>
                     {{/if}}
                 </div>
-                <Badge @status={{if @resource.online "online" "offline"}}>{{if @resource.online "Online" "Offline"}}</Badge>
+                <Badge @status={{if @resource.online "online" "offline"}}>{{if @resource.online (t "vehicle.form.online") (t "vehicle.form.offline")}}</Badge>
             </div>
         </div>
         <div class="next-view-header-right">
@@ -31,7 +31,7 @@
                     <Button
                         @type="primary"
                         @icon={{if @resource.isNew "check" "save"}}
-                        @text={{if @resource.isNew (concat "Create " this.modelName) "Save Changes"}}
+                        @text={{if @resource.isNew (concat (t "common.create") " " this.modelName) (t "common.save-changes")}}
                         @onClick={{perform @saveTask @resource}}
                         @disabled={{cannot-write @resource schema=@authSchema}}
                         @isLoading={{@saveTask.isRunning}}

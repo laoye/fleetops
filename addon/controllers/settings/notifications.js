@@ -21,6 +21,13 @@ export default class SettingsNotificationsController extends Controller {
     @service fetch;
 
     /**
+     * Inject the intl service.
+     *
+     * @memberof ConsoleAdminNotificationsController
+     */
+    @service intl;
+
+    /**
      * The notification settings value JSON.
      *
      * @memberof ConsoleAdminNotificationsController
@@ -95,7 +102,7 @@ export default class SettingsNotificationsController extends Controller {
 
         try {
             yield this.fetch.post('fleet-ops/settings/notification-settings', { notificationSettings });
-            this.notifications.success('Notification settings successfully saved.');
+            this.notifications.success(this.intl.t('notifications.notification-settings-saved'));
         } catch (error) {
             this.notifications.serverError(error);
         }

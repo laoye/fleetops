@@ -109,7 +109,7 @@
                                             @name={{concat "waypoint_" index "_dropoff"}}
                                             @changed={{fn (mut waypoint.type)}}
                                         />
-                                        <label for={{concat "waypoint_" index "_dropoff"}} class="ml-2">Dropoff</label>
+                                        <label for={{concat "waypoint_" index "_dropoff"}} class="ml-2">{{t "common.dropoff"}}</label>
                                     </div>
                                 </div>
                                 <div class={{if (eq waypoint.type "pickup") "is-checked"}}>
@@ -122,7 +122,7 @@
                                             @name={{concat "waypoint_" index "_pickup"}}
                                             @changed={{fn (mut waypoint.type)}}
                                         />
-                                        <label for={{concat "waypoint_" index "_pickup"}} class="ml-2">Pickup</label>
+                                        <label for={{concat "waypoint_" index "_pickup"}} class="ml-2">{{t "common.pickup"}}</label>
                                     </div>
                                 </div>
                             </div>

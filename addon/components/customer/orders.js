@@ -20,6 +20,7 @@ export default class CustomerOrdersComponent extends Component {
     @service store;
     @service fetch;
     @service notifications;
+    @service intl;
     @service currentUser;
     @service universe;
     @service urlSearchParams;
@@ -160,9 +161,9 @@ export default class CustomerOrdersComponent extends Component {
 
         // render dialog to display label within
         this.modalsManager.show(`modals/order-label`, {
-            title: 'Order Label',
+            title: this.intl.t('modals.order-label'),
             modalClass: 'modal-xl',
-            acceptButtonText: 'Done',
+            acceptButtonText: this.intl.t('common.done'),
             hideDeclineButton: true,
             order,
         });
@@ -189,9 +190,9 @@ export default class CustomerOrdersComponent extends Component {
     @action async viewWaypointLabel(waypoint) {
         // render dialog to display label within
         this.modalsManager.show(`modals/order-label`, {
-            title: 'Waypoint Label',
+            title: this.intl.t('modals.waypoint-label'),
             modalClass: 'modal-xl',
-            acceptButtonText: 'Done',
+            acceptButtonText: this.intl.t('common.done'),
             hideDeclineButton: true,
         });
 

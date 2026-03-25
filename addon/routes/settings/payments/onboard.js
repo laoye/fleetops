@@ -16,7 +16,7 @@ export default class SettingsPaymentsOnboardRoute extends Route {
 
     async beforeModel() {
         if (!this.isStripeEnabled) {
-            this.notifications.warning('This system is unable to acceot or process payments at this time, contact the system administrator to configure payments.');
+            this.notifications.warning(this.intl.t('notifications.payments-unavailable'));
             return this.hostRouter.transitionTo('console.fleet-ops.settings.payments.index');
         }
 
@@ -28,7 +28,7 @@ export default class SettingsPaymentsOnboardRoute extends Route {
         try {
             const { hasStripeConnectAccount } = await this.fetch.get('fleet-ops/payments/has-stripe-connect-account');
             if (hasStripeConnectAccount) {
-                this.notifications.info('Your account is already enabled to accept payments.');
+                this.notifications.info(this.intl.t('notifications.payments-already-enabled'));
                 return this.hostRouter.transitionTo('console.fleet-ops.settings.payments.index');
             }
         } catch (error) {

@@ -13,13 +13,14 @@ export default class OperationsOrdersIndexDetailsController extends Controller {
     @service hostRouter;
     @service universe;
     @service sidebar;
+    @service intl;
     @tracked routingControl;
 
     get tabs() {
         return [
             {
                 route: 'operations.orders.index.details.index',
-                label: 'Overview',
+                label: this.intl.t('common.overview'),
             },
         ];
     }
@@ -29,13 +30,13 @@ export default class OperationsOrdersIndexDetailsController extends Controller {
             {
                 items: [
                     {
-                        text: 'Edit details',
+                        text: this.intl.t('common.edit-details'),
                         icon: 'pencil',
                         disabled: this.model.status === 'canceled',
                         fn: () => this.orderActions.editOrderDetails(this.model),
                     },
                     {
-                        text: 'Update activity',
+                        text: this.intl.t('common.update-activity'),
                         icon: 'signal',
                         disabled: this.model.status === 'canceled',
                         fn: () =>
@@ -46,13 +47,13 @@ export default class OperationsOrdersIndexDetailsController extends Controller {
                             }),
                     },
                     {
-                        text: 'Unassign driver',
+                        text: this.intl.t('common.unassign-driver'),
                         icon: 'user-xmark',
                         disabled: this.model.status === 'canceled' || !this.model.driver_assigned,
                         fn: () => this.orderActions.unassignDriver(this.model),
                     },
                     {
-                        text: 'View order label',
+                        text: this.intl.t('common.view-order-label'),
                         icon: 'file-invoice',
                         fn: () => this.orderActions.viewLabel(this.model),
                     },
@@ -60,12 +61,12 @@ export default class OperationsOrdersIndexDetailsController extends Controller {
                         separator: true,
                     },
                     {
-                        text: 'Listen to socket channel',
+                        text: this.intl.t('common.listen-socket-channel'),
                         icon: 'headphones',
                         fn: () => this.hostRouter.transitionTo('console.developers.sockets.view', `order.${this.model.public_id}`),
                     },
                     {
-                        text: 'View metadata',
+                        text: this.intl.t('common.view-metadata'),
                         icon: 'table',
                         fn: () => this.orderActions.viewMetadata(this.model),
                     },
@@ -73,14 +74,14 @@ export default class OperationsOrdersIndexDetailsController extends Controller {
                         separator: true,
                     },
                     {
-                        text: 'Cancel order',
+                        text: this.intl.t('common.cancel-order'),
                         icon: 'ban',
                         class: 'text-danger',
                         disabled: this.model.status === 'canceled',
                         fn: () => this.orderActions.cancel(this.model),
                     },
                     {
-                        text: 'Delete order',
+                        text: this.intl.t('common.delete-order'),
                         icon: 'trash',
                         class: 'text-danger',
                         fn: () =>

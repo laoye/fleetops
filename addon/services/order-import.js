@@ -9,23 +9,24 @@ export default class OrderImportService extends Service {
     @service fetch;
     @service modalsManager;
     @service notifications;
+    @service intl;
     @service currentUser;
     @tracked queuedFiles = [];
     @tracked uploadedFiles = [];
 
     @action promptImport(order, options = {}) {
         return this.modalsManager.show('modals/order-import', {
-            title: 'Import order(s) with spreadsheets',
-            acceptButtonText: 'Start Upload',
+            title: this.intl.t('modals.import-orders'),
+            acceptButtonText: this.intl.t('common.start-upload'),
             acceptButtonScheme: 'magic',
             acceptButtonIcon: 'upload',
             acceptButtonDisabled: true,
             isProcessing: false,
             fileQueueColumns: [
-                { name: 'Type', valuePath: 'extension', key: 'type' },
-                { name: 'File Name', valuePath: 'name', key: 'fileName' },
-                { name: 'File Size', valuePath: 'size', key: 'fileSize' },
-                { name: 'Upload Date', valuePath: 'file.lastModifiedDate', key: 'uploadDate' },
+                { name: this.intl.t('column.type'), valuePath: 'extension', key: 'type' },
+                { name: this.intl.t('common.file-name'), valuePath: 'name', key: 'fileName' },
+                { name: this.intl.t('common.file-size'), valuePath: 'size', key: 'fileSize' },
+                { name: this.intl.t('common.upload-date'), valuePath: 'file.lastModifiedDate', key: 'uploadDate' },
                 { name: '', valuePath: '', key: 'delete' },
             ],
             acceptedFileTypes: ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'text/csv'],
@@ -36,11 +37,11 @@ export default class OrderImportService extends Service {
                 if (!this.#importValid()) return this.notifications.warning(this.intl.t('fleet-ops.operations.orders.index.new.warning-message'));
 
                 modal.startLoading();
-                modal.setOption('acceptButtonText', 'Uploading...');
+                modal.setOption('acceptButtonText', this.intl.t('common.uploading'));
 
                 const uploadedFiles = await this.queuedFiles.perform();
 
-                this.modalsManager.setOption('acceptButtonText', 'Processing...');
+                this.modalsManager.setOption('acceptButtonText', this.intl.t('common.processing'));
                 this.modalsManager.setOption('isProcessing', true);
 
                 const results = await this.importFiles.perform(uploadedFiles);

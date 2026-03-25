@@ -48,7 +48,7 @@ export default class ConnectivitySensorsIndexController extends Controller {
     /** bulk action buttons */
     @tracked bulkActions = [
         {
-            label: 'Delete selected...',
+            label: this.intl.t('common.delete-selected'),
             class: 'text-red-500',
             fn: this.sensorActions.bulkDelete,
         },
@@ -71,7 +71,7 @@ export default class ConnectivitySensorsIndexController extends Controller {
             filterComponent: 'filter/string',
         },
         {
-            label: 'Telematic',
+            label: this.intl.t('common.telematic'),
             valuePath: 'telematic.provider',
             cellComponent: 'table/cell/anchor',
             action: this.telematicActions.transition.view,
@@ -80,12 +80,12 @@ export default class ConnectivitySensorsIndexController extends Controller {
             sortable: true,
             filterable: true,
             filterComponent: 'filter/model',
-            filterComponentPlaceholder: 'Select telematic',
+            filterComponentPlaceholder: this.intl.t('common.select-resource', { resource: this.intl.t('resource.telematic') }),
             filterParam: 'telematic',
             model: 'telematic',
         },
         {
-            label: 'Device',
+            label: this.intl.t('common.device'),
             valuePath: 'device.displayName',
             cellComponent: 'table/cell/anchor',
             action: this.deviceActions.transition.view,
@@ -94,12 +94,12 @@ export default class ConnectivitySensorsIndexController extends Controller {
             sortable: true,
             filterable: true,
             filterComponent: 'filter/model',
-            filterComponentPlaceholder: 'Select device',
+            filterComponentPlaceholder: this.intl.t('common.select-resource', { resource: this.intl.t('resource.device') }),
             filterParam: 'device',
             model: 'device',
         },
         {
-            label: 'Type',
+            label: this.intl.t('column.type'),
             valuePath: 'type',
             resizable: true,
             sortable: true,
@@ -109,7 +109,7 @@ export default class ConnectivitySensorsIndexController extends Controller {
             filterOptions: localizeFleetOpsOptions(this.intl, 'sensorTypes'),
         },
         {
-            label: 'Serial Number',
+            label: this.intl.t('common.serial-number'),
             valuePath: 'serial_number',
             resizable: true,
             sortable: true,

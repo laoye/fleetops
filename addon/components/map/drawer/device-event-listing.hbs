@@ -4,7 +4,7 @@
             <ModelSelect
                 @modelName="telematic"
                 @selectedModel={{this.telematic}}
-                @placeholder="Filter by Telematic"
+                @placeholder={{t "common.filter-by-telematic"}}
                 @triggerClass="form-select form-input form-input-sm w-48"
                 @infiniteScroll={{false}}
                 @renderInPlace={{true}}
@@ -28,7 +28,7 @@
             <ModelSelect
                 @modelName="device"
                 @selectedModel={{this.device}}
-                @placeholder="Filter by Device"
+                @placeholder={{t "common.filter-by-device"}}
                 @triggerClass="form-select form-input form-input-sm w-48"
                 @infiniteScroll={{false}}
                 @renderInPlace={{true}}
@@ -48,7 +48,7 @@
                 @range={{true}}
                 @onSelect={{this.onDateRangeChanged}}
                 @autoClose={{true}}
-                @placeholder="Select date range"
+                @placeholder={{t "common.select-date-range"}}
                 class="w-full form-input form-input-sm w-48"
             />
         </div>

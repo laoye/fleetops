@@ -10,11 +10,11 @@ import isObject from '@fleetbase/ember-core/utils/is-object';
 import isJson from '@fleetbase/ember-core/utils/is-json';
 import createFullCalendarEventFromOrder, { createOrderEventTitle, createOrderEventDescription } from '../../../utils/create-full-calendar-event-from-order';
 
-function createFullCalendarEventFromScheduleItem(item, driver) {
+function createFullCalendarEventFromScheduleItem(item, driver, shiftLabel = 'Shift') {
     return {
         id: item.id,
         resourceId: driver.id,
-        title: `${driver.name} - Shift`,
+        title: `${driver.name} - ${shiftLabel}`,
         start: item.start_at,
         end: item.end_at,
         backgroundColor: getScheduleItemColor(item),
@@ -54,7 +54,7 @@ export default class OperationsSchedulerIndexController extends Controller {
         if (this.viewMode === 'drivers') {
             return this.scheduleItems.map((item) => {
                 const driver = this.drivers.find((d) => d.id === item.assignee_uuid);
-                return createFullCalendarEventFromScheduleItem(item, driver);
+                return createFullCalendarEventFromScheduleItem(item, driver, this.intl.t('scheduler.shift'));
             });
         }
         return this.scheduledOrders.map(createFullCalendarEventFromOrder);
@@ -125,7 +125,7 @@ export default class OperationsSchedulerIndexController extends Controller {
 
         this.modalsManager.show('modals/order-event', {
             title: this.intl.t('scheduler.scheduling-for', { orderId: order.tracking }),
-            acceptButtonText: 'Save Changes',
+            acceptButtonText: this.intl.t('common.save-changes'),
             acceptButtonIcon: 'save',
             hideDeclineButton: true,
             order,
@@ -206,8 +206,8 @@ export default class OperationsSchedulerIndexController extends Controller {
 
     @action viewScheduleItem(scheduleItem, driver) {
         this.modalsManager.show('modals/driver-shift', {
-            title: `${driver.name} - Shift Details`,
-            acceptButtonText: 'Save Changes',
+            title: `${driver.name} - ${this.intl.t('scheduler.shift-details')}`,
+            acceptButtonText: this.intl.t('common.save-changes'),
             acceptButtonIcon: 'save',
             scheduleItem,
             driver,
@@ -215,7 +215,7 @@ export default class OperationsSchedulerIndexController extends Controller {
                 modal.startLoading();
                 try {
                     await scheduleItem.save();
-                    this.notifications.success('Shift updated successfully');
+                    this.notifications.success(this.intl.t('notifications.shift-updated'));
                     await this.loadScheduleItems.perform();
                     modal.done();
                 } catch (error) {
@@ -224,11 +224,11 @@ export default class OperationsSchedulerIndexController extends Controller {
                 }
             },
             delete: async (modal) => {
-                if (confirm('Are you sure you want to delete this shift?')) {
+                if (confirm(this.intl.t('common.confirm-delete-shift'))) {
                     modal.startLoading();
                     try {
                         await scheduleItem.destroyRecord();
-                        this.notifications.success('Shift deleted successfully');
+                        this.notifications.success(this.intl.t('notifications.shift-deleted'));
                         await this.loadScheduleItems.perform();
                         modal.done();
                     } catch (error) {
@@ -279,7 +279,7 @@ export default class OperationsSchedulerIndexController extends Controller {
                     scheduleItem.set('assignee_uuid', newResourceId);
                 }
                 await scheduleItem.save();
-                this.notifications.success('Shift rescheduled successfully');
+                this.notifications.success(this.intl.t('notifications.shift-rescheduled'));
                 await this.loadScheduleItems.perform();
             } catch (error) {
                 this.notifications.serverError(error);
@@ -306,8 +306,8 @@ export default class OperationsSchedulerIndexController extends Controller {
 
     @action async addDriverShift() {
         this.modalsManager.show('modals/add-driver-shift', {
-            title: 'Add Driver Shift',
-            acceptButtonText: 'Create Shift',
+            title: this.intl.t('modals.add-driver-shift'),
+            acceptButtonText: this.intl.t('modals.create-shift'),
             acceptButtonIcon: 'plus',
             drivers: this.drivers,
             confirm: async (modal) => {
@@ -323,7 +323,7 @@ export default class OperationsSchedulerIndexController extends Controller {
                         status: 'pending',
                     });
                     await scheduleItem.save();
-                    this.notifications.success('Shift created successfully');
+                    this.notifications.success(this.intl.t('notifications.shift-created'));
                     await this.loadScheduleItems.perform();
                     modal.done();
                 } catch (error) {

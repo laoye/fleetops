@@ -8,7 +8,7 @@
         @disabled={{this.config.core_service}}
         @permission="fleet-ops update order-config"
     />
-    <Button @type="default" @icon="rotate" @text="Reset" @onClick={{this.resetConfig}} @disabled={{or this.config.core_service (cannot "fleet-ops update order-config")}} />
+    <Button @type="default" @icon="rotate" @text={{t "common.reset"}} @onClick={{this.resetConfig}} @disabled={{or this.config.core_service (cannot "fleet-ops update order-config")}} />
 </div>
 <div class="activity-flow-graph-container">
     <div class="activity-flow-zoom-controls">

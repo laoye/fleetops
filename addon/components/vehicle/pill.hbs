@@ -14,7 +14,7 @@
     ...attributes
 >
     <:default>
-        <div class="text-sm">{{or this.resource.name this.resource.yearMakeModel @titleFallback "No vehicle"}}</div>
+        <div class="text-sm">{{or this.resource.name this.resource.yearMakeModel @titleFallback (t "vehicle.form.no-vehicle")}}</div>
         <div class="text-xs text-gray-400 dark:text-gray-500">{{or this.resource.plate_number this.resource.vin this.resource.serial_number this.resource.call_sign "-"}}</div>
     </:default>
     <:tooltip>
@@ -27,7 +27,7 @@
                     {{if this.resource.online (t "common.online") (t "common.offline")}}
                 </span>
             </div>
-            <div class="text-xs truncate">Pos: {{point-coordinates this.resource.location}}</div>
+            <div class="text-xs truncate">{{t "vehicle.form.pos-prefix"}} {{point-coordinates this.resource.location}}</div>
         </div>
     </:tooltip>
 </Pill>
