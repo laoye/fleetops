@@ -1,3 +1,4 @@
+/* eslint-disable ember/no-shadow-route-definition */
 import buildRoutes from 'ember-engines/routes';
 
 export default buildRoutes(function () {
@@ -19,6 +20,7 @@ export default buildRoutes(function () {
                 this.route('new');
                 this.route('details', { path: '/:public_id' }, function () {
                     this.route('index', { path: '/' });
+                    this.route('virtual', { path: '/:slug' });
                 });
             });
         });

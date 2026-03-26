@@ -2,10 +2,12 @@ import Controller, { inject as controller } from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
+import { isArray } from '@ember/array';
 import { task } from 'ember-concurrency';
 
 export default class OperationsOrdersIndexDetailsController extends Controller {
     @controller('operations.orders.index') index;
+    @service('universe/menu-service') menuService;
     @service orderActions;
     @service orderSocketEvents;
     @service leafletMapManager;
@@ -16,11 +18,14 @@ export default class OperationsOrdersIndexDetailsController extends Controller {
     @tracked routingControl;
 
     get tabs() {
+        const registeredTabs = this.menuService.getMenuItems('fleet-ops:component:order:details');
         return [
             {
                 route: 'operations.orders.index.details.index',
                 label: 'Overview',
+                icon: 'folder-open',
             },
+            ...(isArray(registeredTabs) ? registeredTabs : []),
         ];
     }
 
