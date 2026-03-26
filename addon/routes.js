@@ -1,7 +1,7 @@
+/* eslint-disable ember/no-shadow-route-definition */
 import buildRoutes from 'ember-engines/routes';
 
 export default buildRoutes(function () {
-    // eslint-disable-next-line ember/no-shadow-route-definition
     this.route('virtual', { path: '/:section/:slug' });
     this.route('operations', { path: '/' }, function () {
         this.route('order-config', function () {});
