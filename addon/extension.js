@@ -83,14 +83,14 @@ export default {
             'auth:login',
             new MenuItem({
                 title: 'Track Order',
-                route: 'virtual',
+                route: 'track-order',
                 slug: 'track-order',
                 icon: 'barcode',
                 type: 'link',
                 wrapperClass: 'btn-block py-1 border dark:border-gray-700 border-gray-200 hover:opacity-50',
                 component: new ExtensionComponent('@fleetbase/fleetops-engine', 'order-tracking-lookup'),
                 onClick: (menuItem) => {
-                    universe.transitionMenuItem('virtual', menuItem);
+                    universe.transitionMenuItem('track-order', menuItem);
                 },
             })
         );
