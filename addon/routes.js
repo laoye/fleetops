@@ -19,6 +19,7 @@ export default buildRoutes(function () {
                 this.route('new');
                 this.route('details', { path: '/:public_id' }, function () {
                     this.route('index', { path: '/' });
+                    this.route('virtual', { path: '/:slug' });
                 });
             });
         });
