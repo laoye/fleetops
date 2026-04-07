@@ -7,7 +7,61 @@ export default {
         const widgetService = universe.getService('widget');
 
         // Register header navigation
-        menuService.registerHeaderMenuItem('Fleet-Ops', 'console.fleet-ops', { icon: 'route', priority: 0 });
+        menuService.registerHeaderMenuItem('Fleet-Ops', 'console.fleet-ops', {
+            icon: 'route',
+            priority: 0,
+            description: 'Dispatch, fleet management, driver tracking, and logistics operations.',
+            shortcuts: [
+                {
+                    title: 'Orders',
+                    description: 'Create, dispatch, and track delivery orders in real time.',
+                    icon: 'boxes-stacked',
+                    route: 'console.fleet-ops.operations.orders',
+                },
+                {
+                    title: 'Places',
+                    description: 'Manage saved locations, addresses, and points of interest.',
+                    icon: 'location-dot',
+                    route: 'console.fleet-ops.management.places',
+                },
+                {
+                    title: 'Drivers',
+                    description: 'Manage driver profiles, assignments, and live locations.',
+                    icon: 'id-card',
+                    route: 'console.fleet-ops.management.drivers',
+                },
+                {
+                    title: 'Vehicles',
+                    description: 'View and manage your vehicle fleet and telematics.',
+                    icon: 'truck',
+                    route: 'console.fleet-ops.management.vehicles',
+                },
+                {
+                    title: 'Fleets',
+                    description: 'Organise drivers and vehicles into operational fleets.',
+                    icon: 'layer-group',
+                    route: 'console.fleet-ops.management.fleets',
+                },
+                {
+                    title: 'Service Rates',
+                    description: 'Configure pricing rules and service rate cards.',
+                    icon: 'tags',
+                    route: 'console.fleet-ops.operations.service-rates',
+                },
+                {
+                    title: 'Devices',
+                    description: 'Manage connected telematics devices and their sensor data.',
+                    icon: 'microchip',
+                    route: 'console.fleet-ops.connectivity.devices',
+                },
+                {
+                    title: 'Reports',
+                    description: 'Generate and review operational analytics reports.',
+                    icon: 'chart-bar',
+                    route: 'console.fleet-ops.analytics.reports',
+                },
+            ],
+        });
 
         // Register admin sections
         menuService.registerAdminMenuPanel(
