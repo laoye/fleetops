@@ -121,6 +121,15 @@ export default {
                 grid_options: { w: 12, h: 12, minW: 8, minH: 12 },
                 default: true,
             }),
+            new Widget({
+                id: 'forbox-ops-widget',
+                name: 'ForBox 运营看板',
+                description: '今日揽件、在库、派送中、签收、异常及路线分布。',
+                icon: 'boxes-stacked',
+                component: new ExtensionComponent('@fleetbase/fleetops-engine', 'widget/forbox-ops'),
+                grid_options: { w: 12, h: 14, minW: 8, minH: 10 },
+                default: true,
+            }),
         ];
 
         widgetService.registerWidgets('dashboard', widgets);

@@ -1,0 +1,62 @@
+<div class="forbox-ops-widget" ...attributes>
+    <div class="flex flex-col">
+        {{! Header }}
+        <div class="flex flex-row items-center justify-between px-4 py-2 border dark:border-gray-700 border-gray-200 dark:bg-gray-800 bg-gray-50 rounded-lg shadow-sm">
+            <span class="text-base font-bold text-black dark:text-gray-100">ForBox 运营看板</span>
+        </div>
+
+        <div class="mt-4">
+            {{#if this.loadStats.isRunning}}
+                <Spinner />
+            {{else if this.data}}
+                {{! KPI Cards }}
+                <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 mb-4">
+                    <div class="bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 border-gray-200 p-3 shadow-sm">
+                        <p class="text-xs text-gray-500 dark:text-gray-400">今日揽件</p>
+                        <p class="text-2xl font-bold text-blue-600 dark:text-blue-400 mt-1">{{this.data.picked_up_today}}</p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 border-gray-200 p-3 shadow-sm">
+                        <p class="text-xs text-gray-500 dark:text-gray-400">在库</p>
+                        <p class="text-2xl font-bold text-violet-600 dark:text-violet-400 mt-1">{{this.data.in_warehouse}}</p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 border-gray-200 p-3 shadow-sm">
+                        <p class="text-xs text-gray-500 dark:text-gray-400">派送中</p>
+                        <p class="text-2xl font-bold text-amber-600 dark:text-amber-400 mt-1">{{this.data.out_for_delivery}}</p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 border-gray-200 p-3 shadow-sm">
+                        <p class="text-xs text-gray-500 dark:text-gray-400">今日签收</p>
+                        <p class="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">{{this.data.delivered_today}}</p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 border-gray-200 p-3 shadow-sm">
+                        <p class="text-xs text-gray-500 dark:text-gray-400">异常</p>
+                        <p class="text-2xl font-bold text-red-600 dark:text-red-400 mt-1">{{this.data.exceptions}}</p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 border-gray-200 p-3 shadow-sm">
+                        <p class="text-xs text-gray-500 dark:text-gray-400">平均在仓(h)</p>
+                        <p class="text-2xl font-bold text-gray-700 dark:text-gray-300 mt-1">{{this.data.avg_dwell_hours}}</p>
+                    </div>
+                </div>
+
+                {{! Route Inventory }}
+                {{#if this.data.route_inventory.length}}
+                    <div class="bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 border-gray-200 p-3 shadow-sm">
+                        <p class="text-xs font-semibold text-gray-600 dark:text-gray-300 mb-2">路线在库分布</p>
+                        <div class="space-y-1.5">
+                            {{#each this.data.route_inventory as |row|}}
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs font-mono w-14 shrink-0 text-gray-700 dark:text-gray-300">{{row.route_code}}</span>
+                                    <div class="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+                                        <div class="h-full bg-violet-500 rounded-full" style="width: {{row.count}}%"></div>
+                                    </div>
+                                    <span class="text-xs text-gray-500 w-6 text-right">{{row.count}}</span>
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                {{/if}}
+            {{else}}
+                <p class="text-sm text-gray-500 dark:text-gray-400 text-center py-4">暂无数据</p>
+            {{/if}}
+        </div>
+    </div>
+</div>
