@@ -136,6 +136,7 @@ export default buildRoutes(function () {
                 this.route('edit', { path: '/edit/:public_id' });
             });
         });
+        this.route('warehouse', { path: '/warehouse' });
     });
     this.route('connectivity', function () {
         this.route('telematics', function () {

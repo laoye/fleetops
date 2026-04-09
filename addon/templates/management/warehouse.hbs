@@ -1,0 +1,269 @@
+<div class="flex flex-col h-full overflow-hidden">
+
+    {{!-- ── 页头 ── --}}
+    <div class="flex items-center justify-between px-5 py-4 border-b dark:border-gray-700 border-gray-200 bg-white dark:bg-gray-900 shrink-0">
+        <div class="flex items-center gap-3">
+            <FaIcon @icon="warehouse" class="text-blue-500 text-lg" />
+            <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">ForBox 仓库管理</h2>
+        </div>
+        <div class="flex items-center gap-2">
+            <button
+                type="button"
+                class="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                {{on "click" (fn this.openScanPanel "scan-in")}}
+            >
+                <FaIcon @icon="arrow-down-to-bracket" class="text-xs" />
+                入库扫码
+            </button>
+            <button
+                type="button"
+                class="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md bg-violet-600 hover:bg-violet-700 text-white transition-colors"
+                {{on "click" (fn this.openScanPanel "sort")}}
+            >
+                <FaIcon @icon="code-branch" class="text-xs" />
+                分拣
+            </button>
+            <button
+                type="button"
+                class="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md bg-amber-600 hover:bg-amber-700 text-white transition-colors"
+                {{on "click" (fn this.openScanPanel "scan-out")}}
+            >
+                <FaIcon @icon="truck-ramp-box" class="text-xs" />
+                出库扫码
+            </button>
+            <button
+                type="button"
+                class="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md border dark:border-gray-600 border-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
+                {{on "click" this.refresh}}
+            >
+                <FaIcon @icon="rotate" class="text-xs {{if this.isLoading 'animate-spin'}}" />
+                刷新
+            </button>
+        </div>
+    </div>
+
+    {{!-- ── Tab 栏 ── --}}
+    <div class="flex gap-0 border-b dark:border-gray-700 border-gray-200 bg-white dark:bg-gray-900 shrink-0 px-4">
+        {{#each this.tabs as |tab|}}
+            <button
+                type="button"
+                class="relative flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors
+                    {{if (eq this.activeTab tab.key)
+                        'text-blue-600 dark:text-blue-400'
+                        'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'}}"
+                {{on "click" (fn this.switchTab tab.key)}}
+            >
+                <FaIcon @icon={{tab.icon}} class="text-xs" />
+                {{tab.label}}
+                {{#if tab.count}}
+                    <span class="ml-1 px-1.5 py-0.5 rounded-full text-xs font-medium
+                        {{if (eq this.activeTab tab.key)
+                            'bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300'
+                            'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'}}">
+                        {{tab.count}}
+                    </span>
+                {{/if}}
+                {{#if (eq this.activeTab tab.key)}}
+                    <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400 rounded-full"></span>
+                {{/if}}
+            </button>
+        {{/each}}
+    </div>
+
+    {{!-- ── 内容区 ── --}}
+    <div class="flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-950">
+        {{#if this.isLoading}}
+            {{!-- 骨架屏 --}}
+            <div class="p-4 space-y-2">
+                {{#each (array 1 2 3 4 5) as |i|}}
+                    <div class="h-14 rounded-lg bg-gray-200 dark:bg-gray-800 animate-pulse"></div>
+                {{/each}}
+            </div>
+        {{else if this.currentRows.length}}
+            <table class="w-full text-sm">
+                <thead class="sticky top-0 bg-gray-100 dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                    <tr>
+                        <th class="text-left px-4 py-2.5 font-medium text-gray-600 dark:text-gray-400">运单号</th>
+                        <th class="text-left px-4 py-2.5 font-medium text-gray-600 dark:text-gray-400">商家单号</th>
+                        <th class="text-left px-4 py-2.5 font-medium text-gray-600 dark:text-gray-400">目的地</th>
+                        <th class="text-left px-4 py-2.5 font-medium text-gray-600 dark:text-gray-400">件数/重量</th>
+                        {{#if (eq this.activeTab "inventory")}}
+                            <th class="text-left px-4 py-2.5 font-medium text-gray-600 dark:text-gray-400">路线</th>
+                            <th class="text-left px-4 py-2.5 font-medium text-gray-600 dark:text-gray-400">状态</th>
+                        {{/if}}
+                        <th class="text-left px-4 py-2.5 font-medium text-gray-600 dark:text-gray-400 w-32">操作</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y dark:divide-gray-800 divide-gray-100">
+                    {{#each this.currentRows as |order|}}
+                        <tr class="bg-white dark:bg-gray-900 hover:bg-blue-50/40 dark:hover:bg-gray-800/60 transition-colors">
+                            <td class="px-4 py-3 font-mono text-xs font-medium text-blue-700 dark:text-blue-400">
+                                {{order.tracking_number.tracking_number}}
+                            </td>
+                            <td class="px-4 py-3 text-gray-700 dark:text-gray-300 text-xs">
+                                {{or order.meta.merchant_order_no "-"}}
+                            </td>
+                            <td class="px-4 py-3 text-gray-600 dark:text-gray-400 text-xs">
+                                {{order.payload.dropoff.city}}{{if order.payload.dropoff.province (concat ", " order.payload.dropoff.province)}}
+                                <span class="ml-1 text-gray-400">{{order.payload.dropoff.postal_code}}</span>
+                            </td>
+                            <td class="px-4 py-3 text-gray-600 dark:text-gray-400 text-xs">
+                                {{or order.meta.package_count "1"}} 件
+                                {{#if order.meta.estimated_weight_lbs}}
+                                    / {{order.meta.estimated_weight_lbs}} lbs
+                                {{/if}}
+                            </td>
+                            {{#if (eq this.activeTab "inventory")}}
+                                <td class="px-4 py-3">
+                                    {{#if order.meta.route_code}}
+                                        <span class="px-2 py-0.5 rounded-full text-xs font-mono font-medium bg-violet-100 dark:bg-violet-900/40 text-violet-700 dark:text-violet-300">
+                                            {{order.meta.route_code}}
+                                        </span>
+                                    {{else}}
+                                        <span class="text-gray-400 text-xs">未分拣</span>
+                                    {{/if}}
+                                </td>
+                                <td class="px-4 py-3">
+                                    <span class="px-2 py-0.5 rounded-full text-xs
+                                        {{if (eq order.status 'warehouse_sorted')
+                                            'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300'
+                                            'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300'}}">
+                                        {{if (eq order.status 'warehouse_sorted') '已分拣' '待分拣'}}
+                                    </span>
+                                </td>
+                            {{/if}}
+                            <td class="px-4 py-3">
+                                {{#if (eq this.activeTab "pending-inbound")}}
+                                    <button
+                                        type="button"
+                                        class="px-2.5 py-1 text-xs rounded-md bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                                        {{on "click" (fn this.quickScanIn order)}}
+                                    >入库</button>
+                                {{else if (eq this.activeTab "inventory")}}
+                                    <button
+                                        type="button"
+                                        class="px-2.5 py-1 text-xs rounded-md bg-violet-600 hover:bg-violet-700 text-white transition-colors"
+                                        {{on "click" (fn this.quickSort order)}}
+                                    >分拣</button>
+                                {{else if (eq this.activeTab "pending-outbound")}}
+                                    <button
+                                        type="button"
+                                        class="px-2.5 py-1 text-xs rounded-md bg-amber-600 hover:bg-amber-700 text-white transition-colors"
+                                        {{on "click" (fn this.quickScanOut order)}}
+                                    >出库</button>
+                                {{/if}}
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        {{else}}
+            <div class="flex flex-col items-center justify-center h-64 text-gray-400 dark:text-gray-600 gap-3">
+                <FaIcon @icon="inbox" class="text-4xl opacity-40" />
+                <p class="text-sm">
+                    {{#if (eq this.activeTab "pending-inbound")}}暂无待入库订单
+                    {{else if (eq this.activeTab "inventory")}}仓库暂无在库订单
+                    {{else}}暂无待出库订单{{/if}}
+                </p>
+            </div>
+        {{/if}}
+    </div>
+
+</div>
+
+{{!-- ── 扫码 Panel (Overlay) ── --}}
+{{#if this.showScanPanel}}
+    <div
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+        {{on "click" this.closeScanPanel}}
+    >
+        <div
+            class="bg-white dark:bg-gray-900 rounded-xl shadow-2xl w-full max-w-sm mx-4 p-6"
+            {{on "click" (fn (mut this) this)}}
+        >
+            {{!-- Panel 标题 --}}
+            <div class="flex items-center justify-between mb-5">
+                <div class="flex items-center gap-2">
+                    {{#if (eq this.scanMode "scan-in")}}
+                        <FaIcon @icon="arrow-down-to-bracket" class="text-blue-500" />
+                        <h3 class="font-semibold text-gray-900 dark:text-gray-100">入库扫码</h3>
+                    {{else if (eq this.scanMode "sort")}}
+                        <FaIcon @icon="code-branch" class="text-violet-500" />
+                        <h3 class="font-semibold text-gray-900 dark:text-gray-100">分拣确认</h3>
+                    {{else}}
+                        <FaIcon @icon="truck-ramp-box" class="text-amber-500" />
+                        <h3 class="font-semibold text-gray-900 dark:text-gray-100">出库扫码</h3>
+                    {{/if}}
+                </div>
+                <button type="button" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200" {{on "click" this.closeScanPanel}}>
+                    <FaIcon @icon="xmark" />
+                </button>
+            </div>
+
+            {{!-- 输入区 --}}
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+                        {{if (eq this.scanMode "sort") "订单 UUID" "运单号 / 条码"}}
+                    </label>
+                    <Input
+                        @value={{this.scanCode}}
+                        class="w-full px-3 py-2 rounded-lg border dark:border-gray-600 border-gray-300 bg-white dark:bg-gray-800 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder={{if (eq this.scanMode "sort") "粘贴订单 UUID" "扫描或输入运单号"}}
+                        autofocus={{true}}
+                    />
+                </div>
+                {{#if (eq this.scanMode "sort")}}
+                    <div>
+                        <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">路线编码（可选）</label>
+                        <Input
+                            @value={{this.scanRouteCode}}
+                            class="w-full px-3 py-2 rounded-lg border dark:border-gray-600 border-gray-300 bg-white dark:bg-gray-800 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-violet-500"
+                            placeholder="如 LA-Z1"
+                        />
+                    </div>
+                {{/if}}
+            </div>
+
+            {{!-- 反馈 --}}
+            {{#if this.scanError}}
+                <div class="mt-3 flex items-center gap-2 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 rounded-lg px-3 py-2">
+                    <FaIcon @icon="circle-exclamation" class="shrink-0" />
+                    {{this.scanError}}
+                </div>
+            {{/if}}
+            {{#if this.scanSuccess}}
+                <div class="mt-3 flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg px-3 py-2">
+                    <FaIcon @icon="circle-check" class="shrink-0" />
+                    {{this.scanSuccess}}
+                </div>
+            {{/if}}
+
+            {{!-- 按钮 --}}
+            <div class="flex gap-2 mt-5">
+                <button
+                    type="button"
+                    class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors
+                        {{if (eq this.scanMode 'scan-in') 'bg-blue-600 hover:bg-blue-700'
+                            (if (eq this.scanMode 'sort') 'bg-violet-600 hover:bg-violet-700' 'bg-amber-600 hover:bg-amber-700')}} text-white
+                        disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={{this.submitScan.isRunning}}
+                    {{on "click" (perform this.submitScan)}}
+                >
+                    {{#if this.submitScan.isRunning}}
+                        <FaIcon @icon="circle-notch" class="animate-spin" />
+                        处理中...
+                    {{else}}
+                        <FaIcon @icon="barcode-scan" />
+                        确认
+                    {{/if}}
+                </button>
+                <button
+                    type="button"
+                    class="px-4 py-2.5 rounded-lg text-sm font-medium border dark:border-gray-600 border-gray-300 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                    {{on "click" this.closeScanPanel}}
+                >取消</button>
+            </div>
+        </div>
+    </div>
+{{/if}}

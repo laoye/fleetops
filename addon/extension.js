@@ -60,6 +60,12 @@ export default {
                     icon: 'chart-bar',
                     route: 'console.fleet-ops.analytics.reports',
                 },
+                {
+                    title: 'ForBox 仓库',
+                    description: '仓库入库、分拣、出库操作队列。',
+                    icon: 'warehouse',
+                    route: 'console.fleet-ops.management.warehouse',
+                },
             ],
         });
 
