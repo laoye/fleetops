@@ -19,9 +19,8 @@ export default class ManagementWarehouseController extends Controller {
 
     /** 扫码 overlay */
     @tracked showScanPanel = false;
-    @tracked scanMode = 'scan-in';   // scan-in | sort | scan-out
+    @tracked scanMode = 'scan-in';   // scan-in | scan-out
     @tracked scanCode = '';
-    @tracked scanRouteCode = '';
     @tracked scanError = null;
     @tracked scanSuccess = null;
 
@@ -83,7 +82,6 @@ export default class ManagementWarehouseController extends Controller {
     @action openScanPanel(mode) {
         this.scanMode    = mode;
         this.scanCode    = '';
-        this.scanRouteCode = '';
         this.scanError   = null;
         this.scanSuccess = null;
         this.showScanPanel = true;
@@ -112,14 +110,6 @@ export default class ManagementWarehouseController extends Controller {
                 this.scanSuccess = `入库成功：${response?.data?.order_public_id ?? code}`;
                 this.pendingInbound = this.pendingInbound.filter(o => o.uuid !== response?.data?.order_uuid);
 
-            } else if (this.scanMode === 'sort') {
-                response = yield this.fetch.post('forbox/int/v1/warehouse/sort', {
-                    order_uuid: code,
-                    route_code: this.scanRouteCode.trim() || undefined,
-                });
-                this.scanSuccess = `分拣完成：${response?.data?.order_public_id ?? code}（路线：${response?.data?.route_code ?? '-'}）`;
-                yield this.loadTab.perform('inventory');
-
             } else if (this.scanMode === 'scan-out') {
                 response = yield this.fetch.post('forbox/int/v1/warehouse/scan-out', { code });
                 this.scanSuccess = `出库成功：${response?.data?.order_public_id ?? code}`;
@@ -127,7 +117,6 @@ export default class ManagementWarehouseController extends Controller {
             }
 
             this.scanCode = '';
-            this.scanRouteCode = '';
         } catch (err) {
             this.scanError = err?.payload?.message ?? err?.message ?? '操作失败，请重试';
         }
@@ -137,12 +126,6 @@ export default class ManagementWarehouseController extends Controller {
     @action quickScanIn(order) {
         this.openScanPanel('scan-in');
         this.scanCode = order?.tracking_number?.tracking_number ?? order?.public_id ?? '';
-    }
-
-    @action quickSort(order) {
-        this.openScanPanel('sort');
-        this.scanCode = order?.uuid ?? '';
-        this.scanRouteCode = order?.meta?.route_code ?? '';
     }
 
     @action quickScanOut(order) {

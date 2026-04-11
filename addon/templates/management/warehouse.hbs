@@ -17,14 +17,6 @@
             </button>
             <button
                 type="button"
-                class="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md bg-violet-600 hover:bg-violet-700 text-white transition-colors"
-                {{on "click" (fn this.openScanPanel "sort")}}
-            >
-                <FaIcon @icon="code-branch" class="text-xs" />
-                分拣
-            </button>
-            <button
-                type="button"
                 class="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md bg-amber-600 hover:bg-amber-700 text-white transition-colors"
                 {{on "click" (fn this.openScanPanel "scan-out")}}
             >
@@ -89,7 +81,6 @@
                         <th class="text-left px-4 py-2.5 font-medium text-gray-600 dark:text-gray-400">件数/重量</th>
                         {{#if (eq this.activeTab "inventory")}}
                             <th class="text-left px-4 py-2.5 font-medium text-gray-600 dark:text-gray-400">路线</th>
-                            <th class="text-left px-4 py-2.5 font-medium text-gray-600 dark:text-gray-400">状态</th>
                         {{/if}}
                         <th class="text-left px-4 py-2.5 font-medium text-gray-600 dark:text-gray-400 w-32">操作</th>
                     </tr>
@@ -120,16 +111,8 @@
                                             {{order.meta.route_code}}
                                         </span>
                                     {{else}}
-                                        <span class="text-gray-400 text-xs">未分拣</span>
+                                        <span class="text-gray-400 text-xs">-</span>
                                     {{/if}}
-                                </td>
-                                <td class="px-4 py-3">
-                                    <span class="px-2 py-0.5 rounded-full text-xs
-                                        {{if (eq order.status 'warehouse_sorted')
-                                            'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300'
-                                            'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300'}}">
-                                        {{if (eq order.status 'warehouse_sorted') '已分拣' '待分拣'}}
-                                    </span>
                                 </td>
                             {{/if}}
                             <td class="px-4 py-3">
@@ -140,11 +123,7 @@
                                         {{on "click" (fn this.quickScanIn order)}}
                                     >入库</button>
                                 {{else if (eq this.activeTab "inventory")}}
-                                    <button
-                                        type="button"
-                                        class="px-2.5 py-1 text-xs rounded-md bg-violet-600 hover:bg-violet-700 text-white transition-colors"
-                                        {{on "click" (fn this.quickSort order)}}
-                                    >分拣</button>
+                                    <span class="text-xs text-gray-400">待出库</span>
                                 {{else if (eq this.activeTab "pending-outbound")}}
                                     <button
                                         type="button"
@@ -187,9 +166,6 @@
                     {{#if (eq this.scanMode "scan-in")}}
                         <FaIcon @icon="arrow-down-to-bracket" class="text-blue-500" />
                         <h3 class="font-semibold text-gray-900 dark:text-gray-100">入库扫码</h3>
-                    {{else if (eq this.scanMode "sort")}}
-                        <FaIcon @icon="code-branch" class="text-violet-500" />
-                        <h3 class="font-semibold text-gray-900 dark:text-gray-100">分拣确认</h3>
                     {{else}}
                         <FaIcon @icon="truck-ramp-box" class="text-amber-500" />
                         <h3 class="font-semibold text-gray-900 dark:text-gray-100">出库扫码</h3>
@@ -204,25 +180,15 @@
             <div class="space-y-3">
                 <div>
                     <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
-                        {{if (eq this.scanMode "sort") "订单 UUID" "运单号 / 条码"}}
+                        运单号 / 条码
                     </label>
                     <Input
                         @value={{this.scanCode}}
                         class="w-full px-3 py-2 rounded-lg border dark:border-gray-600 border-gray-300 bg-white dark:bg-gray-800 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder={{if (eq this.scanMode "sort") "粘贴订单 UUID" "扫描或输入运单号"}}
+                        placeholder="扫描或输入运单号"
                         autofocus={{true}}
                     />
                 </div>
-                {{#if (eq this.scanMode "sort")}}
-                    <div>
-                        <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">路线编码（可选）</label>
-                        <Input
-                            @value={{this.scanRouteCode}}
-                            class="w-full px-3 py-2 rounded-lg border dark:border-gray-600 border-gray-300 bg-white dark:bg-gray-800 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-violet-500"
-                            placeholder="如 LA-Z1"
-                        />
-                    </div>
-                {{/if}}
             </div>
 
             {{!-- 反馈 --}}
@@ -244,8 +210,7 @@
                 <button
                     type="button"
                     class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors
-                        {{if (eq this.scanMode 'scan-in') 'bg-blue-600 hover:bg-blue-700'
-                            (if (eq this.scanMode 'sort') 'bg-violet-600 hover:bg-violet-700' 'bg-amber-600 hover:bg-amber-700')}} text-white
+                        {{if (eq this.scanMode 'scan-in') 'bg-blue-600 hover:bg-blue-700' 'bg-amber-600 hover:bg-amber-700'}} text-white
                         disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={{this.submitScan.isRunning}}
                     {{on "click" (perform this.submitScan)}}
