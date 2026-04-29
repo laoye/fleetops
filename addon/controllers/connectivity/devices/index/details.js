@@ -8,7 +8,7 @@ export default class ConnectivityDevicesIndexDetailsController extends Controlle
     @service intl;
 
     get tabs() {
-        const registeredTabs = this.menuService.getMenuItems('fleet-ops:component:place:details');
+        const registeredTabs = this.menuService.getMenuItems('fleet-ops:component:device:details');
         return [
             {
                 route: 'connectivity.devices.index.details.index',

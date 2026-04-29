@@ -18,6 +18,10 @@ export default class ManagementDriverIndexDetailsController extends Controller {
                 route: 'management.drivers.index.details.positions',
                 label: this.intl.t('common.positions'),
             },
+            {
+                route: 'management.drivers.index.details.schedule',
+                label: this.intl.t('common.schedule'),
+            },
             ...(isArray(registeredTabs) ? registeredTabs : []),
         ];
     }

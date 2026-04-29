@@ -33,7 +33,10 @@ export default class DriverSchedulingService extends Service {
      */
     @task *createSchedule(data) {
         try {
-            const schedule = this.store.createRecord('schedule', data);
+            const schedule = this.store.createRecord('schedule', {
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                ...data,
+            });
             yield schedule.save();
             this.notifications.success(this.intl.t('notifications.schedule-created'));
             return schedule;

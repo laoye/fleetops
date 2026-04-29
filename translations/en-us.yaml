@@ -1,11 +1,6 @@
 fleet-ops:
   extension-name: Fleet-Ops
 
-ember-power-select:
-  search-message: Type to search
-  no-matches-message: No results found
-  loading-message: Loading...
-
 common:
   proof-of-delivery: Proof of Delivery
   ad-hoc: As-Hoc
@@ -37,6 +32,8 @@ common:
   select-resource-filter-by: Select {resource} to filter by
   table-view: Table View
   grid-view: Grid View
+  calendar-view: Calendar View
+  change-layout: Change Layout
   livemap: Live map
   tracking: Tracking
   activity: Activity
@@ -46,148 +43,17 @@ common:
   edit-address: Edit Address
   new-address: New Address
   select-address: Select Address
-  delete-selected: Delete selected...
-  event: Event
-  device: Device
-  telematic: Telematic
-  provider: Provider
-  severity: Severity
-  ident: IDENT
-  protocol: Protocol
-  state: State
-  code: Code
-  serial-number: Serial Number
-  select-resource: "Select {resource}"
-  select-resource-for: "Select {resource} for {target}"
-  select-order-pickup: Select order pickup location
-  select-order-dropoff: Select order dropoff location
-  filter-by-order-config: Filter by order config
-  payload-id: Payload ID
-  without-driver-assigned: Without Driver Assigned
-  change-layout: Change the layout
-  created-between: Created Between
-  last-updated-between: Last Updated Between
-  select-issue-type: Select issue type
-  select-issue-category: Select issue category
-  confirm-and-save: "Confirm & Save"
-  start-upload: Start Upload
-  file-name: File Name
-  file-size: File Size
-  upload-date: Upload Date
-  uploading: Uploading...
-  processing: Processing...
-  test-connection: Test Connection
-  untitled-field: Untitled Field
-  overview: Overview
-  result: Result
-  positions: Positions
-  edit-details: Edit details
-  update-activity: Update activity
-  unassign-driver: Unassign driver
-  view-order-label: View order label
-  listen-socket-channel: Listen to socket channel
-  view-metadata: View metadata
-  cancel-order: Cancel order
-  delete-order: Delete order
-  confirm-delete-shift: Are you sure you want to delete this shift?
-  stop: Stop
-  pause: Pause
-  resume: Resume
-  play: Play
-  step-backward: Step backward
-  step-forward: Step forward
-  speed: Speed
-  timestamp: Timestamp
-  latitude: Latitude
-  longitude: Longitude
-  speed-kmh: Speed (km/h)
-  heading: Heading
-  altitude-m: Altitude (m)
-  select-date-range: Select date range
-  filter-by-telematic: Filter by Telematic
-  filter-by-device: Filter by Device
-  select-device: Select device
-  no-positions-found: No Positions Found
-  no-positions-hint: Try adjusting your filters or select a different date range.
-  position-data: Position Data
-  position-metrics: Position Metrics
-  total-distance: Total Distance
-  duration: Duration
-  max-speed: Max Speed
-  avg-speed: Avg Speed
-  speeding-events: Speeding Events
-  dwell-times: Dwell Times
-  acceleration-events: Acceleration Events
-  online: Online
-  offline: Offline
-  filter-by-order: Filter by order
-  reset: Reset
-  pickup: Pickup
-  dropoff: Dropoff
-  customer: Customer
-  driver: Driver
-  driver-license: Drivers License
-  metadata: Metadata
-  active-manpower: Active Manpower
-  amount: Amount
-  avatar: Avatar
-  back: Back
-  board: Board
-  building: Building
-  cancel: Cancel
-  clear: Clear
-  cost: Cost
-  create: Create
-  create-a-new-resource: "Create a new {resource}"
-  create-new-resource: "Create new {resource}"
-  date-created: Date Created
-  delete-resource-name: "Delete {resourceName}"
-  distance: Distance
-  edit: Edit
-  edit-resource-name: "Edit {resourceName}"
-  edit-resource-type-name: "Edit {resourceType} {resourceName}"
-  host: Host
-  id: ID
-  item: Item
-  key: Key
-  label: Label
-  last-seen-at: Last Seen At
-  loading-resource: "Loading {resource}..."
-  manage-message: Manage Message
-  map: Map
-  namespace: Namespace
-  neighborhood: Neighborhood
-  new: New
-  "no": "No"
-  odometer: Odometer
-  photos: Photos
-  plate-number: Plate Number
-  priority: Priority
-  remove: Remove
-  reporter: Reporter
-  sandbox: Sandbox
+  save: Save
   save-changes: Save Changes
-  search: Search
-  security-access-code: Security Access Code
-  select-field: Select Field
-  service: Service
-  service-area: Service Area
-  street: Street
-  table: Table
-  task: Task
-  total: Total
-  unauthorized: Unauthorized
-  unauthorized-to: "You are not authorized to {action}"
-  upload-image: Upload Image
-  upload-image-supported: "Supported formats: JPG, PNG, GIF"
-  value: Value
-  vehicle: Vehicle
-  vendor: Vendor
-  vin-number: VIN Number
-  website: Website
-  website-url: Website URL
-  "yes": "Yes"
-  zone: Zone
+  done: Done
+  delete: Delete
+  overview: Overview
+  notes: Notes
+  schedule: Schedule
+  optional: Optional
+  unauthorized-access: You are not authorized to access this resource.
+  online: Online
+  refresh: Refresh
 
 menu:
   operations: Operations
@@ -206,9 +72,11 @@ menu:
   fuel-reports: Fuel Reports
   issues: Issues
   maintenance: Maintenance
+  schedules: Schedules
   work-orders: Work Orders
   equipment: Equipment
   parts: Parts
+  maintenance-history: Maintenance History
   connectivity: Connectivity
   telematics: Telematics
   devices: Devices
@@ -225,6 +93,10 @@ menu:
   custom-fields: Custom Fields
   order-board: Order Board
   avatars: Avatars
+  scheduling: Scheduling
+  maintenances: Maintenances
+  orchestrator: Orchestrator
+  orchestrator-settings: Orchestrator Settings
 
 resource:
   asset: Asset
@@ -273,6 +145,8 @@ resource:
   issues: Issues
   maintenance: Maintenance
   maintenances: Maintenances
+  maintenance-schedule: Maintenance Schedule
+  maintenance-schedules: Maintenance Schedules
   order-config: Order Config
   order-configs: Order Configs
   order: Order
@@ -321,9 +195,6 @@ resource:
   work-orders: Work Orders
   zone: Zone
   zones: Zones
-  reporter: Reporter
-  assignee: Assignee
-  user: User
 
 order-status:
   created: Created
@@ -372,7 +243,6 @@ column:
   postal-code: Postal Code
   state: State
   make: Make
-  manage-message: Manage your resources
   model: Model
   plate-number: Plate Number
   year: Year
@@ -396,6 +266,21 @@ column:
   current-job: Current Job
   last-seen: Last Seen
   place: Place
+  subject: Subject
+  summary: Summary
+  total-cost: Total Cost
+  due-at: Due At
+  serial-number: Serial Number
+  manufacturer: Manufacturer
+  part-number: Part Number
+  quantity-on-hand: Quantity on Hand
+  quantity: Quantity
+  unit-cost: Unit Cost
+  code: Code
+  interval: Interval
+  next-due: Next Due
+  asset: Asset
+  performed-by: Performed By
 
 map:
   visibility-controls:
@@ -489,16 +374,11 @@ activity:
         and: Logical AND, true if both operands are true
         or: Logical OR, true if at least one operand is true
         not: Logical NOT, inverts the truth value
-      add-condition: Add condition
-      no-activity-logic: No activity logic
-      no-activity-logic-hint: Add your first activity logic to create computed activity decisions
     event-selector:
       activity-events: Activity Events
       activity-events-select-to-fire: Select which events will be activated when this activity occurs.
       activity-events-select-events-info: Select the specific event you want to trigger in response to this activity.
       select-event-to-add: Select event to add...
-      no-activity-events: No activity events
-      no-activity-events-hint: Select and add events to fire once activity is reached
       events:
         order:
           dispatched: Triggers when an order is successfully dispatched.
@@ -714,7 +594,6 @@ order:
     notes-title: Notes
     optimize-route: Optimize Route
     optimize-route-help-text: Fleetbase will automatically optimize the route.
-    optimize-route-engine-help-text: Optimize route using an integrated optimization engine
     order-type: Order Type
     order-type-help-text: Selecting the order type will tell fleetbase what order configurations to use.
     order-type-placeholder: Select Order Type
@@ -825,6 +704,7 @@ order:
     assign-text: You are about to assign a new driver ({driverName}) to Order {orderId}. Click continue to confirm driver.
     assign-button: Continue and assign driver
     date: Date scheduled
+    date-created: Date created
     driver-assigned: Driver
     vehicle-assigned: Vehicle
     no-driver: No Driver
@@ -834,13 +714,6 @@ order:
   kanban:
     status-updated: Order activity updated to {status} status.
     cannot-update-status: Order unable to move to {status} status.
-  details:
-    no-driver-assigned: No driver assigned
-    no-vehicle-assigned: No vehicle assigned
-    no-customer: No customer
-    no-facilitator: No facilitator
-    no-driver: No driver
-    no-phone: No phone
 
 order-config-manager:
   title: Orders Configuration
@@ -1068,115 +941,9 @@ vehicle:
     year: Year
   actions:
     locate-vehicle: Locate Vehicle on Map
-  sections:
-    vehicle-identification: Vehicle Identification
-    assignment-status: Assignment & Status
-    location: Location
-    measurement-units: Measurement & Units
-    odometer-usage: Odometer & Usage
-    body-usage: Body & Usage
-    technical-specifications: Technical Specifications
-    powertrain-engine: Powertrain & Engine
-    capacity-dimensions: Capacity & Dimensions
-    regulatory-compliance: Regulatory & Compliance
-    financial-lifecycle: Financial & Lifecycle
-    asset-values: Asset Values
-    lifecycle-service-life: Lifecycle & Service Life
-    financing-loan: Financing (Loan)
-  form:
-    trim: Trim
-    color: Color
-    vehicle-color-placeholder: Vehicle Color
-    serial-number: Serial Number
-    class: Class
-    call-sign: Call Sign
-    system-of-measurement: System of Measurement
-    select-system-of-measurement: Select System of Measurement
-    fuel-volume-unit: Fuel Volume Unit
-    select-fuel-volume-unit: Select Fuel Volume Unit
-    current-odometer: "Current Odometer ({unit})"
-    current-odometer-placeholder: Current Odometer Reading
-    odometer-unit: Odometer Unit
-    select-unit: Select unit
-    odometer-at-purchase: Odometer at Purchase
-    odometer-at-purchase-placeholder: Odometer reading at purchase
-    body-type: Body Type
-    select-body-type: Select body type
-    body-subtype: Body Subtype
-    select-body-subtype: Select body sub-type
-    usage-type: Usage Type
-    select-usage-type: Select usage type
-    ownership-type: Ownership Type
-    select-ownership-type: Select ownership type
-    fuel-type: Fuel Type
-    select-fuel-type: Select fuel type
-    transmission: Transmission
-    select-transmission: Select transmission
-    engine-number: Engine Number
-    engine-make: Engine Make
-    engine-model: Engine Model
-    engine-family: Engine Family
-    engine-configuration: Engine Configuration
-    engine-configuration-placeholder: e.g., DOHC, SOHC, OHV
-    engine-manufacturer: Engine Manufacturer
-    cylinder-arrangement: Cylinder Arrangement
-    cylinder-arrangement-placeholder: e.g., Inline, V-type, Flat
-    number-of-cylinders: Number of Cylinders
-    number-of-cylinders-placeholder: e.g., 4, 6, 8
-    engine-size: Engine Size
-    engine-displacement: Engine Displacement
-    horsepower: Horsepower
-    horsepower-rpm: Horsepower RPM
-    rpm-at-max-horsepower: RPM at Max Horsepower
-    torque: Torque
-    torque-rpm: Torque RPM
-    rpm-at-max-torque: RPM at Max Torque
-    fuel-capacity: Fuel Capacity
-    fuel-tank-capacity: Fuel Tank Capacity
-    payload-capacity: Payload Capacity
-    maximum-payload: Maximum Payload
-    towing-capacity: Towing Capacity
-    seating-capacity: Seating Capacity
-    number-of-seats: Number of Seats
-    vehicle-weight: Vehicle Weight
-    length: Length
-    width: Width
-    height: Height
-    cargo-volume: Cargo Volume
-    passenger-volume: Passenger Volume
-    interior-volume: Interior Volume
-    ground-clearance: Ground Clearance
-    bed-length: Bed Length
-    emission-standard: Emission Standard
-    emission-standard-placeholder: "e.g., Euro 6, EPA Tier 3"
-    dpf-equipped: DPF Equipped
-    scr-equipped: SCR Equipped
-    gvwr: GVWR (Gross Vehicle Weight Rating)
-    gcwr: GCWR (Gross Combined Weight Rating)
-    currency: Currency
-    acquisition-cost: Acquisition Cost
-    current-value: Current Value
-    insurance-value: Insurance Value
-    depreciation-rate: Depreciation Rate (%)
-    estimated-service-life-distance: Estimated Service Life (Distance)
-    service-life-distance-unit: Service Life Distance Unit
-    estimated-service-life-months: Estimated Service Life (Months)
-    purchase-date: Purchase Date
-    lease-expiry-date: Lease Expiry Date
-    loan-amount: Loan Amount
-    number-of-payments: Number of Payments
-    first-payment-date: First Payment Date
-    create-new-vehicle: Create a new vehicle
-    no-vehicle: No vehicle
-    pos-prefix: "Pos:"
-    online: Online
-    offline: Offline
-    last-modified: "Last Modified:"
-    details: Details
-    select-driver: Select Driver
-    overview-tab: Overview
-    positions-tab: Positions
-    devices-tab: Devices
+    schedule-maintenance: Schedule Maintenance
+    create-work-order: Create Work Order
+    log-maintenance: Log Maintenance
 
 vendor:
   fields:
@@ -1387,51 +1154,132 @@ scheduler:
     scheduled-orders: Scheduled Orders
     unauthorized-to-schedule: You are not authorized to schedule orders.
     scheduling-for: Scheduling for {orderId}
+    add-shift: Add Shift
+    create-shift: Create Shift
+    edit-shift: Edit Shift
+    delete-shift: Delete Shift
+    delete-shift-confirm: Are you sure you want to delete this shift? This action cannot be undone.
+    shift-created: Shift created successfully.
+    shift-updated: Shift updated successfully.
+    shift-title: Shift Title
+    shift-title-placeholder: e.g. Morning Delivery Run
+    shift-start: Shift Start
+    shift-end: Shift End
+    shift-notes-placeholder: Optional notes about this shift
+    select-start-datetime: Select start date & time
+    select-end-datetime: Select end date & time
+    select-driver: Select Driver
+    upcoming-shifts: Upcoming Shifts
+    no-upcoming-shifts: No upcoming shifts scheduled.
+    hours-of-service: Hours of Service
+    daily-driving-hours: Daily Driving Hours
+    weekly-hours: Weekly Hours
+    compliance-status: Compliance Status
+    set-availability: Set Availability
+    availability-set: Availability saved successfully.
+    availability-time-off: Availability & Time Off
+    no-availability-restrictions: No availability restrictions set.
+    available: Available
+    unavailable: Unavailable
+    unavailable-time-off: Unavailable / Time Off
+    availability-type: Availability Type
+    request-time-off: Request Time Off
+    submit-request: Submit Request
+    time-off-requested: Time off request submitted.
+    delete-availability: Delete Availability
+    delete-availability-confirm: Are you sure you want to remove this availability record?
+    availability-deleted: Availability record removed.
+    start-date: Start Date
+    end-date: End Date
+    select-start-date: Select start date
+    select-end-date: Select end date
+    reason: Reason
+    reason-placeholder: e.g. Personal appointment
+    notes-placeholder: Optional additional notes
     shift: Shift
-    shift-details: Shift Details
-
-notifications:
-  schedule-created: Schedule created successfully
-  schedule-item-created: Schedule item created successfully
-  schedule-item-updated: Schedule item updated successfully
-  schedule-item-deleted: Schedule item deleted successfully
-  availability-set: Availability set successfully
-  invalid-vendor-config: Invalid vendor provider configuration.
-  failed-create-integration: Failed to create integration.
-  draw-service-area: "Use drawing controls to the right to draw a service area, complete point connections to save service area."
-  service-area-required: Service Area required to create Zone!
-  layer-saved: "New {type} '{name}' saved."
-  service-area-saved: "New service area '{name}' saved."
-  draw-zone: "Use the drawing controls to the right to draw a zone within the service area, complete point connections to save the zone."
-  zone-added: "New zone '{zoneName}' added to '{serviceAreaName}' service area."
-  device-attached: Device attached successfully.
-  device-removed: Device removed.
-  device-created: Device created successfully.
-  sensor-created: Sensor created successfully.
-  telematic-created: Telematic created successfully.
-  user-created: New user created successfully!
-  upload-photo-error: Unable to upload photo
-  settings-saved: Settings saved.
-  stripe-required: You must configure Stripe first to accept payments.
-  purchase-error: Something went wrong trying to complete purchase.
-  customer-password-reset: Customer password reset.
-  connection-successful: Connection successful!
-  connection-failed: Connection test failed
-  no-positions-replay: No positions to replay
-  replay-running: Replay is already running
-  no-resource-replay: No resource provided for replay
-  no-resource-position: No resource provided for position query
-  replay-completed: Replay completed
-  report-validation-error: Error validating report configuration
-  shift-updated: Shift updated successfully
-  shift-deleted: Shift deleted successfully
-  shift-rescheduled: Shift rescheduled successfully
-  shift-created: Shift created successfully
-  notification-settings-saved: Notification settings successfully saved.
-  routing-setting-saved: Routing setting saved.
-  payments-unavailable: "This system is unable to accept or process payments at this time, contact the system administrator to configure payments."
-  payments-already-enabled: Your account is already enabled to accept payments.
-
+    add-shift-hint: Click "Add Shift" to schedule a new shift.
+    time-off-exceptions: Time Off & Exceptions
+    no-exceptions: No time off or exceptions recorded.
+    exception-approved: Exception approved.
+    exception-rejected: Exception rejected.
+    exception-deleted: Exception removed.
+    delete-exception: Delete Exception
+    delete-exception-confirm: Are you sure you want to remove this exception?
+    approve: Approve
+    reject: Reject
+    recurring-schedule-created: Recurring schedule created and shifts materialised.
+    recurring-schedule: Recurring Schedule
+    is-recurring: Recurring
+    recurrence-pattern: Recurrence Pattern
+    recurrence-start-date: Starts On
+    recurrence-end-date: Ends On (optional)
+    template-name: Template Name
+    template-name-placeholder: e.g. Standard Week
+    schedule-name: Schedule Name
+    schedule-name-placeholder: e.g. Standard Week
+    one-off-shift: One-off Shift
+    one-off-shift-help: Toggle on to add a single shift on a specific date and time instead of a recurring schedule.
+    template-color: Color
+    shift-start-time: Shift Start Time
+    shift-end-time: Shift End Time
+    break-start-time: Break Start Time
+    break-end-time: Break End Time
+    day-monday: Monday
+    day-tuesday: Tuesday
+    day-wednesday: Wednesday
+    day-thursday: Thursday
+    day-friday: Friday
+    day-saturday: Saturday
+    day-sunday: Sunday
+    frequency-daily: Daily
+    frequency-weekly: Weekly
+    frequency-monthly: Monthly
+    today: Today
+    orders-tab: Order Schedule
+    fleet-schedule-tab: Fleet Schedule
+    break-start: Break Start
+    break-end: Break End
+    select-break-start: Select break start time
+    select-break-end: Select break end time
+    select-date: Select date
+    working-days: Working Days
+    recurrence-start: Starts On
+    recurrence-end: Ends On
+    recurring-schedule-help: Define a recurring shift pattern using days and times. Shifts will be automatically created for the driver.
+    shift-deleted: Shift deleted successfully.
+    day-mon: Mon
+    day-tue: Tue
+    day-wed: Wed
+    day-thu: Thu
+    day-fri: Fri
+    day-sat: Sat
+    day-sun: Sun
+    view-day: Day
+    view-week: Week
+    undo: Undo last action
+    redo: Redo last action
+    search-orders: Search orders...
+    select-all: Select all
+    all-scheduled: All orders scheduled
+    not-scheduled: Not Scheduled
+    expand-sidebar: Expand sidebar
+    collapse-sidebar: Collapse sidebar
+    bulk-assign: Assign {count} orders
+    bulk-assign-title: Bulk Assign {count} Orders
+    bulk-assign-success: "{count} orders assigned successfully."
+    bulk-assign-order-count: "{count} orders selected for assignment"
+    bulk-assign-spacing-hint: Orders will be scheduled sequentially starting from the selected date and time, spaced by estimated duration.
+    assign-to-driver: Assign to Driver
+    assign-orders: Assign Orders
+    orders-to-assign: "{count} orders to assign"
+    scheduled-date: Scheduled Date
+    conflict-title: Scheduling Conflict Detected
+    conflict-description: "{orderTracking} overlaps with an existing order for {driverName}."
+    conflicting-orders: Conflicting Orders
+    conflict-resolution-prompt: How would you like to resolve this conflict?
+    auto-adjust: Auto-Adjust Time
+    assign-anyway: Assign Anyway
+    clear-selection: Clear selection
 modals:
   new-custom-field-group:
     modal-title: Create a new custom field group
@@ -1780,7 +1628,6 @@ modals:
     webhook-text: Integrated vendors will typically require this so that Fleetbase can receive activity updates on the order. Do not change unless you know what you are doing! Changing this may break your order updates!
     cancel-credentials: Cancel credentials reset
     reset-message: Sensitive credentials can only be reset, to update credentials you must re-enter the credentials.
-    click-to-reset: Click here to reset
     optionally: Optionally supply your own
     configure-vendor: to configure this vendor.
     select: Select
@@ -1800,25 +1647,6 @@ modals:
     customize-fill-color: Customize the fill color for this zone.
     optionally: Optionally give the zone a description.
     description-zone: Description of Zone
-
-  create-new-layer: Create new Layer
-  save-service-area: Save Service Area
-  edit-service-area: Edit Service Area
-  save-zone: Save Zone
-  edit-zone: Edit Zone
-  import-orders: Import order(s) with spreadsheets
-  waypoint-label: Waypoint Label
-  order-label-text: Order Label
-  select-device-attach: Select device to attach
-  confirm-attach-device: "Confirm & Attach Device"
-  new-place: New Place
-  edit-place: Edit Place
-  finalizing-purchase: Finalizing Purchase
-  create-new-user: Create a new user
-  reset-customer-credentials: Reset Customer Credentials
-  reset-credentials-button: Reset Credentials
-  add-driver-shift: Add Driver Shift
-  create-shift: Create Shift
 
 widget:
   fleet-ops-quickstart:
@@ -2053,886 +1881,281 @@ settings:
       button-continue: Continue
       button-start: Start onboard now
       button-in-progress: Onboard in progress
+  scheduling:
+    scheduling-settings: Scheduling Settings
+    materialisation: Materialisation
+    horizon-days: Schedule Horizon (Days)
+    horizon-days-help: How many days ahead to generate shift items when a schedule template is applied.
+    default-shift-duration: Default Shift Duration (Hours)
+    default-shift-duration-help: The default number of hours for a shift when no end time is specified.
+    hours-of-service: Hours of Service Limits
+    hos-daily-limit: Daily Driving Limit (Hours)
+    hos-daily-limit-help: Maximum hours a driver is permitted to drive in a single day.
+    hos-weekly-limit: Weekly Driving Limit (Hours)
+    hos-weekly-limit-help: Maximum hours a driver is permitted to drive in a rolling 7-day period.
+    behaviour: Behaviour
+    auto-activate-schedule: Auto-Activate Schedule
+    auto-activate-schedule-help: Automatically transition a schedule from Draft to Active when the first shift is created.
+    notify-drivers: Notify Drivers on Shift Changes
+    notify-drivers-help: Send a push notification to drivers when their shifts are created, updated, or deleted.
+    schedule-templates: Reusable Schedule Templates
+    no-templates: No reusable templates have been created yet.
+    new-template: New Template
+    edit-template: Edit Template
+    delete-template: Delete Template
+    delete-template-confirm: Are you sure you want to delete the template "{name}"? This will not affect existing schedules.
+    template-deleted: Template deleted successfully.
+    settings-saved: Scheduling settings saved.
+maintenance-schedule:
+  actions:
+    trigger-now: Trigger Work Order Now
+    pause: Pause Schedule
+    resume: Resume Schedule
+work-order:
+  actions:
+    view: View Work Order
+    edit: Edit Work Order
+    delete: Delete Work Order
+maintenance:
+  actions:
+    view: View Maintenance Record
+    edit: Edit Maintenance Record
+    delete: Delete Maintenance Record
+equipment:
+  actions:
+    view: View Equipment
+    edit: Edit Equipment
+    delete: Delete Equipment
+part:
+  actions:
+    view: View Part
+    edit: Edit Part
+    delete: Delete Part
 
-fleet-ops-options:
-  driver-types:
-    full_time: Full-time
-    full_time-description: Permanent employee driver
-    part_time: Part-time
-    part_time-description: Part-time or contract driver
-    contractor: Contractor
-    contractor-description: Independent contractor driver
-    owner_operator: Owner-Operator
-    owner_operator-description: Driver owns and operates own vehicle
-    temporary: Temporary
-    temporary-description: Short-term or seasonal driver
-    apprentice: Apprentice
-    apprentice-description: Trainee or under-supervision driver
-    relief: Relief / On-call
-    relief-description: Covers shifts and peak demand as needed
-    hazmat: Hazmat Certified
-    hazmat-description: Qualified to carry hazardous materials
-    reefer_specialist: Refrigerated Cargo Specialist
-    reefer_specialist-description: Experienced with temperature-controlled cargo
-    heavy_haul: Oversize / Heavy Haul
-    heavy_haul-description: Certified for oversize/overweight loads
-    last_mile: Courier / Last-mile
-    last_mile-description: Small parcel/urban delivery specialist
-  driver-statuses:
-    active: Active
-    active-description: Driver is available for assignments
-    inactive: Inactive
-    inactive-description: Driver is not currently active
-    on_duty: On Duty
-    on_duty-description: Driver is working and available
-    off_duty: Off Duty
-    off_duty-description: Driver is not working
-    on_break: On Break
-    on_break-description: Driver is on a scheduled break
-    suspended: Suspended
-    suspended-description: Driver is temporarily suspended
-    terminated: Terminated
-    terminated-description: Driver no longer works with company
-    pre_shift: Pre-shift
-    pre_shift-description: Clocked in, prepping for shift
-    training: Training
-    training-description: In training, not available for jobs
-    onboarding: Onboarding
-    onboarding-description: Documents/induction in progress
-    on_route: On Route
-    on_route-description: Actively driving a planned route
-    delayed: Delayed
-    delayed-description: Experiencing delay (traffic, weather, etc.)
-    accident_hold: Accident Hold
-    accident_hold-description: Temporarily paused due to incident
-    on_leave: On Leave
-    on_leave-description: Approved leave period
-    no_show: No-show
-    no_show-description: Missed scheduled shift
-    pending_verification: Pending Verification
-    pending_verification-description: Waiting on document/compliance checks
-  vehicle-types:
-    truck: Truck
-    truck-description: Standard freight truck
-    van: Van
-    van-description: Cargo or delivery van
-    trailer: Trailer
-    trailer-description: Detachable cargo trailer
-    motorbike: Motorbike
-    motorbike-description: Two-wheeled delivery bike
-    car: Car
-    car-description: Passenger car or small vehicle
-    reefer: Refrigerated Truck
-    reefer-description: Temperature-controlled transport
-    container_truck: Container Truck
-    container_truck-description: Truck for containerized cargo
-    tanker: Tanker
-    tanker-description: Truck for liquid/gas transport
-    box_truck: Box Truck
-    box_truck-description: Enclosed box body truck
-    flatbed: Flatbed
-    flatbed-description: Open platform for oversized cargo
-    pickup: Pickup
-    pickup-description: Light-duty utility pickup
-    bus: Bus / Minibus
-    bus-description: Passenger transport
-    forklift: Forklift
-    forklift-description: Material handling equipment
-    ev: EV (Electric Vehicle)
-    ev-description: Battery electric vehicle
-    hybrid: Hybrid
-    hybrid-description: Hybrid electric vehicle
-    charging_trailer: Charging Trailer
-    charging_trailer-description: Mobile charging or auxiliary power unit
-  vehicle-statuses:
-    available: Available
-    available-description: Vehicle is ready for use
-    in_use: In Use
-    in_use-description: Vehicle is assigned to a driver/order
-    maintenance: Maintenance
-    maintenance-description: Vehicle is under maintenance or repair
-    out_of_service: Out of Service
-    out_of_service-description: Vehicle is not operational
-    reserved: Reserved
-    reserved-description: Vehicle is reserved for a future assignment
-    retired: Retired
-    retired-description: Vehicle is decommissioned
-    staging: Staging
-    staging-description: Prepped and queued for dispatch
-    on_route: On Route
-    on_route-description: Actively executing a route
-    idle: Idle
-    idle-description: Powered on but not moving
-    cleaning: Cleaning
-    cleaning-description: Under wash/detailing
-    awaiting_parts: Awaiting Parts
-    awaiting_parts-description: Maintenance waiting for spares
-    inspection_due: Inspection Due
-    inspection_due-description: Compliance inspection required
-    inspection_failed: Inspection Failed
-    inspection_failed-description: Failed inspection—cannot dispatch
-    accident: Accident / Damage
-    accident-description: Unavailable due to incident
-    compliance_hold: Compliance Hold
-    compliance_hold-description: Blocked due to expired docs/permits
-    stolen: Stolen
-    stolen-description: Reported stolen—do not dispatch
-  vendor-types:
-    vendor: Vendor
-    vendor-description: General vendor type for uncategorized services
-    integrated_vendor: Integrated Vendor
-    integrated_vendor-description: Vendor with native API integration into Fleetbase
-    fuel_supplier: Fuel Supplier
-    fuel_supplier-description: Provides fuel for vehicles
-    maintenance_provider: Maintenance Provider
-    maintenance_provider-description: Performs vehicle repairs/maintenance
-    parts_supplier: Parts Supplier
-    parts_supplier-description: Supplies vehicle parts
-    tech_provider: Technology Provider
-    tech_provider-description: Provides software or hardware services
-    logistics_partner: Logistics Partner
-    logistics_partner-description: 3PL or logistics subcontractor
-    insurance_provider: Insurance Provider
-    insurance_provider-description: Provides insurance services
-    towing_service: Towing Service
-    towing_service-description: Roadside assistance, towing, and recovery
-    leasing_company: Leasing Company
-    leasing_company-description: Provides rental or leased vehicles and equipment
-    driver_staffing: Driver Staffing Agency
-    driver_staffing-description: Provides contract or temporary drivers
-    customs_broker: Customs Broker
-    customs_broker-description: Handles border clearance and regulatory compliance
-    telematics_provider: Telematics Provider
-    telematics_provider-description: Supplies GPS, ELD, and IoT telematics services
-    freight_forwarder: Freight Forwarder
-    freight_forwarder-description: Manages international and multi-modal shipments
-    compliance_audit: Compliance / Audit
-    compliance_audit-description: Regulatory audits, safety, training
-    wash_detailing: Wash & Detailing
-    wash_detailing-description: Cleaning and sanitization services
-    tire_service: Tyre / Tire Service
-    tire_service-description: Tyre sales, repair, and fitting
-    body_paint: Body & Paint Shop
-    body_paint-description: Accident repair and refinishing
-    yard_storage: Storage / Yard
-    yard_storage-description: Short/long-term vehicle storage
-    charging_network: Charging Network
-    charging_network-description: EV charging infrastructure provider
-  vendor-statuses:
-    active: Active
-    active-description: Vendor is active and available
-    inactive: Inactive
-    inactive-description: Vendor is inactive or on hold
-    suspended: Suspended
-    suspended-description: Vendor is temporarily suspended
-    blacklisted: Blacklisted
-    blacklisted-description: Vendor is banned from operations
-    connected: Connected
-    connected-description: API connection healthy
-    syncing: Syncing
-    syncing-description: Data synchronization in progress
-    integration_error: Integration Error
-    integration_error-description: API connection failing—needs attention
-    under_review: Under Review
-    under_review-description: Being evaluated for approval
-    preferred: Preferred
-    preferred-description: Preferred supplier with negotiated terms
-    prequalified: Prequalified
-    prequalified-description: Meets minimum standards—conditional
-    terminated: Terminated
-    terminated-description: Relationship formally ended
-  contact-types:
-    customer: Customer
-    customer-description: End customer contact
-    vendor_contact: Vendor Contact
-    vendor_contact-description: Point of contact at vendor
-    driver_contact: Driver Contact
-    driver_contact-description: Driver or field contact
-    fleet_manager: Fleet Manager
-    fleet_manager-description: Contact for managing fleets
-    support: Support
-    support-description: General support or helpdesk contact
-    consignor: Consignor
-    consignor-description: Sender of goods
-    consignee: Consignee
-    consignee-description: Receiver of goods
-    accounts_payable: Accounts Payable
-    accounts_payable-description: Billing and payments contact
-    procurement: Procurement
-    procurement-description: Purchasing contact
-    site_security: Site Security
-    site_security-description: Gatehouse/security desk
-    dock_manager: Dock Manager
-    dock_manager-description: Loading dock operations contact
-    dispatcher: Dispatcher
-    dispatcher-description: Scheduling and operations contact
-  contact-statuses:
-    active: Active
-    active-description: Contact is valid and in use
-    inactive: Inactive
-    inactive-description: Contact is no longer valid
-    blocked: Blocked
-    blocked-description: Contact is blocked from use
-    primary: Primary
-    primary-description: Primary contact for an account/place
-    verified: Verified
-    verified-description: Email/phone verified
-    unverified: Unverified
-    unverified-description: Contact details not verified
-    do_not_contact: Do Not Contact
-    do_not_contact-description: Respect DNC for this contact
-    archived: Archived
-    archived-description: Kept for record; not actively used
-  fleet-types:
-    regional: Regional Fleet
-    regional-description: Fleet covering a specific region
-    long_haul: Long Haul Fleet
-    long_haul-description: Fleet for cross-country or international routes
-    urban: Urban Fleet
-    urban-description: Fleet for city/local deliveries
-    specialized: Specialized Fleet
-    specialized-description: Fleet for special cargo like hazmat or reefer
-    last_mile: Last-mile Fleet
-    last_mile-description: Dense urban, short-drop operations
-    linehaul: Linehaul / Middle-mile
-    linehaul-description: Terminal-to-terminal trunk routes
-    service: Service Fleet
-    service-description: Field service/technician vehicles
-    rental_pool: Rental Pool
-    rental_pool-description: Pool of shared/rental vehicles
-    electric: Electric Fleet
-    electric-description: EV-focused operations
-    moto_courier: Motorcycle Courier
-    moto_courier-description: Two-wheeler delivery fleet
-  fleet-statuses:
-    active: Active
-    active-description: Fleet is active and operational
-    inactive: Inactive
-    inactive-description: Fleet is inactive or dissolved
-    on_hold: On Hold
-    on_hold-description: Fleet operations are paused
-    scaling: Scaling
-    scaling-description: Actively adding vehicles/drivers
-    downsizing: Downsizing
-    downsizing-description: Reducing footprint
-    seasonal: Seasonal
-    seasonal-description: Operational during specific seasons
-    pilot: Pilot
-    pilot-description: Trial/limited-scope operations
-    decommissioning: Decommissioning
-    decommissioning-description: Winding down; reassigning assets
-  fuel-report-types:
-    refueling: Refueling
-    refueling-description: Standard refueling log
-    top_up: Top-up
-    top_up-description: Partial refuel
-    full_tank: Full Tank
-    full_tank-description: Complete refuel to full capacity
-    adjustment: Adjustment
-    adjustment-description: Correction or manual adjustment
-    card_txn: Card Transaction
-    card_txn-description: Imported from fuel card/processor
-    manual_entry: Manual Entry
-    manual_entry-description: Entered by user/driver
-    bulk_refuel: Bulk Refuel
-    bulk_refuel-description: Yard or tank bulk fueling event
-    def: DEF / AdBlue
-    def-description: Diesel Exhaust Fluid purchase
-    transfer: Transfer
-    transfer-description: Fuel moved between assets/tanks
-    refund: Refund / Reversal
-    refund-description: Refunded or reversed transaction
-  fuel-report-statuses:
-    recorded: Recorded
-    recorded-description: Fuel report has been logged
-    verified: Verified
-    verified-description: Fuel report verified by manager
-    disputed: Disputed
-    disputed-description: Fuel report is under review
-    rejected: Rejected
-    rejected-description: Fuel report was rejected
-    pending: Pending Review
-    pending-description: Awaiting manager verification
-    matched: Matched
-    matched-description: Matched to trip/vehicle automatically
-    unmatched: Unmatched
-    unmatched-description: No matching trip/vehicle found
-    flagged: Flagged Anomaly
-    flagged-description: Outlier (volume, price, location, time)
-    reimbursed: Reimbursed
-    reimbursed-description: Driver expense reimbursed
-  issue-statuses:
-    open: Open
-    open-description: Issue is open and unresolved
-    pending: Pending
-    pending-description: Issue is logged but work has not yet started
-    triage: Triage
-    triage-description: Initial assessment and classification
-    backlogged: Backlogged
-    backlogged-description: Issue is prioritized but not currently scheduled
-    in_progress: In Progress
-    in_progress-description: Issue is being worked on
-    requires_update: Requires Update
-    requires_update-description: Additional information is needed to proceed
-    in_review: In Review
-    in_review-description: Issue is under review or QA
-    re_opened: Re-opened
-    re_opened-description: Issue was closed/resolved but has been reopened
-    awaiting_parts: Awaiting Parts
-    awaiting_parts-description: Blocked pending required parts
-    awaiting_vendor: Awaiting Vendor
-    awaiting_vendor-description: Waiting on third-party action
-    monitoring: Monitoring
-    monitoring-description: Issue resolved but under observation
-    escalated: Escalated
-    escalated-description: Issue escalated for higher review
-    duplicate: Duplicate
-    duplicate-description: Merged into an existing issue
-    pending_review: Pending Review
-    pending_review-description: Awaiting manager or stakeholder review
-    resolved: Resolved
-    resolved-description: Issue has been resolved
-    completed: Completed
-    completed-description: Work is fully completed and verified
-    closed: Closed
-    closed-description: Issue is closed and no further action is needed
-    wont_fix: "Won't Fix"
-    wont_fix-description: Accepted risk—no action planned
-    canceled: Canceled
-    canceled-description: Issue was canceled before completion
-  issue-types:
-    vehicle: Vehicle
-    vehicle-description: Vehicle-related issues (mechanical, electrical, damage, accidents, etc.)
-    driver: Driver
-    driver-description: Driver-related issues (behavior, training, time management, documentation, safety)
-    route: Route
-    route-description: Routing and navigation issues (deviation, blockages, weather, efficiency)
-    payload-cargo: Payload / Cargo
-    payload-cargo-description: Cargo issues (damage, loss, documentation, temperature control)
-    software-technical: Software / Technical
-    software-technical-description: System/app/device issues (bugs, outages, integrations, security)
-    operational: Operational
-    operational-description: Process, resource, vendor, or cost issues; compliance & paperwork
-    customer: Customer
-    customer-description: Customer service, billing, communications, and order accuracy
-    security: Security
-    security-description: Unauthorized access, theft, vandalism, and data/security incidents
-    environmental-sustainability: Environmental / Sustainability
-    environmental-sustainability-description: Environmental hazards, emissions, waste, and green initiatives
-  issue-categories:
-    mechanical_problems: Mechanical Problems
-    mechanical_problems-description: Issues related to vehicle mechanical performance or breakdowns.
-    electrical_faults: Electrical Faults
-    electrical_faults-description: Electrical/battery faults impacting operation.
-    accidents_collisions: Accidents & Collisions
-    accidents_collisions-description: Any accident/incident involving the vehicle.
-    cosmetic_damages: Cosmetic Damages
-    cosmetic_damages-description: Non-critical bodywork or appearance issues.
-    tire_issues: Tire Issues
-    tire_issues-description: Wear, punctures, blowouts, alignment issues.
-    electronics_instruments: Electronics & Instruments
-    electronics_instruments-description: Dash, sensors, telematics hardware, or instrument faults.
-    maintenance_alerts: Maintenance Alerts
-    maintenance_alerts-description: Scheduled/overdue maintenance notifications.
-    fuel_efficiency: Fuel Efficiency Issues
-    fuel_efficiency-description: Abnormal consumption vs. baseline.
-    fuel_shortage: Fuel Shortage
-    fuel_shortage-description: Unexpected low fuel resulting in disruption.
-    behavior_concerns: Behavior Concerns
-    behavior_concerns-description: Conduct, professionalism, or policy adherence.
-    driver_documentation: Documentation
-    driver_documentation-description: Licenses, permits, or expired credentials.
-    time_management: Time Management
-    time_management-description: Delays, missed windows, or poor scheduling adherence.
-    driver_communication: Communication
-    driver_communication-description: Driver↔dispatch/customer communication gaps.
-    training_needs: Training Needs
-    training_needs-description: Upskilling or re-training required.
-    health_safety: Health & Safety Violations
-    health_safety-description: H&S non-compliance or incidents.
-    route_deviation: Route Deviation
-    route_deviation-description: Departed from planned route.
-    inefficient_routes: Inefficient Routes
-    inefficient_routes-description: Unnecessary time/cost/mileage.
-    route_safety: Safety Concerns
-    route_safety-description: Hazards along the route.
-    blocked_routes: Blocked Routes
-    blocked_routes-description: Road closures, restrictions, or access denied.
-    unfavorable_weather: Unfavorable Weather Conditions
-    unfavorable_weather-description: Weather delays or hazards.
-    environmental_considerations: Environmental Considerations
-    environmental_considerations-description: Environmental restrictions along route.
-    cargo_damage: Cargo Damage / Loss
-    cargo_damage-description: Goods damaged, spoiled, or missing.
-    damaged_goods: Damaged Goods
-    damaged_goods-description: Goods received/delivered damaged.
-    misplaced_goods: Misplaced Goods
-    misplaced_goods-description: Misrouted or lost items.
-    cargo_documentation: Documentation Issues
-    cargo_documentation-description: Incorrect/missing cargo docs.
-    temperature_sensitive_goods: Temperature-Sensitive Goods
-    temperature_sensitive_goods-description: Cold-chain or thermal control failures.
-    incorrect_cargo_loading: Incorrect Cargo Loading
-    incorrect_cargo_loading-description: Poor load plan or unsafe stacking.
-    bugs: Bugs
-    bugs-description: Defects impacting workflow.
-    system_outage: System Outage
-    system_outage-description: App/platform downtime or connectivity loss.
-    integration_failures: Integration Failures
-    integration_failures-description: 3rd-party/API sync or contract errors.
-    performance: Performance
-    performance-description: Slow or degraded system behavior.
-    feature_requests: Feature Requests
-    feature_requests-description: Requested improvements or capabilities.
-    security_vulnerabilities: Security Vulnerabilities
-    security_vulnerabilities-description: Potential exploit or insecure config.
-    compliance: Compliance
-    compliance-description: Regulatory or policy non-compliance.
-    paperwork_permits: Paperwork & Permits
-    paperwork_permits-description: Incorrect/expired documents or filings.
-    resource_allocation: Resource Allocation
-    resource_allocation-description: Insufficient/incorrect staffing or assets.
-    cost_overruns: Cost Overruns
-    cost_overruns-description: Budget/expense anomalies.
-    operational_communication: Communication
-    operational_communication-description: Internal comms failures.
-    vendor_management: Vendor Management Issues
-    vendor_management-description: 3rd-party coordination or SLA gaps.
-    customer_complaint: Customer Complaint
-    customer_complaint-description: Reported dissatisfaction or incident.
-    service_quality: Service Quality
-    service_quality-description: Service below expectation.
-    billing_discrepancies: Billing Discrepancies
-    billing_discrepancies-description: Invoice errors or disputes.
-    customer_communication: Communication Breakdown
-    customer_communication-description: Customer comms issues.
-    order_errors: Order Errors
-    order_errors-description: Wrong item/quantity/address/etc.
-    unauthorized_access: Unauthorized Access
-    unauthorized_access-description: Intrusion or improper access.
-    theft: Theft / Vandalism
-    theft-description: Stolen assets or malicious damage.
-    data_concerns: Data Concerns
-    data_concerns-description: Potential or actual data breach.
-    physical_security: Physical Security
-    physical_security-description: Facility or cargo security weaknesses.
-    data_integrity: Data Integrity Issues
-    data_integrity-description: Corruption or inconsistency of data.
-    fuel_consumption: Fuel Consumption
-    fuel_consumption-description: Excessive or abnormal usage patterns.
-    carbon_footprint: Carbon Footprint
-    carbon_footprint-description: Emissions or footprint tracking issues.
-    waste_management: Waste Management
-    waste_management-description: Handling and disposal of waste.
-    green_initiatives: Green Initiatives Opportunities
-    green_initiatives-description: Improvements to sustainability programs.
-  issue-priorities:
-    low: Low
-    low-description: Minor issue with little to no operational impact.
-    medium: Medium
-    medium-description: Moderate issue requiring attention but not urgent.
-    high: High
-    high-description: Serious issue affecting operations that needs prompt resolution.
-    critical: Critical
-    critical-description: Severe issue causing major disruption; requires immediate resolution.
-    scheduled_maintenance: Scheduled Maintenance
-    scheduled_maintenance-description: Planned maintenance tasks or service checks.
-    operational_suggestion: Operational Suggestion
-    operational_suggestion-description: Improvement idea or recommendation, not an urgent issue.
-  place-types:
-    warehouse: Warehouse
-    warehouse-description: Storage or distribution warehouse
-    depot: Depot
-    depot-description: Operational depot or hub
-    fuel_station: Fuel Station
-    fuel_station-description: Refueling station
-    checkpoint: Checkpoint
-    checkpoint-description: Border or security checkpoint
-    customer_location: Customer Location
-    customer_location-description: Customer delivery address
-    vendor_facility: Vendor Facility
-    vendor_facility-description: Vendor-owned site
-    port: Port
-    port-description: Shipping or receiving port
-    airport: Airport
-    airport-description: Air freight hub
-    distribution_center: Distribution Center
-    distribution_center-description: Regional DC / fulfillment
-    cross_dock: Cross-dock
-    cross_dock-description: Immediate transfer; minimal storage
-    micro_hub: Micro-hub
-    micro_hub-description: Urban mini-warehouse for last-mile
-    rest_area: Rest Area / Layover
-    rest_area-description: Driver rest/layover location
-    weigh_station: Weigh Station
-    weigh_station-description: Regulatory weigh site
-    toll_plaza: Toll Plaza
-    toll_plaza-description: Toll payment checkpoint
-    service_center: Service Center
-    service_center-description: Repair/maintenance facility
-    charging_station: Charging Station
-    charging_station-description: EV charging location
-  place-statuses:
-    active: Active
-    active-description: Place is active and valid
-    inactive: Inactive
-    inactive-description: Place is no longer used
-    restricted: Restricted
-    restricted-description: Place has restricted access
-    closed: Closed
-    closed-description: Place is permanently closed
-    new: New
-    new-description: Recently created—details may be incomplete
-    temp_closed: Temporarily Closed
-    temp_closed-description: Closed for a limited period
-    under_construction: Under Construction
-    under_construction-description: Site works ongoing
-    permit_required: Permit Required
-    permit_required-description: Entry requires permit/clearance
-    approach_caution: Approach with Caution
-    approach_caution-description: Known access difficulties or hazards
-  route-profile-options:
-    driving: Driving
-    driving-description: Optimized routes for motor vehicles.
-    bicycle: Bicycle
-    bicycle-description: Optimized routes for bicycles with bike paths where available.
-    walking: Walking
-    walking-description: Pedestrian-friendly routes suitable for walking.
-  pod-options:
-    scan: Scan
-    scan-description: Proof of delivery captured by scanning a QR code or barcode.
-    signature: Signature
-    signature-description: Proof of delivery confirmed with recipient signature.
-    photo: Photo
-    photo-description: Proof of delivery recorded with a photo of the delivered goods.
-    sms: SMS
-    sms-description: Proof of delivery sent and confirmed via SMS verification.
-  service-rate-calculation-methods:
-    per_meter: Per Meter
-    per_meter-description: Calculate cost based on the number of meters traveled.
-    fixed_meter: Fixed Rate
-    fixed_meter-description: Charge a fixed rate per meter regardless of distance.
-    parcel: Parcel Rate
-    parcel-description: Charge a dynamic rate based on parcel/payload weight and dimensions.
-    per_drop: Per Drop-off
-    per_drop-description: Cost applied per drop-off point.
-    algo: Algorithm
-    algo-description: Cost calculated dynamically using algorithmic logic.
-  service-rate-cod-calculation-methods:
-    flat: Flat Fee
-    flat-description: A fixed fee applied to all COD transactions.
-    percentage: Percentage
-    percentage-description: Fee calculated as a percentage of the COD amount.
-  service-rate-peak-hour-calculation-methods:
-    flat: Flat Fee
-    flat-description: A fixed surcharge applied during peak hours.
-    percentage: Percentage
-    percentage-description: A surcharge calculated as a percentage of the base fare during peak hours.
-  distance-units:
-    m: Meter
-    m-description: Distances measured in meters.
-    km: Kilometer
-    km-description: Distances measured in kilometers.
-    ft: Feet
-    ft-description: Distances measured in feet.
-    yd: Yard
-    yd-description: Distances measured in yards.
-    mi: Mile
-    mi-description: Distances measured in miles.
-  long-distance-units:
-    km: Kilometer
-    km-description: Distances measured in kilometers.
-    mi: Mile
-    mi-description: Distances measured in miles.
-  dimension-units:
-    cm: Centimeters
-    cm-description: Measurements in centimeters.
-    in: Inches
-    in-description: Measurements in inches.
-    ft: Feet
-    ft-description: Measurements in feet.
-    mm: Millimeters
-    mm-description: Measurements in millimeters.
-    m: Meters
-    m-description: Measurements in meters.
-    yd: Yards
-    yd-description: Measurements in yards.
-  weight-units:
-    g: Grams
-    g-description: Weight in grams.
-    oz: Ounces
-    oz-description: Weight in ounces.
-    lb: Pounds
-    lb-description: Weight in pounds.
-    kg: Kilograms
-    kg-description: Weight in kilograms.
-  service-area-types:
-    neighborhood: Neighborhood
-    neighborhood-description: A small, localized area within a city, typically residential or community-focused.
-    city: City
-    city-description: An urban area with its own municipal government and defined boundaries.
-    state: State
-    state-description: A major administrative division within a country, often with its own governing authority.
-    province: Province
-    province-description: A territorial division within a country, similar to a state, common in non-U.S. regions.
-    region: Region
-    region-description: A larger geographic area that may include multiple cities, states, or provinces.
-    country: Country
-    country-description: A sovereign nation with defined borders and central governance.
-    continent: Continent
-    continent-description: A global landmass encompassing multiple countries (e.g., Asia, Europe, Africa).
-  telematic-statuses:
-    initialized: Initialized
-    initialized-description: Provider entry has been created but not yet configured.
-    configured: Configured
-    configured-description: Provider credentials and settings are valid but connection not yet tested.
-    connecting: Connecting
-    connecting-description: Attempting to establish a connection with provider API.
-    connected: Connected
-    connected-description: Successfully authenticated and connected to provider API.
-    synchronizing: Synchronizing
-    synchronizing-description: Currently syncing data (devices, vehicles, positions, etc.) from provider.
-    active: Active
-    active-description: Integration is healthy and data syncs are occurring normally.
-    degraded: Degraded
-    degraded-description: Integration partially working; intermittent errors or missing data.
-    disconnected: Disconnected
-    disconnected-description: Connection lost or failed authentication.
-    error: Error
-    error-description: Provider integration encountered a fatal issue.
-    disabled: Disabled
-    disabled-description: Manually disabled by the user.
-    archived: Archived
-    archived-description: Deprecated or replaced integration, kept for record.
-  telematic-health-states:
-    healthy: Healthy
-    healthy-description: Integration tested and stable.
-    warning: Warning
-    warning-description: Minor issues detected (e.g., slow response, nearing quota).
-    critical: Critical
-    critical-description: Persistent failure or no data received in X hours.
-  device-types:
-    gps_tracker: GPS Tracker
-    gps_tracker-description: Standalone GPS tracking device installed in vehicle or asset.
-    obd2_plugin: OBD-II Plug-in Device
-    obd2_plugin-description: Plugs into vehicle OBD-II port; reads diagnostics, engine data, and transmits telematics.
-    can_bus_module: CAN Bus Module
-    can_bus_module-description: Hard-wired module connected to vehicle CAN bus for detailed vehicle subsystem data.
-    dashcam_unit: Dash Camera Telematics Unit
-    dashcam_unit-description: Camera + integrated telematics module capturing video and vehicle data.
-    battery_asset_tracker: Battery-Powered Asset Tracker
-    battery_asset_tracker-description: Self-powered wireless device for tracking non-powered assets (trailers, containers, equipment).
-    smartphone_app_device: Smartphone App Device
-    smartphone_app_device-description: Mobile device running telematics/tracking app using phone sensors and connectivity.
-    hardwired_black_box: Hard-wired Black Box Module
-    hardwired_black_box-description: Permanently installed telematics control unit wired to vehicle electrical system for fleet use.
-    mobile_edge_gateway: Mobile Edge / IoT Gateway
-    mobile_edge_gateway-description: Multi-sensor/IoT gateway installed in vehicle or asset to aggregate sensor data and telematics.
-    trailer_container_node: Trailer/Container Telematic Sensor Node
-    trailer_container_node-description: Specialised telematics node for trailers, containers, intermodal assets, tracking location and status.
-  sensor-types:
-    gps_gnss: GPS / GNSS Receiver
-    gps_gnss-description: Global positioning sensor providing latitude/longitude, speed and time information.
-    accelerometer: Accelerometer
-    accelerometer-description: Measures linear acceleration; used to detect harsh braking, rapid acceleration, and movement.
-    gyroscope_imu: Gyroscope / IMU
-    gyroscope_imu-description: Inertial Measurement Unit estimating orientation, yaw/pitch/roll of vehicle or asset.
-    fuel_level: Fuel Level Sensor
-    fuel_level-description: Measures remaining fuel in tank; used for fuel monitoring and consumption tracking.
-    tire_pressure: Tire Pressure Sensor (TPMS)
-    tire_pressure-description: Measures pressure (and often temperature) in tires for safety and maintenance.
-    engine_diagnostic: Engine Diagnostic / OBD Sensor
-    engine_diagnostic-description: Reads engine fault codes, RPM, engine hours, and other diagnostics via OBD or CAN.
-    temperature: Temperature Sensor
-    temperature-description: Monitors ambient or equipment temperature; used for refrigerated cargo, battery health etc.
-    humidity: Humidity Sensor
-    humidity-description: Detects moisture/humidity levels in cargo or enclosed spaces for condition monitoring.
-    door_hatch: Door / Hatch Sensor
-    door_hatch-description: Monitors open/close status of doors, hatches or compartments for security/tracking.
-    vibration_shock: Vibration / Shock Sensor
-    vibration_shock-description: Measures vibration or shock events; suitable for freight, containers or equipment stability monitoring.
-    battery_voltage: Battery Voltage Sensor
-    battery_voltage-description: Monitors battery or electrical system voltage to detect low power or charging issues.
-    geofence_event: Geofence / Entry-Exit Event Sensor
-    geofence_event-description: Triggers when asset enters/exits defined geographic zone; used for location-based alerts.
-    idle_time: Idle Time Sensor
-    idle_time-description: Tracks engine on with vehicle stationary; used to measure idling and optimize fuel/usage.
-    driver_behavior: Driver Behavior Sensor
-    driver_behavior-description: Aggregates data (speed, braking, cornering) to score driving behavior and safety.
-  device-statuses:
-    inactive: Inactive
-    inactive-description: Device record exists but has not yet been activated or assigned.
-    active: Active
-    active-description: Device is online and actively communicating with the platform.
-    online: Online
-    online-description: Device is currently connected and transmitting live data.
-    offline: Offline
-    offline-description: Device is powered off or has not transmitted data within the expected interval.
-    sleeping: Sleeping
-    sleeping-description: Device in low-power mode awaiting wake event or scheduled reporting interval.
-    idle: Idle
-    idle-description: Device is powered and connected but not moving or transmitting new telemetry.
-    maintenance: Maintenance
-    maintenance-description: Device is undergoing repair, firmware update, or service maintenance.
-    degraded: Degraded
-    degraded-description: Device is partially functional; intermittent connectivity or incomplete data.
-    error: Error
-    error-description: Device reported fault, hardware issue, or repeated communication errors.
-    disconnected: Disconnected
-    disconnected-description: Device lost connection to network or telematic gateway.
-    decommissioned: Decommissioned
-    decommissioned-description: Device permanently retired or removed from active fleet use.
-    disabled: Disabled
-    disabled-description: Device manually disabled by user or admin; data not being accepted.
-    pending_activation: Pending Activation
-    pending_activation-description: Device provisioned but not yet verified or linked to telematic source.
-    provisioning: Provisioning
-    provisioning-description: Device configuration or initialization is in progress.
-  sensor-statuses:
-    active: Active
-    active-description: Sensor is online and transmitting readings as expected.
-    inactive: Inactive
-    inactive-description: Sensor exists but is not currently operational or reporting.
-    online: Online
-    online-description: Sensor is connected and sending live data via its parent device.
-    offline: Offline
-    offline-description: Sensor has stopped sending data or is unreachable.
-    calibrating: Calibrating
-    calibrating-description: Sensor undergoing calibration or self-test to ensure measurement accuracy.
-    faulty: Faulty
-    faulty-description: Sensor hardware failure or inconsistent readings detected.
-    degraded: Degraded
-    degraded-description: Sensor partially functional; data irregularities or unstable connection.
-    maintenance: Maintenance
-    maintenance-description: Sensor temporarily disabled for maintenance, cleaning, or recalibration.
-    error: Error
-    error-description: Critical failure or unrecoverable error reported by sensor or gateway.
-    disconnected: Disconnected
-    disconnected-description: Sensor communication link lost with device or telematic gateway.
-    disabled: Disabled
-    disabled-description: Sensor manually disabled; no data being collected.
-    decommissioned: Decommissioned
-    decommissioned-description: Sensor permanently retired, replaced, or removed from service.
-  measurement-systems:
-    metric: Metric System
-    metric-description: Internationally adopted system based on meters, liters, and kilograms; used by most countries.
-    imperial: Imperial System
-    imperial-description: Traditional British system using miles, gallons, and pounds; still widely used in the United States.
-  fuel-volume-units:
-    liters: Liters (L)
-    liters-description: Metric unit for measuring liquid fuel; standard in most of the world.
-    gallons_us: Gallons (US gal)
-    gallons_us-description: US customary gallon, equal to 3.785 liters; commonly used in the United States.
-    gallons_imperial: Gallons (Imperial gal)
-    gallons_imperial-description: UK Imperial gallon, equal to 4.546 liters; historically used in the UK and some Commonwealth countries.
-  fuel-types:
-    petrol: Petrol (Gasoline)
-    petrol-description: Traditional internal combustion engine fuel, widely available.
-    diesel: Diesel
-    diesel-description: Fuel for compression ignition engines, offering higher efficiency and torque.
-    electric: Electric
-    electric-description: Battery-powered vehicles producing zero tailpipe emissions.
-    hybrid: Hybrid
-    hybrid-description: Combines petrol/diesel engine with an electric motor for better fuel economy.
-    lpg: Liquefied Petroleum Gas (LPG)
-    lpg-description: Alternative fuel derived from propane or butane, lower emissions.
-    cng: Compressed Natural Gas (CNG)
-    cng-description: Fuel stored at high pressure, cleaner than petrol or diesel.
-  vehicle-usage-types:
-    commercial: Commercial
-    commercial-description: Used for business operations such as deliveries, services, or company activities.
-    personal: Personal
-    personal-description: Used by an individual for private, non-business purposes.
-    mixed: Mixed
-    mixed-description: Used for both business and personal purposes.
-    rental: Rental
-    rental-description: Provided for short or long-term rental to third parties.
-    fleet: Fleet
-    fleet-description: Part of a company-managed group of vehicles or assets for organizational use.
-    operational: Operational
-    operational-description: Vehicles actively in use for company operations or service delivery.
-    standby: Standby
-    standby-description: Assets kept on standby for future or emergency use.
-    under_maintenance: Under Maintenance
-    under_maintenance-description: Vehicles currently undergoing repair, inspection, or service.
-    decommissioned: Decommissioned
-    decommissioned-description: Retired assets no longer part of active operations.
-    in_transit: In Transit
-    in_transit-description: Assets currently being transported between locations.
-    on_loan: On Loan
-    on_loan-description: Assets temporarily loaned to another department or client.
-  vehicle-ownership-types:
-    company_owned: Company Owned
-    company_owned-description: Vehicles fully owned and managed by the company.
-    leased: Leased
-    leased-description: Vehicles leased from a third-party vendor or lessor under contract.
-    rented: Rented
-    rented-description: Short-term rental assets used for temporary fleet expansion or projects.
-    financed: Financed
-    financed-description: Vehicles purchased through financing or loan agreements.
-    vendor_supplied: Vendor Supplied
-    vendor_supplied-description: Assets provided and maintained by external vendors.
-    customer_owned: Customer Owned
-    customer_owned-description: Assets owned by a customer but operated or tracked within the system.
-  vehicle-body-types:
-    sedan: Sedan
-    sedan-description: Standard passenger car body with a fixed roof and trunk.
-    suv: SUV
-    suv-description: Sport utility vehicle designed for passenger and cargo versatility.
-    pickup_truck: Pickup Truck
-    pickup_truck-description: Truck with an open cargo area and enclosed cab.
-    van: Van
-    van-description: Multi-purpose vehicle for transporting passengers or goods.
-    box_truck: Box Truck
-    box_truck-description: Enclosed cargo truck for logistics or delivery operations.
-    flatbed: Flatbed
-    flatbed-description: Truck with a flat, open platform for hauling oversized loads.
-    trailer: Trailer
-    trailer-description: Unpowered vehicle towed for freight transport.
-    bus: Bus
-    bus-description: Passenger transport vehicle with multiple seating rows.
-  vehicle-body-sub-types:
-    refrigerated_truck: Refrigerated Truck
-    refrigerated_truck-description: Temperature-controlled truck for transporting perishable goods.
-    tanker: Tanker
-    tanker-description: Vehicle designed for transporting liquids such as fuel or water.
-    tipper_truck: Tipper Truck
-    tipper_truck-description: Truck equipped with a hydraulic bed for dumping bulk materials.
-    car_carrier: Car Carrier
-    car_carrier-description: Trailer or truck configured for vehicle transport.
-    mini_van: Mini Van
-    mini_van-description: Compact van suitable for urban transport or light cargo.
-    panel_van: Panel Van
-    panel_van-description: Enclosed van used for deliveries or small logistics operations.
-    chassis_cab: Chassis Cab
-    chassis_cab-description: Truck base with customizable rear body configurations.
-    electric_bus: Electric Bus
-    electric_bus-description: Battery-powered bus used for sustainable public or private transport.
-    motorbike: Motorbike
-    motorbike-description: Two-wheeled asset for rapid, lightweight transportation.
-  transmission-types:
-    manual: Manual
-    manual-description: Vehicles requiring manual gear shifting by the driver.
-    automatic: Automatic
-    automatic-description: Vehicles equipped with fully automatic transmission systems.
-    semi_automatic: Semi-Automatic
-    semi_automatic-description: Combines manual control with automatic clutch operation.
-    cvt: CVT (Continuously Variable Transmission)
-    cvt-description: Uses a belt and pulley system for seamless gear ratio transitions.
-    dual_clutch: Dual-Clutch
-    dual_clutch-description: High-performance transmission with two clutches for faster shifting.
-    electric_drive: Electric Drive
-    electric_drive-description: Single-speed transmission system used in electric vehicles (EVs).
-  odometer-units:
-    m: Meter
-    m-description: Distances measured in meters.
-    km: Kilometer
-    km-description: Distances measured in kilometers.
-    ft: Feet
-    ft-description: Distances measured in feet.
-    yd: Yard
-    yd-description: Distances measured in yards.
-    mi: Mile
-    mi-description: Distances measured in miles.
-    hours: Hours
-    hours-description: Unit of time measurement, commonly used worldwide.
+orchestrator:
+  settings-title: Orchestrator Settings
+  engine-settings: Allocation Engine
+  active-engine: Active Allocation Engine
+  active-engine-help: Select which allocation engine is used to assign orders to drivers and vehicles.
+  auto-allocate-on-create: Auto-Allocate on Order Creation
+  auto-allocate-on-create-label: Automatically run allocation when a new order is created.
+  auto-reallocate-on-complete: Auto Re-Allocate on Delivery Completion
+  auto-reallocate-on-complete-label: Re-run allocation when a delivery is completed to fill freed capacity.
+  constraint-settings: Allocation Constraints
+  max-travel-time: Max Travel Time (seconds)
+  max-travel-time-help: Maximum travel time in seconds a driver may be assigned. Leave 0 for no limit.
+  balance-workload: Balance Workload
+  balance-workload-label: Distribute orders evenly across available drivers and vehicles.
+  settings-saved: Orchestrator settings saved.
+  workbench-title: Orchestrator Workbench
+  unassigned-orders: Unassigned Orders
+  no-unassigned-orders: No unassigned orders — all caught up!
+  run-allocation: Run Orchestrator
+  running: Running…
+  plan-ready: Plan ready — review and commit.
+  commit-plan: Commit Plan
+  discard-plan: Discard
+  committed: "Orchestration committed — {count} order(s) assigned."
+  committed-badge: Plan committed
+  overridden: Overridden
+  on-shift: On Shift
+  empty-state-title: No orchestration plan yet
+  empty-state-body: Click "Run Orchestrator" to generate an optimized assignment plan for unassigned orders.
+  unassigned-warning: Some orders could not be assigned — insufficient vehicle capacity or no drivers on shift.
+  # Workbench toolbar & options
+  run-orchestration: Run Orchestrator
+  options: Options
+  mode: Mode
+  mode-allocate: Allocate Orders
+  mode-optimize: Optimize Routes
+  engine: Engine
+  respect-skills: Respect Skills
+  respect-capacity: Respect Capacity
+  return-to-depot: Return to Depot
+  # Plan state
+  unassigned-count: "Unassigned:"
+  clear: Clear
+  # Order pool
+  search-orders: Search orders…
+  filter-all: All
+  filter-scheduled: Scheduled
+  filter-urgent: Urgent
+  filter-today: Today
+  filter-unassigned: Unassigned
+  filter-imported: Imported
+  advanced-filters: Advanced Filters
+  filter-country: Country
+  filter-type: Order Type
+  filter-status: Status
+  filter-date: Scheduled Date
+  filter-country-placeholder: All countries
+  filter-type-placeholder: All types
+  filter-status-placeholder: All statuses
+  filter-date-placeholder: Any date
+  clear-filters: Clear Filters
+  no-address: No address
+  selected: selected
+  clear-selection: Clear
+  # Panel toggles
+  show-orders: Show Order Pool
+  hide-orders: Hide Order Pool
+  show-drivers: Show Resources
+  hide-drivers: Hide Resources
+  # Driver / resource panel
+  available-drivers: Available Drivers
+  available-vehicles: Available Vehicles
+  no-available-drivers: No drivers available right now.
+  no-available-vehicles: No vehicles available right now.
+  no-search-results: No results match your search.
+  search-drivers: Search drivers...
+  search-vehicles: Search vehicles...
+  filter-online: Online
+  filter-offline: Offline
+  filter-on-shift: On Job
+  filter-on-job: On Job
+  filter-active: Active
+  filter-no-driver: No Driver
+  proposed-routes: Proposed Routes
+  stops: stops
+  route: Route
+  drivers-selected: drivers selected
+  vehicles-selected: vehicles selected
+  drop-orders-here: Drop orders here
+  # Import modal
+  import-orders: Import Orders
+  import-step-upload: Upload
+  import-step-map: Map Columns
+  import-step-preview: Preview & Import
+  drop-file-here: Drop your CSV or Excel file here
+  or: or
+  browse-file: Browse file
+  accepted-formats: "Accepted: .csv, .xlsx, .xls"
+  remove-file: Remove file
+  download-template: Download Import Template
+  download-template-desc: Use our template to ensure your data imports correctly.
+  download: Download
+  next: Next
+  back: Back
+  map-columns-title: Map Columns
+  map-columns-desc: "Map the columns in"
+  col-target-field: Target Field
+  col-your-spreadsheet: Your Spreadsheet
+  mapped: mapped
+  mapping-required-hint: "Dropoff Street 1 is required before you can continue."
+  select-column: "— skip —"
+  data-preview: "First 3 orders preview:"
+  preview-import: Preview Import
+  preview-desc: "{count} orders ready to import"
+  errors: errors
+  all-rows-valid: All rows valid
+  validation-warning: "{count} order(s) have errors and will be skipped."
+  import-confirm: Confirm Import
+  importing: "Importing…"
+  col-pickup: Pickup
+  col-dropoff: Dropoff
+  col-scheduled: Scheduled
+  col-weight: Weight
+  col-customer: Customer
+  col-status: Status
+  col-preview-ref: Ref / ID
+  col-preview-type: Type
+  col-preview-facilitator: Facilitator
+  col-preview-vehicle: Vehicle
+  col-preview-driver: Driver
+  col-preview-entities: Items
+  col-preview-multi-stop: "{count} stops"
+  col-preview-pickup-dropoff: Pickup & Dropoff
+  error: Error
+  valid: Valid
+  import-success: "{count} order(s) imported successfully."
+  no-valid-rows: No valid orders to import.
+  invalid-file-type: "Please upload a .csv, .xlsx or .xls file."
+  parse-error: Could not parse the file. Please check the format.
+  read-error: Could not read the file.
+  empty-file: The file appears to be empty.
+  missing-dropoff: Dropoff Street 1 is required.
+  stops-count: "{count} stops"
+  # Order card fields
+  pickup: Pickup
+  dropoff: Dropoff
+  scheduled: Scheduled
+  customer: Customer
+  driver-assigned: Driver Assigned
+  vehicle-assigned: Vehicle Assigned
+  no-vehicle-assigned: No vehicle assigned
+  no-driver-assigned: No driver assigned
+  created: Created
+  # Phase builder
+  phases: Phases
+  phases-description: Compose a multi-step orchestration run. Each phase runs a specific mode in sequence.
+  add-phase: Add Phase
+  no-phases: No phases configured. Add a phase to get started.
+  phase-n: "Phase {n}"
+  phase-label: Phase Label
+  save-phase: Save Phase
+  select-phase-to-edit: Select a phase to edit its settings.
+  run-phases: "Run {count} Phase(s)"
+  include-order-statuses: Include Order Statuses
+  constraints: Constraints
+  auto-commit: Auto-commit after phase
+  # Allocation modes
+  mode-assign-vehicles: Assign Vehicles
+  mode-assign-drivers: Assign Drivers
+  mode-optimize-routes: Optimize Routes
+  # Order statuses for phase filter
+  status-created: Created
+  status-dispatched: Dispatched
+  status-started: Started
+  # Card fields settings
+  card-fields: Card Fields
+  card-fields-description: Configure which fields are displayed on order cards in the workbench. Fields are grouped by order config so you can tailor the view for each order type.
+  card-fields-saved: Order card fields saved.
+  save-card-fields: Save Card Fields
+  standard-fields: Standard Fields
+  standard-fields-description: These fields appear on every order card regardless of order type.
+  config-fields-description: "Custom fields for {name} orders."
+  meta-fields: Meta Fields
+  meta-fields-description: Free-form metadata keys pushed by integrations.
+  no-custom-fields: No custom fields defined for this order config.
+  field-tracking: Tracking Number
+  field-status: Status
+  field-scheduled-at: Scheduled At
+  field-customer: Customer
+  field-type: Type
+  field-notes: Notes
+  field-priority: Priority
+  field-dropoff: Dropoff Address
+  field-pickup: Pickup Address
+  # Resource panel filters
+  filter-available: Available
+  # Plan viewer
+  vehicle: Vehicle
+  expand-all: Expand all
+  tab-routes: Routes
+  tab-timeline: Timeline
+  collapse-all: Collapse all
+  collapse-route: Collapse route
+  expand-route: Expand route
+  no-plan: Run the orchestrator to see the proposed plan.
+  unassigned-description: These orders could not be assigned. They will remain in the queue for re-allocation.
+  unassigned: unassigned
+  # General additions
+  vehicles: Vehicles
+  drivers: Drivers
+  orders: Orders
+  cancel: Cancel
+  no-vehicles: No vehicles found.
+  no-drivers: No drivers found.
+  no-orders: No orders found.
+  expand-panel: Expand panel
+  collapse-panel: Collapse panel
+  # Run error state
+  run-failed-title: No assignments returned
+  try-again: Try Again
+  change-resources: Change Resources
+  no-assignments-returned: The orchestrator could not assign any orders. Check that vehicles have sufficient capacity and drivers are on shift.
+  # Stop list labels
+  stop-type-pickup: Pickup
+  stop-type-dropoff: Dropoff
+  pod-required: POD
+  no-pod: No POD
