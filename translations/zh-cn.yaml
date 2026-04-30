@@ -2935,3 +2935,261 @@ fleet-ops-options:
     mi-description: 以英里为单位测量距离
     hours: 小时
     hours-description: 以小时为单位的时间测量
+
+orchestrator:
+  settings-title: 调度器设置
+  engine-settings: 分配引擎
+  active-engine: 当前分配引擎
+  active-engine-help: 选择用于将订单分配给司机和车辆的引擎。
+  auto-allocate-on-create: 创建订单时自动分配
+  auto-allocate-on-create-label: 新订单创建时自动运行分配。
+  auto-reallocate-on-complete: 配送完成时自动重新分配
+  auto-reallocate-on-complete-label: 配送完成后重新运行分配以填补释放出的运力。
+  constraint-settings: 分配约束
+  max-travel-time: 最大行驶时间（秒）
+  max-travel-time-help: 司机被分配的最大行驶时间（秒）。填 0 表示不限制。
+  balance-workload: 平衡工作负载
+  balance-workload-label: 在可用司机和车辆之间均匀分配订单。
+  settings-saved: 调度器设置已保存。
+  workbench-title: 调度工作台
+  unassigned-orders: 未分配订单
+  no-unassigned-orders: 没有未分配的订单 — 全部处理完了！
+  run-allocation: 运行调度器
+  running: 正在运行…
+  plan-ready: 计划已就绪 — 请审核并提交。
+  commit-plan: 提交计划
+  discard-plan: 放弃
+  committed: "调度已提交 — 共分配 {count} 个订单。"
+  committed-badge: 计划已提交
+  overridden: 已覆盖
+  on-shift: 在班
+  empty-state-title: 暂无调度计划
+  empty-state-body: 点击"运行调度器"为未分配订单生成优化的分配计划。
+  unassigned-warning: 部分订单无法分配 — 车辆运力不足或没有在班司机。
+  # Workbench toolbar & options
+  run-orchestration: 运行调度器
+  options: 选项
+  mode: 模式
+  mode-allocate: 分配订单
+  mode-optimize: 优化路线
+  engine: 引擎
+  respect-skills: 遵守技能要求
+  respect-capacity: 遵守运力限制
+  return-to-depot: 返回站点
+  # Plan state
+  unassigned-count: "未分配："
+  clear: 清空
+  # Order pool
+  search-orders: 搜索订单…
+  filter-all: 全部
+  filter-scheduled: 已排程
+  filter-urgent: 紧急
+  filter-today: 今天
+  filter-unassigned: 未分配
+  filter-imported: 已导入
+  advanced-filters: 高级筛选
+  filter-country: 国家
+  filter-type: 订单类型
+  filter-status: 状态
+  filter-date: 排程日期
+  filter-country-placeholder: 全部国家
+  filter-type-placeholder: 全部类型
+  filter-status-placeholder: 全部状态
+  filter-date-placeholder: 任意日期
+  clear-filters: 清空筛选
+  no-address: 无地址
+  selected: 已选
+  clear-selection: 取消选择
+  # Panel toggles
+  show-orders: 显示订单池
+  hide-orders: 隐藏订单池
+  show-drivers: 显示资源面板
+  hide-drivers: 隐藏资源面板
+  # Driver / resource panel
+  available-drivers: 可用司机
+  available-vehicles: 可用车辆
+  no-available-drivers: 当前没有可用司机。
+  no-available-vehicles: 当前没有可用车辆。
+  no-search-results: 没有匹配搜索的结果。
+  search-drivers: 搜索司机…
+  search-vehicles: 搜索车辆…
+  filter-online: 在线
+  filter-offline: 离线
+  filter-on-shift: 执行中
+  filter-on-job: 执行中
+  filter-active: 活跃
+  filter-no-driver: 无司机
+  proposed-routes: 建议路线
+  stops: 站点
+  route: 路线
+  drivers-selected: 已选司机
+  vehicles-selected: 已选车辆
+  drop-orders-here: 拖放订单到此处
+  # Import modal
+  import-orders: 导入订单
+  import-step-upload: 上传
+  import-step-map: 映射列
+  import-step-preview: 预览并导入
+  drop-file-here: 将 CSV 或 Excel 文件拖放到此处
+  or: 或
+  browse-file: 浏览文件
+  accepted-formats: "支持格式：.csv、.xlsx、.xls"
+  remove-file: 移除文件
+  download-template: 下载导入模板
+  download-template-desc: 使用模板可确保数据正确导入。
+  download: 下载
+  next: 下一步
+  back: 上一步
+  map-columns-title: 映射列
+  map-columns-desc: "请映射文件"
+  col-target-field: 目标字段
+  col-your-spreadsheet: 你的表格
+  mapped: 已映射
+  mapping-required-hint: "继续之前必须映射 收货地址1。"
+  select-column: "— 跳过 —"
+  data-preview: "前 3 个订单预览："
+  preview-import: 预览导入
+  preview-desc: "{count} 个订单准备导入"
+  errors: 错误
+  all-rows-valid: 全部行有效
+  validation-warning: "{count} 个订单存在错误，将被跳过。"
+  import-confirm: 确认导入
+  importing: "正在导入…"
+  col-pickup: 取货
+  col-dropoff: 送达
+  col-scheduled: 排程时间
+  col-weight: 重量
+  col-customer: 客户
+  col-status: 状态
+  col-preview-ref: 单号 / ID
+  col-preview-type: 类型
+  col-preview-facilitator: 协调员
+  col-preview-vehicle: 车辆
+  col-preview-driver: 司机
+  col-preview-entities: 货品
+  col-preview-multi-stop: "{count} 个站点"
+  col-preview-pickup-dropoff: 取货 & 送达
+  error: 错误
+  valid: 有效
+  import-success: "成功导入 {count} 个订单。"
+  no-valid-rows: 没有可导入的有效订单。
+  invalid-file-type: "请上传 .csv、.xlsx 或 .xls 文件。"
+  parse-error: 文件解析失败，请检查格式。
+  read-error: 文件读取失败。
+  empty-file: 文件似乎为空。
+  missing-dropoff: 必须填写收货地址1。
+  stops-count: "{count} 个站点"
+  # Order card fields
+  pickup: 取货
+  dropoff: 送达
+  scheduled: 排程时间
+  customer: 客户
+  driver-assigned: 已分配司机
+  vehicle-assigned: 已分配车辆
+  no-vehicle-assigned: 未分配车辆
+  no-driver-assigned: 未分配司机
+  created: 创建时间
+  # Phase builder
+  phases: 阶段
+  phases-description: 组合多步骤的调度运行。每个阶段按顺序执行特定模式。
+  add-phase: 添加阶段
+  no-phases: 尚未配置阶段。请添加阶段开始。
+  phase-n: "阶段 {n}"
+  phase-label: 阶段名称
+  save-phase: 保存阶段
+  select-phase-to-edit: 选择一个阶段来编辑设置。
+  run-phases: "运行 {count} 个阶段"
+  include-order-statuses: 包含的订单状态
+  constraints: 约束
+  auto-commit: 阶段完成后自动提交
+  # Allocation modes
+  mode-assign-vehicles: 分配车辆
+  mode-assign-drivers: 分配司机
+  mode-optimize-routes: 优化路线
+  # Order statuses for phase filter
+  status-created: 已创建
+  status-dispatched: 已派单
+  status-started: 已开始
+  # Card fields settings
+  card-fields: 卡片字段
+  card-fields-description: 配置工作台中订单卡片显示的字段。字段按订单配置分组，可为每种订单类型定制视图。
+  card-fields-saved: 订单卡片字段已保存。
+  save-card-fields: 保存卡片字段
+  standard-fields: 标准字段
+  standard-fields-description: 这些字段会在每个订单卡片上显示，与订单类型无关。
+  config-fields-description: "{name} 订单的自定义字段。"
+  meta-fields: 元数据字段
+  meta-fields-description: 由集成推送的自由形式元数据键。
+  no-custom-fields: 此订单配置未定义自定义字段。
+  field-tracking: 跟踪号
+  field-status: 状态
+  field-scheduled-at: 排程时间
+  field-customer: 客户
+  field-type: 类型
+  field-notes: 备注
+  field-priority: 优先级
+  field-dropoff: 收货地址
+  field-pickup: 取货地址
+  # Resource panel filters
+  filter-available: 可用
+  # Plan viewer
+  vehicle: 车辆
+  expand-all: 全部展开
+  tab-routes: 路线
+  tab-timeline: 时间轴
+  collapse-all: 全部折叠
+  collapse-route: 折叠路线
+  expand-route: 展开路线
+  no-plan: 运行调度器以查看建议方案。
+  unassigned-description: 这些订单未能分配。它们将留在队列中等待重新分配。
+  unassigned: 未分配
+  # General additions
+  vehicles: 车辆
+  drivers: 司机
+  orders: 订单
+  cancel: 取消
+  no-vehicles: 未找到车辆。
+  no-drivers: 未找到司机。
+  no-orders: 未找到订单。
+  expand-panel: 展开面板
+  collapse-panel: 折叠面板
+  # Run error state
+  run-failed-title: 未返回任何分配
+  try-again: 重试
+  change-resources: 更换资源
+  no-assignments-returned: 调度器未能分配任何订单。请检查车辆是否有足够运力以及是否有司机在班。
+  # Stop list labels
+  stop-type-pickup: 取货
+  stop-type-dropoff: 送达
+  pod-required: 需要 POD
+  no-pod: 无 POD
+
+maintenance:
+  actions:
+    view: 查看维保记录
+    edit: 编辑维保记录
+    delete: 删除维保记录
+
+maintenance-schedule:
+  actions:
+    trigger-now: 立即触发工单
+    pause: 暂停排程
+    resume: 恢复排程
+
+equipment:
+  actions:
+    view: 查看设备
+    edit: 编辑设备
+    delete: 删除设备
+
+part:
+  actions:
+    view: 查看零件
+    edit: 编辑零件
+    delete: 删除零件
+
+work-order:
+  actions:
+    view: 查看工单
+    edit: 编辑工单
+    delete: 删除工单
