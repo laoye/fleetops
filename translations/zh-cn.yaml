@@ -225,6 +225,12 @@ menu:
   custom-fields: 自定义字段
   order-board: 订单看板
   avatars: 头像
+  orchestrator: 智能调度
+  orchestrator-settings: 调度器设置
+  scheduling: 排班
+  schedules: 排班表
+  maintenances: 维保记录
+  maintenance-history: 维保历史
 
 resource:
   asset: 资产

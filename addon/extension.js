@@ -61,8 +61,8 @@ export default {
                     route: 'console.fleet-ops.analytics.reports',
                 },
                 {
-                    title: 'Orchestrator',
-                    description: 'Intelligently allocate and dispatch orders to available drivers.',
+                    title: '智能调度',
+                    description: '智能分配并派单给在班司机和可用车辆。',
                     icon: 'diagram-project',
                     route: 'console.fleet-ops.operations.orchestrator',
                 },
