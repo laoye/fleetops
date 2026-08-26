@@ -128,10 +128,10 @@ class DriverController extends Controller
         // create the driver
         $driver = Driver::create($input);
 
-        // Handle photo upload using FileResolverService
+        // Handle photo upload(data-URI base64),说明见 update() 中同名处理
         if ($request->has('photo')) {
             $path = 'uploads/' . $company->uuid . '/drivers';
-            $file = app(\Fleetbase\Services\FileResolverService::class)->resolve($request->input('photo'), $path);
+            $file = static::createImageFileFromDataUri($request->input('photo'), $path);
 
             if ($file) {
                 // 上游误写 photo_uuid(users 表无此列):Driver.photo_url 读的是 user.avatarUrl,
@@ -214,10 +214,12 @@ class DriverController extends Controller
         $driver->update($input);
         $driver->flushAttributesCache();
 
-        // Handle photo upload using FileResolverService
+        // Handle photo upload(data-URI base64)
+        // 不走 FileResolverService:上游 File::createFromBase64 不剥 data-URI 前缀,
+        // 整串 base64_decode 出来是乱码文件(核心 bug),这里自行剥前缀并带上真实 mime。
         if ($request->has('photo')) {
             $path = 'uploads/' . session('company') . '/drivers';
-            $file = app(\Fleetbase\Services\FileResolverService::class)->resolve($request->input('photo'), $path);
+            $file = static::createImageFileFromDataUri($request->input('photo'), $path);
 
             if ($file) {
                 // 上游误写 photo_uuid(users 表无此列):Driver.photo_url 读的是 user.avatarUrl,
@@ -1020,5 +1022,30 @@ class DriverController extends Controller
                 }
             }
         }
+    }
+
+    /**
+     * 从 data-URI(data:image/xxx;base64,....)创建图片文件。
+     *
+     * 绕开 FileResolverService:其内部 File::createFromBase64 不剥 data-URI 前缀,
+     * 会把整串(含前缀)base64_decode 成乱码文件。此处剥前缀、校验 base64、
+     * 并把真实 mime 传给 createFromBase64。
+     */
+    protected static function createImageFileFromDataUri(?string $dataUri, string $path): ?\Fleetbase\Models\File
+    {
+        if (!is_string($dataUri) || !preg_match('/^data:(image\/[a-z0-9.+-]+);base64,(.+)$/is', $dataUri, $matches)) {
+            return null;
+        }
+
+        $contentType = strtolower($matches[1]);
+        $base64      = $matches[2];
+
+        if (base64_decode($base64, true) === false) {
+            return null;
+        }
+
+        $file = \Fleetbase\Models\File::createFromBase64($base64, null, rtrim($path, '/'), 'image', $contentType);
+
+        return $file instanceof \Fleetbase\Models\File ? $file : null;
     }
 }
