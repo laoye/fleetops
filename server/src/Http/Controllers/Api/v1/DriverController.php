@@ -134,7 +134,8 @@ class DriverController extends Controller
             $file = app(\Fleetbase\Services\FileResolverService::class)->resolve($request->input('photo'), $path);
 
             if ($file) {
-                $user->update(['photo_uuid' => $file->uuid]);
+                // photo_uuid 不在 User::$fillable,mass assignment 会被静默丢弃,必须 forceFill
+                $user->forceFill(['photo_uuid' => $file->uuid])->save();
             }
         }
 
@@ -218,7 +219,8 @@ class DriverController extends Controller
             $file = app(\Fleetbase\Services\FileResolverService::class)->resolve($request->input('photo'), $path);
 
             if ($file) {
-                $driver->user->update(['photo_uuid' => $file->uuid]);
+                // photo_uuid 不在 User::$fillable,mass assignment 会被静默丢弃,必须 forceFill
+                $driver->user->forceFill(['photo_uuid' => $file->uuid])->save();
             }
         }
 
