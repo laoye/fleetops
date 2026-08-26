@@ -134,8 +134,9 @@ class DriverController extends Controller
             $file = app(\Fleetbase\Services\FileResolverService::class)->resolve($request->input('photo'), $path);
 
             if ($file) {
-                // photo_uuid 不在 User::$fillable,mass assignment 会被静默丢弃,必须 forceFill
-                $user->forceFill(['photo_uuid' => $file->uuid])->save();
+                // 上游误写 photo_uuid(users 表无此列):Driver.photo_url 读的是 user.avatarUrl,
+                // 实际存储列为 avatar_uuid
+                $user->update(['avatar_uuid' => $file->uuid]);
             }
         }
 
@@ -219,8 +220,9 @@ class DriverController extends Controller
             $file = app(\Fleetbase\Services\FileResolverService::class)->resolve($request->input('photo'), $path);
 
             if ($file) {
-                // photo_uuid 不在 User::$fillable,mass assignment 会被静默丢弃,必须 forceFill
-                $driver->user->forceFill(['photo_uuid' => $file->uuid])->save();
+                // 上游误写 photo_uuid(users 表无此列):Driver.photo_url 读的是 user.avatarUrl,
+                // 实际存储列为 avatar_uuid
+                $driver->user->update(['avatar_uuid' => $file->uuid]);
             }
         }
 
