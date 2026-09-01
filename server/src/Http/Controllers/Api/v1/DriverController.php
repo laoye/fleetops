@@ -481,15 +481,18 @@ class DriverController extends Controller
             return response()->apiError('Platform is required to register device.');
         }
 
-        $device = UserDevice::firstOrCreate(
+        // 推送 token 是设备级的，换账号不会变。原先用 firstOrCreate 按 (token, platform)
+        // 查找，命中已有记录时 user_uuid 不会更新 —— 同一台手机换司机登录后，设备仍挂在
+        // 前一个司机名下：新司机收不到派单推送，前一个司机的推送反而发到这台机器上。
+        // 接口照样返回 200，App 与日志都无异常，只有对着 user_devices 才看得出来。
+        // 改用 updateOrCreate 把归属转移到当前登录的司机；多设备不受影响（token 不同各自一条）。
+        $device = UserDevice::updateOrCreate(
             [
                 'token'    => $token,
                 'platform' => $platform,
             ],
             [
                 'user_uuid' => $driver->user_uuid,
-                'platform'  => $platform,
-                'token'     => $token,
                 'status'    => 'active',
             ]
         );
