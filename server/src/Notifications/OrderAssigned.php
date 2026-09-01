@@ -75,7 +75,21 @@ class OrderAssigned extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['broadcast', 'mail', FcmChannel::class, ApnChannel::class];
+        $channels = ['broadcast', 'mail'];
+
+        // 只在收件人真的有该平台的设备时才挂推送渠道。
+        // 渠道即使拿到空 token 列表也会先初始化 SDK：未配置 FCM 的部署里，
+        // 每发一次通知就抛一次 "Unable to determine the Firebase Project ID"
+        // 落进 failed_jobs——收件人是纯 iOS 用户也照样失败，噪音把真问题淹没。
+        if (method_exists($notifiable, 'routeNotificationForFcm') && !empty($notifiable->routeNotificationForFcm())) {
+            $channels[] = FcmChannel::class;
+        }
+
+        if (method_exists($notifiable, 'routeNotificationForApn') && !empty($notifiable->routeNotificationForApn())) {
+            $channels[] = ApnChannel::class;
+        }
+
+        return $channels;
     }
 
     /**
