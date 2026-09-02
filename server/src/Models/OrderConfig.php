@@ -415,9 +415,14 @@ class OrderConfig extends Model
      */
     public function getCompletedActivity()
     {
-        $completedActivity = $this->activities()->firstWhere('code', 'completed');
-        if ($completedActivity) {
-            return $completedActivity;
+        // 终态活动的 code 不是所有流程都叫 'completed'——ForBox 的流程终态是 'delivered'
+        // （已签收）。只按 'completed' 字面查会漏掉它，Order::complete() 便会回落到下方的
+        // 硬编码活动，把刚写入的 delivered 覆写成 completed。
+        foreach (['completed', 'delivered'] as $completedCode) {
+            $completedActivity = $this->activities()->firstWhere('code', $completedCode);
+            if ($completedActivity) {
+                return $completedActivity;
+            }
         }
 
         return new Activity([

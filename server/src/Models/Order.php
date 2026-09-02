@@ -1365,10 +1365,14 @@ class Order extends Model
     {
         $this->notifyCompleted();
 
-        $doesntHaveCompletedActivity = TrackingStatus::where(['tracking_number_uuid' => $this->tracking_number_uuid, 'code' => 'COMPLETED'])->doesntExist();
+        // 幂等守卫按流程实际的终态活动判定，不能写死 'COMPLETED'：终态是 'delivered' 的流程
+        // 里守卫永远不成立，每推进一次就会重复插一条终态记录。
+        $activity                    = $this->config()->getCompletedActivity();
+        $doesntHaveCompletedActivity = TrackingStatus::where([
+            'tracking_number_uuid' => $this->tracking_number_uuid,
+            'code'                 => TrackingStatus::prepareCode($activity->get('code')),
+        ])->doesntExist();
         if ($doesntHaveCompletedActivity) {
-            $activity = $this->config()->getCompletedActivity();
-
             return $this->updateActivity($activity, $proof);
         }
 
