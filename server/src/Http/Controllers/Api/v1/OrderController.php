@@ -1521,10 +1521,14 @@ class OrderController extends Controller
         }
 
         // Determine storage disk & bucket
+        // bucket 必须从 config 读:此前把 config path 当成 request input key 传,
+        // 永远取不到值只能回落 s3.bucket;未配 S3 的部署即为 null,撞上
+        // storeProofPhoto 的 string 类型声明直接 500(2026-09-03 线上上传凭证)。
+        // 读法与 File::createFromUpload 对齐,bucket 列本身 nullable。
         $disk        = $request->input('disk', config('filesystems.default'));
         $bucket      = $request->input(
-            "filesystems.disks.{$disk}.bucket",
-            config('filesystems.disks.s3.bucket')
+            'bucket',
+            config("filesystems.disks.{$disk}.bucket", config('filesystems.disks.s3.bucket'))
         );
 
         // Collect uploads & Base64 strings
@@ -1594,11 +1598,11 @@ class OrderController extends Controller
      *
      * @param UploadedFile|string $photo  UploadedFile instance or Base64 string
      * @param string              $disk   Filesystem disk name
-     * @param string              $bucket Storage bucket/key prefix
+     * @param string|null         $bucket Storage bucket/key prefix（本地/public disk 无 bucket，为 null）
      *
      * @return \Feetbase\Models\File
      */
-    protected function storeProofPhoto(Proof $proof, UploadedFile|string $photo, string $disk, string $bucket): File
+    protected function storeProofPhoto(Proof $proof, UploadedFile|string $photo, string $disk, ?string $bucket = null): File
     {
         $isFile      = $photo instanceof UploadedFile;
         $contents    = $isFile
@@ -1616,6 +1620,8 @@ class OrderController extends Controller
 
         Storage::disk($disk)->put($path, $contents);
 
+        // disk 此前没写入,文件大小写的是 'size'——files 表的列名是 file_size,
+        // 不在 fillable 里,一直被静默丢弃(凭证文件大小全为 null)。
         return File::create([
             'company_uuid'      => $company,
             'uploader_uuid'     => session('user'),
@@ -1623,10 +1629,11 @@ class OrderController extends Controller
             'original_filename' => basename($path),
             'extension'         => $extension,
             'content_type'      => $contentType,
+            'disk'              => $disk,
             'path'              => $path,
             'bucket'            => $bucket,
             'type'              => 'photo',
-            'size'              => strlen($contents),
+            'file_size'         => strlen($contents),
         ])->setKey($proof);
     }
 
