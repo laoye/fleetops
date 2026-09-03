@@ -1436,6 +1436,8 @@ class OrderController extends Controller
         Storage::disk($disk)->put($path, base64_decode(str_replace('data:image/png;base64,', '', $signature)));
 
         // create file record for upload
+        // 与 storeProofPhoto 同族问题:disk 此前没写入,大小写的是 'size'——
+        // files 表的列名是 file_size 且 'size' 不在 fillable,一直被静默丢弃。
         $file = File::create([
             'company_uuid'      => session('company'),
             'uploader_uuid'     => session('user'),
@@ -1443,10 +1445,11 @@ class OrderController extends Controller
             'original_filename' => basename($path),
             'extension'         => 'png',
             'content_type'      => 'image/png',
+            'disk'              => $disk,
             'path'              => $path,
             'bucket'            => $bucket,
             'type'              => 'signature',
-            'size'              => Utils::getBase64ImageSize($signature),
+            'file_size'         => Utils::getBase64ImageSize($signature),
         ])->setKey($proof);
 
         // set file to proof
