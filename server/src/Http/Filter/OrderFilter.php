@@ -94,7 +94,9 @@ class OrderFilter extends Filter
             $this->builder->where(
                 function ($q) {
                     $q->whereDoesntHave('driverAssigned');
-                    $q->whereNotIn('status', ['completed', 'canceled', 'expired']);
+                    // `delivered` 是 ForBox 流程的终态（上游只认 `completed`）。漏掉它，
+                    // 已签收的无司机单会出现在司机端的「附近可接订单」里。
+                    $q->whereNotIn('status', ['completed', 'delivered', 'canceled', 'expired']);
                 }
             );
         }
@@ -116,7 +118,10 @@ class OrderFilter extends Filter
             $this->builder->where(
                 function ($q) {
                     $q->whereHas('driverAssigned');
-                    $q->whereNotIn('status', ['created', 'completed', 'expired', 'order_canceled', 'canceled', 'pending']);
+                    // `delivered` 是 ForBox 流程的终态（上游只认 `completed`）。漏掉它，
+                    // 已签收的单会一直算作「进行中」，污染司机端的订单徽标、首页统计和当前任务。
+                    // 口径与 Fleetbase\ForBox\Support\DriverAssignment::CLOSED 保持一致。
+                    $q->whereNotIn('status', ['created', 'completed', 'delivered', 'expired', 'order_canceled', 'canceled', 'pending']);
                 }
             );
         }
@@ -127,7 +132,8 @@ class OrderFilter extends Filter
         // handle `active` alias status
         if ($status === 'active') {
             // active status is anything that is not these values
-            $this->builder->whereNotIn('status', ['created', 'completed', 'expired', 'order_canceled', 'canceled', 'pending']);
+            // `delivered` 同上：ForBox 的终态，必须与 active() 的名单保持一致。
+            $this->builder->whereNotIn('status', ['created', 'completed', 'delivered', 'expired', 'order_canceled', 'canceled', 'pending']);
             // remove the searchBuilder where clause
             $this->builder->removeWhereFromQuery('status', 'active');
 

@@ -83,6 +83,14 @@ class OrderTracker
 
         // Get order percentage by activity if distance-based progress is not available
         if ($cannotUseDistance) {
+            // 优先按订单当前所处的阶段算（见 getProgressByFlowPosition）。按活动计数
+            // 的老口径把分支出口也算进分母、且只数写下过 tracking status 的环节，
+            // 走完整流程的订单永远到不了 100%。
+            $progressByPosition = $this->getProgressByFlowPosition();
+            if ($progressByPosition !== null) {
+                return $progressByPosition;
+            }
+
             /** @var Collection $activities */
             $activities    = $this->order->orderConfig ? $this->order->orderConfig->activities() : collect();
             $totalActivity = $activities->count();
@@ -104,6 +112,102 @@ class OrderTracker
         }
 
         return round(($completedDistance / $totalDistance) * 100, 2);
+    }
+
+    /**
+     * 订单流程的主干：正常履约路线上的状态 code，按先后顺序排列。
+     *
+     * flow 是一张状态图，主线之外还挂着 canceled / exception 这类分支出口。
+     * 从起点沿 activities 逐步前进，每步取 sequence 最小的后继 —— 分支出口在
+     * 配置里排在主线之后（fb-large-item-delivery 的 exception=7、canceled=8
+     * 都排在终态 delivered=6 后面），所以取最小值总能落回主线。遇到 complete
+     * 的节点或没有后继时结束。
+     *
+     * 只有 flow 维护了有区分度的 sequence 时这套推导才成立。内置的 transport /
+     * storefront 配置 sequence 全为 0，这时返回空数组，由调用方退回旧口径 ——
+     * 借此把改动的影响面限制在真正维护了流程顺序的配置上。
+     *
+     * @return array 主干上的状态 code；无法推导时为空数组
+     */
+    protected function getFlowMainPath(): array
+    {
+        $flow = $this->order->orderConfig ? $this->order->orderConfig->flow : null;
+        if (!is_array($flow) || count($flow) < 2) {
+            return [];
+        }
+
+        $sequences = [];
+        foreach ($flow as $code => $node) {
+            $sequence = data_get($node, 'sequence');
+            if (!is_numeric($sequence)) {
+                return [];
+            }
+            $sequences[$code] = (int) $sequence;
+        }
+
+        // 全部相同说明配置没有维护顺序，主干无从推导
+        if (count(array_unique($sequences)) < 2) {
+            return [];
+        }
+
+        asort($sequences);
+        $currentCode = array_key_first($sequences);
+
+        $path = [];
+        while ($currentCode !== null && isset($flow[$currentCode]) && !in_array($currentCode, $path, true)) {
+            $path[] = $currentCode;
+
+            if (data_get($flow[$currentCode], 'complete') === true) {
+                break;
+            }
+
+            $next = collect(data_get($flow[$currentCode], 'activities', []))
+                ->filter(fn ($code) => isset($flow[$code]))
+                ->sortBy(fn ($code) => $sequences[$code])
+                ->first();
+
+            $currentCode = $next;
+        }
+
+        return $path;
+    }
+
+    /**
+     * 按订单当前所处的阶段计算进度百分比。
+     *
+     * 与按「已完成活动数 ÷ 活动总数」计数的老口径不同，这里只看当前状态落在主干
+     * 的第几站：中间被跳过的环节（例如商家自送单没有 picked_up）不会拉低进度，
+     * 分支出口也不再计入分母。老口径下 fb-large-item-delivery 的订单签收后仍只有
+     * 7/9 = 77.78%，卡车永远停在终点之前。
+     *
+     * 订单停在主干之外时（例如 exception），退回它走过的最后一个主干状态。
+     *
+     * @return float|null 进度百分比；主干无法推导时返回 null，交由调用方走旧口径
+     */
+    protected function getProgressByFlowPosition(): ?float
+    {
+        $path = $this->getFlowMainPath();
+        if (count($path) < 2) {
+            return null;
+        }
+
+        $index = array_search(strtolower((string) $this->order->status), $path, true);
+
+        // 当前状态不在主干上：按它走过的最后一个主干状态定位
+        if ($index === false) {
+            $this->order->loadMissing('trackingStatuses');
+            $visited = collect($this->order->trackingStatuses ?? [])
+                ->map(fn ($trackingStatus) => array_search(strtolower((string) $trackingStatus->code), $path, true))
+                ->filter(fn ($position) => $position !== false);
+
+            if ($visited->isEmpty()) {
+                return null;
+            }
+
+            $index = $visited->max();
+        }
+
+        return round(($index / (count($path) - 1)) * 100, 2);
     }
 
     /**
@@ -542,7 +646,8 @@ class OrderTracker
         // Return cached data if available
         return Cache::remember($cacheKey, 60, function () {
             // Early return for completed orders - skip expensive OSRM calls
-            if (in_array($this->order->status, ['completed', 'canceled'])) {
+            // `delivered` 是 ForBox 流程的终态，漏掉它会让每张已签收的订单继续跑 OSRM 请求
+            if (in_array($this->order->status, ['completed', 'delivered', 'canceled'])) {
                 return [
                     'driver_current_location'             => null,
                     'progress_percentage'                 => 100,
@@ -592,7 +697,9 @@ class OrderTracker
                 'current_destination'                 => $this->getCurrentDestination(),
                 'next_destination'                    => $this->getNextDestination(),
                 'first_waypoint_completed'            => $orderProgressPercentage > 10,
-                'last_waypoint_completed'             => $orderProgressPercentage === 100 || $this->order->status === 'completed',
+                // 用 >= 而不是 ===：进度经过 round() 后是 float，float(100.0) === int(100)
+                // 在 PHP 里恒为 false，这个条件原本永远不会成立。终态同时认 `delivered`。
+                'last_waypoint_completed'             => $orderProgressPercentage >= 100 || in_array($this->order->status, ['completed', 'delivered']),
             ];
         });
     }
