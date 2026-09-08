@@ -1570,6 +1570,21 @@ class OrderController extends Controller
             return response()->apiError('Unable to capture photo as proof.');
         }
 
+        // ForBox 水印策略可以要求凭证必须带定位。默认不要求 —— 地库、电梯、
+        // 室内仓库拿不到 GPS 是常态，卡住司机上传的代价远大于少一条坐标。
+        if ($order->type === 'forbox'
+            && class_exists(\Fleetbase\ForBox\Support\ProofStamp::class)
+            && \Fleetbase\ForBox\Support\ProofStamp::rejectsMissingGps($data)
+        ) {
+            return response()->apiError('凭证照片需要定位信息，请开启定位权限后重试。', 422);
+        }
+
+        $driver = Driver::where('user_uuid', optional($request->user())->uuid)->first();
+        $actor  = [
+            'driver_uuid' => $driver?->uuid,
+            'driver_name' => $driver?->name,
+        ];
+
         // 5) Loop through each item, create Proof + File
         foreach ($incoming as $item) {
             $proof = Proof::create([
@@ -1586,7 +1601,9 @@ class OrderController extends Controller
                 proof: $proof,
                 photo: $item,
                 disk: $disk,
-                bucket: $bucket
+                bucket: $bucket,
+                order: $order,
+                stampContext: ['client_data' => $data, 'actor' => $actor]
             );
 
             $proof->update(['file_uuid' => $file->uuid]);
@@ -1605,8 +1622,14 @@ class OrderController extends Controller
      *
      * @return \Feetbase\Models\File
      */
-    protected function storeProofPhoto(Proof $proof, UploadedFile|string $photo, string $disk, ?string $bucket = null): File
-    {
+    protected function storeProofPhoto(
+        Proof $proof,
+        UploadedFile|string $photo,
+        string $disk,
+        ?string $bucket = null,
+        ?Order $order = null,
+        array $stampContext = []
+    ): File {
         $isFile      = $photo instanceof UploadedFile;
         $contents    = $isFile
             ? file_get_contents($photo->getRealPath())
@@ -1618,8 +1641,26 @@ class OrderController extends Controller
             ? $photo->getClientMimeType()
             : 'image/png';
 
-        $company = session('company');
-        $path    = "uploads/{$company}/photos/{$proof->public_id}.{$extension}";
+        $company  = session('company');
+        $basePath = "uploads/{$company}/photos/{$proof->public_id}";
+
+        // ForBox 凭证水印。烧进像素才是证据 —— 展示时叠加的水印，
+        // 照片一被另存或转发就没了，而纠纷恰恰发生在照片离开系统之后。
+        $stamped = $order ? $this->stampProofPhoto($order, $proof, $contents, $stampContext) : null;
+
+        if ($stamped && $stamped['extension'] !== null) {
+            // 原图另存：对外发的是水印图，鉴定时要能回到未经处理的原件
+            $originalPath = "{$basePath}-original.{$extension}";
+            Storage::disk($disk)->put($originalPath, $contents);
+
+            $extension   = $stamped['extension'];
+            $contentType = $stamped['content_type'];
+            $contents    = $stamped['bytes'];
+
+            $this->mergeProofStamp($proof, $stamped['data'], $originalPath);
+        }
+
+        $path = "{$basePath}.{$extension}";
 
         Storage::disk($disk)->put($path, $contents);
 
@@ -1638,6 +1679,57 @@ class OrderController extends Controller
             'type'              => 'photo',
             'file_size'         => strlen($contents),
         ])->setKey($proof);
+    }
+
+    /**
+     * 给凭证照片烧上 ForBox 水印（时间戳 + GPS + 运单号 + 交接点）。
+     *
+     * fleetops 不依赖 forbox 包，用 class_exists 守卫：单独部署 fleetops 时
+     * 这段自动失效，照片按原样入库，不会因为少一个包就 500。
+     *
+     * stage 直接读 proof.data —— FBProofObserver 在 creating 时已按订单状态
+     * 填好，这里再推断一遍必然与 POD 计数走样。
+     *
+     * @return array{bytes:string, extension:?string, content_type:?string, data:array}|null
+     */
+    protected function stampProofPhoto(Order $order, Proof $proof, string $bytes, array $context): ?array
+    {
+        if ($order->type !== 'forbox' || !class_exists(\Fleetbase\ForBox\Support\ProofStamp::class)) {
+            return null;
+        }
+
+        $stage = ((array) $proof->data)['stage'] ?? null;
+
+        if (!is_string($stage) || $stage === '') {
+            return null;
+        }
+
+        return \Fleetbase\ForBox\Support\ProofStamp::process(
+            $order,
+            $bytes,
+            $stage,
+            \Fleetbase\ForBox\Support\ProofStamp::SOURCE_DRIVER,
+            $context['client_data'] ?? [],
+            $context['actor'] ?? []
+        );
+    }
+
+    /**
+     * 把水印的结构化字段并进 proof.data，不碰 stage 等已有键。
+     *
+     * 水印烧在像素里是给系统之外的人看的；这份结构化数据才是运营能搜、能导出、
+     * 能点开地图的那一份，两者同源，不会各说各话。
+     */
+    protected function mergeProofStamp(Proof $proof, array $stampData, ?string $originalPath): void
+    {
+        if (empty($stampData['watermark'])) {
+            return;
+        }
+
+        $watermark                  = $stampData['watermark'];
+        $watermark['original_path'] = $originalPath;
+
+        $proof->update(['data' => array_merge((array) $proof->data, ['watermark' => $watermark])]);
     }
 
     /**
